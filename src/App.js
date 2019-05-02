@@ -15,7 +15,7 @@ class App extends Component {
           { title: 'Price', field: 'price', type: '' },
           { title: 'Picture', field: 'pic' }
         ]}
-        data={[{ name: '1', detail: 'Baran', price: 1987, pic: 63 }]}
+        data={[{ name: '2', detail: 'Baran', price: 1987, pic: 63 }]}
         title="Product"
       />
     </div>

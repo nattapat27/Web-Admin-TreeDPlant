@@ -26,5 +26,4 @@ jobs:
 
       - run: sudo npm install
       - run: sudo npm run build
-      - run: sudo service nginx restart
 
