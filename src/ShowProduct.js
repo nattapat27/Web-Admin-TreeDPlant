@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+//import './AddProduct.css';
 import ReactDOM from 'react-dom'
 import MaterialTable from 'material-table'
+import { Button } from 'react-bootstrap';
 
-class App extends Component {
+class AddProduct extends Component {
   render() {
     return (
       <div style={{ maxWidth: '100%',height: '100%'}}>
@@ -15,7 +15,7 @@ class App extends Component {
           { title: 'Price', field: 'price', type: '' },
           { title: 'Picture', field: 'pic' }
         ]}
-        data={[{ name: '1', detail: 'Baran', price: 1987, pic: 63 }]}
+        data={[{ name: '2', detail: 'Baran', price: 1987, pic: 63 }]}
         title="Product"
       />
     </div>
@@ -24,4 +24,4 @@ class App extends Component {
     );
   }
 }
-export default App;
+export default AddProduct;
