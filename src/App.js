@@ -15,7 +15,7 @@ class App extends Component {
   }
 
   async componentDidMount (){
-    await axios.get('http://35.247.167.41/getAllTree')
+    await axios.get('https://treedp.doge.in.th/getAllTree')
       .then(response =>{
         this.setState({
           plant: response.data
