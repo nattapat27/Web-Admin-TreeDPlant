@@ -4,28 +4,29 @@ import React, { Component } from 'react';
 //import ReactDOM from 'react-dom'
 //import MaterialTable from 'material-table'
 import axios from 'axios';
+import MaterialTable from 'material-table';
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    this.state={
-      plant:[],
-      data:[]
+    this.state = {
+      plant: [],
+      data: []
     }
   }
 
-  async componentDidMount (){
+  async componentDidMount() {
     await axios.get('http://35.247.167.41/getAllTree')
-      .then(response =>{
+      .then(response => {
         this.setState({
           plant: response.data
         })
-      }) 
+      })
   }
 
   render() {
     // for(let i=0; i < this.state.plant.length; i++){
-      
+
     //   data.push({
     //     'treeId': treeId[i],
     //     'model': model[i],
@@ -35,33 +36,26 @@ class App extends Component {
     // }
     return (
       <div>
-      {this.state.plant && (
-        <div>
-          {this.state.plant.map((tree) => 
-          <div key={tree.treeId}>{tree.treeId} {tree.height}cm </div>)}
-        </div>
-      )}
+        {this.state.plant && (
+          <MaterialTable
+            columns={[
+              { title: 'ID', field: 'treeId' },
+              { title: 'model', field: 'model' },
+              { title: 'width', field: 'width' },
+              { title: 'height', field: 'height' }
+            ]}
+            data={this.state.plant}
+          >
+          </MaterialTable>
+        )}
       </div>
 
+      //     data={[{ name: '1', detail: 'Baran', price: 1987, pic: 63 }]}
+      //     title="Product"
+      //   />
+      // </div>
 
 
-
-
-            // this.plant = plant;
-    //   <div style={{ maxWidth: '100%',height: '100%'}}>
-    //   <MaterialTable
-    //     columns={[
-    //       { title: 'Name', field: 'name' },
-    //       { title: 'Detail', field: 'detail' },
-    //       { title: 'Price', field: 'price', type: '' },
-    //       { title: 'Picture', field: 'pic' }
-    //     ]}
-    //     data={[{ name: '1', detail: 'Baran', price: 1987, pic: 63 }]}
-    //     title="Product"
-    //   />
-    // </div>
-     
-    
     );
   }
 }
