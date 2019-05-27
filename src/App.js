@@ -38,6 +38,7 @@ class App extends Component {
       <div>
         {this.state.plant && (
           <MaterialTable
+          title="Products"
             columns={[
               { title: 'ID', field: 'treeId' },
               { title: 'model', field: 'model' },
@@ -45,6 +46,7 @@ class App extends Component {
               { title: 'height', field: 'height' }
             ]}
             data={this.state.plant}
+            
           >
           </MaterialTable>
         )}
