@@ -14,30 +14,24 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-.logo{
-  width: 387px;
-  height: 387px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  
-}
+
 .form-group{
   height: 70px;
   padding-left: 29%;
 }
 
 img {
-  width: 5%;
-  height: auto;
+  height: 103px;
+  width: 103px;
+  left:128px;
  }
  .navbar{
   position: absolute;
   width: 100%;
-  height: 8%;
+  height: 84px;
   left: 0px;
   top: 0px;
-  background: #577863;
+  background: #DAE0D8;
 }
 #root{
   width: 90%;

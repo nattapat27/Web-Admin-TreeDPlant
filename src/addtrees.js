@@ -5,10 +5,10 @@ import React, { Component } from 'react';
 //import MaterialTable from 'material-table'
 import axios from 'axios';
 import MaterialTable from 'material-table';
+import Header from './header';
 
 
-
-class App extends Component {
+class addTree extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -29,7 +29,9 @@ class App extends Component {
   render() {
     
     return (
+
       <div>
+          <Header/>
         {this.state.plant && (
           <MaterialTable
           title="Products"
@@ -55,4 +57,4 @@ class App extends Component {
 
 
 
-export default App;
+export default addTree;
