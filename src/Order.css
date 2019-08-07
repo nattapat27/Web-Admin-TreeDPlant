@@ -1,0 +1,69 @@
+div{
+    font-family: 'Kanit', medium;
+    position: static;
+}
+.head{
+    color:#577863;
+    text-align: center;
+    position:static;
+    margin-top:8% ;   
+}
+input{
+    position: static;
+    width: 30%;
+    height: 30%;
+    font-size: 16px;
+    background-color: #DAE0D8;
+    color: #577863;
+    background-image: url('search-icon.svg');
+    background-position: 30px 10px; 
+    background-repeat: no-repeat;
+    padding: 10px 25px 12px 70px;
+    font-family: 'Kanit';
+    font-weight: lighter;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    border-style: none;
+}
+.bu{
+    position: relative;
+    overflow: auto;
+    margin: 0px 0px 0px 0px; 
+    color: #000;
+    background-color: #ffffff;
+    font-size: 20px;
+    font-weight: lighter;
+    width: 200px;
+    
+}
+.btn-group{
+    display: block;
+    text-align: center;
+    margin: 20px 0px 0px 0px; 
+}
+.tableAllOrder{
+    width: 352px;
+    margin: 20px 0px 0px 40px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.24), 0 2px 5px 0 rgba(0,0,0,0.19);
+    padding: 0px 0px 0px 0px;
+}
+.noOrder{
+    background-color: #DAE0D8;
+    position:static;
+    margin: 0px 0px 0px 0px; 
+    overflow: auto;
+    color: #577863;
+}
+.headText{
+    position:static;
+    overflow: auto;
+    margin: 5px 0px 0px 10px;
+    
+}
+.number{
+    margin: 0px 10px 0px 0px;
+    float: right;
+    position: relative;;
+    overflow: auto;
+}
