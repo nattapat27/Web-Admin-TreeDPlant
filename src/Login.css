@@ -1,4 +1,5 @@
-.bg{
+@media only screen and (min-width: 961px) {
+    .bg{
     background: #5d7c68 url(bg.png);
     top: 0%;
     left: 0%;
@@ -11,15 +12,15 @@
     position:fixed;
     background-size: auto;
 }
-.logo{
-    display: block;
+.logoLogin{
+    width: 300px;
+    height: 300px;
     margin-right: auto;
     margin-left: auto;
-    margin-top: 4%;
-    width: 350px;
-    height: 350px;
+    margin-top:2%; 
+    display: block;
     }
-input{
+.email,.password{
     top: 10%;
     width: 40%;
     height: 30%;
@@ -27,7 +28,7 @@ input{
     background-color: white;
     background-position: 30px 10px; 
     background-repeat: no-repeat;
-    padding: 10px 25px 12px 40px;
+    padding: 10px 20px 10px 20px;
     font-family: 'Kanit';
     font-weight: lighter;
     display: block;
@@ -35,7 +36,7 @@ input{
     margin-left: auto;
     border-style: none;
 }
-.submit{
+.submitLogin{
     display: block;
     margin-right: auto;
     margin-left: auto;
@@ -49,12 +50,140 @@ input{
     font-family: 'Kanit';
     background-color: white;
 }
-.submit:hover {
+.submitLogin:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
     background-color: #577863;
     color: white;
 }
-.submit:active {
+.submitLogin:active {
     background-color:white;
     color:#577863;
   }  
+}
+
+@media only screen and (max-width: 400px) {
+    .bg{
+        background: #5d7c68 url(bg.png);
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        background-color: ;
+        opacity: 0.85;
+        position:fixed;
+        background-size: auto;
+    }
+    .logoLogin{
+        width: 200px;
+        height: 200px;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top:30%; 
+        display: block;
+        }
+    .email,.password{
+        top: 10%;
+        width: 40%;
+        height: 30%;
+        font-size: 10px;
+        background-color: white;
+        background-position: 30px 10px; 
+        background-repeat: no-repeat;
+        padding: 10px 20px 10px 20px;
+        font-family: 'Kanit';
+        font-weight: lighter;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        border-style: none;
+    }
+    .submitLogin{
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 30%;
+        height: 5%;
+        color: #577863;
+        font-size: 12px;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        font-family: 'Kanit';
+        background-color: white;
+    }
+    .submitLogin:hover {
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        background-color: #577863;
+        color: white;
+    }
+    .submitLogin:active {
+        background-color:white;
+        color:#577863;
+      }  
+      }
+
+@media only screen and (min-width: 401px) and (max-width: 960px) {
+    .bg{
+        background: #5d7c68 url(bg.png);
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        opacity: 0.85;
+        position:fixed;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+    .logoLogin{
+        width: 200px;
+        height: 200px;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top:15%; 
+        display: block;
+        }
+    .email,.password{
+        top: 10%;
+        width: 50%;
+        height: 30%;
+        font-size: 14px;
+        background-color: white;
+        background-position: 30px 10px; 
+        background-repeat: no-repeat;
+        padding: 10px 20px 10px 20px;
+        font-family: 'Kanit';
+        font-weight: lighter;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        border-style: none;
+    }
+    .submitLogin{
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        width: 30%;
+        height: 8%;
+        color: #577863;
+        font-size: 16px;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        font-family: 'Kanit';
+        background-color: white;
+    }
+    .submitLogin:hover {
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        background-color: #577863;
+        color: white;
+    }
+    .submitLogin:active {
+        background-color:white;
+        color:#577863;
+      }  
+      
+      }

@@ -43,12 +43,14 @@ input{
     margin: 20px 0px 0px 0px; 
 }
 .tableAllOrder{
+    display: block;
     width: 352px;
     margin: 20px 0px 0px 40px;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.24), 0 2px 5px 0 rgba(0,0,0,0.19);
     padding: 0px 0px 0px 0px;
 }
 .noOrder{
+    display: block;
     background-color: #DAE0D8;
     position:static;
     margin: 0px 0px 0px 0px; 

@@ -4,6 +4,8 @@ import Header from './header';
 //import Search from './header';
 //import ShowPlants from './App';
 import { Button} from 'react-bootstrap';
+import Popup from "reactjs-popup";
+
 
 class Order extends Component {
 
@@ -19,7 +21,7 @@ class Order extends Component {
         </form>
         <div className="btn-group">
         <Button className="bu">ทั้งหมด</Button>
-        <Button className="bu">รอกำเนินการ</Button>
+        <Button className="bu">รอดำเนินการ</Button>
         <Button className="bu">เตรียมจัดส่ง</Button>
         <Button className="bu">เสร็จสมบูรณ์</Button>
         </div>
@@ -47,3 +49,4 @@ class AllOrders extends Component{
         )
     }
 }
+

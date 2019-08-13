@@ -9,27 +9,30 @@
  .logo {
     width: 103px;
     height: 103px;
-    padding-left:128px;
+    padding-left:10%;
 }
 button{
-    width: 143px;
-    height: 37px;
-    position:absolute;
-    margin: 25px 0px 0px 0px; 
-    overflow: auto;
+    display: inline-block;
     color: #577863;
     font-size: 20px;
     border: none;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
     font-family: 'Kanit', medium;
     font-weight: lighter;
+    border:1px;
+    padding: 5px 15px 5px 15px;
+}
+.manage{
+    position: absolute;
+    right:22%;
+    top: 30%;
+    
+    
 }
 button:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-    background-color: #577863;
     color: white;
+    background-color:#577863;
   }
 button:active {
     background-color:white;
@@ -37,14 +40,6 @@ button:active {
     font-weight: bold;
     
   }  
-.addTree{
-    right: 40%;
-    
-}
-.order{
-    
-    right: 30%;
-}
 .user{
     width: 30px;
     height: 30px;

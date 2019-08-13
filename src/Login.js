@@ -1,28 +1,61 @@
 import React, { Component } from 'react';
 import logo from './logo-white.png';
 import './Login.css'
-import { Button} from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+import axios from 'axios';
+
 
 class Login extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            email: '',
+            password: ''
+        }
+    }
+    changeHandler = (e) => {
+        this.setState({ [e.target.name]: e.target.value })
+        console.log(e.target.value);
+    }
+    submitHandler = e => {
+        e.preventDefault()
+        console.log(this.state)
+        axios.post('https://treedp.doge.in.th/admin/login', this.state)
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => {
+                console.log(JSON)
+            })
+
+
+    }
     render() {
+        const { email, password } = this.state
         return (
             <div className="bg">
-                <img src={logo} className="logo" alt="logo" />
+                <img src={logo} className="logoLogin" alt="logo" />
                 <br></br><br></br>
-                <form>
-                    <input type="text" className="email" name="email" placeholder="Enter your e-mail" />
+                <form >
+                    <input type="text" className="email" name="email"
+                        placeholder="Enter your e-mail" value={email}
+                        onChange={this.changeHandler}
+                    />
                     <br></br>
-                    <input type="text" className="password" name="password" placeholder="Enter your password" />
+                    <input type="text"
+                        className="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        value={password}
+                        onChange={this.changeHandler}
+                    />
                 </form>
                 <br></br>
-                <Button className="submit">เข้าสู่ระบบ</Button>
-
-                
-               
-                
-
+                <Button className="submitLogin" onClick={this.submitHandler} >เข้าสู่ระบบ</Button>
             </div>
-        )
+        );
     }
 }
 export default Login;
+
+

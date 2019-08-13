@@ -16,9 +16,14 @@ class AddTree extends Component {
         <h1 className="head">เพิ่ม-ลด ต้นไม้</h1>
         
         <form>
-          <input type="text" name="search" placeholder="SEARCH" />
+          <input type="text" className="search" placeholder="SEARCH" />
 
         </form>
+        <div className="btn-group">
+        <Button className="bu">ทั้งหมด</Button>
+        <Button className="bu">ต้นไม้</Button>
+        <Button className="bu">อุปกรณ์</Button>
+        </div>
           <ShowTree/>
           <ShowTree/>
     </div>
