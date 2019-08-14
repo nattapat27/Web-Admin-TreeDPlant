@@ -23,10 +23,9 @@ class Login extends Component {
         axios.post('https://treedp.doge.in.th/admin/login', this.state)
             .then(response => {
                 console.log(response)
+                console.log(response.data)
             })
-            .catch(error => {
-                console.log(JSON)
-            })
+         
 
 
     }
