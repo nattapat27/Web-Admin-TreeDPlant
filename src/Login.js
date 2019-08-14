@@ -17,13 +17,16 @@ class Login extends Component {
         this.setState({ [e.target.name]: e.target.value })
         console.log(e.target.value);
     }
-    submitHandler = e => {
+    submitLogin = e => {
         e.preventDefault()
         console.log(this.state)
         axios.post('https://treedp.doge.in.th/admin/login', this.state)
             .then(response => {
                 console.log(response)
                 console.log(response.data)
+            })
+            .catch(error=>{
+                console.error("error")
             })
          
 
@@ -41,7 +44,7 @@ class Login extends Component {
                         onChange={this.changeHandler}
                     />
                     <br></br>
-                    <input type="text"
+                    <input type="password"
                         className="password"
                         name="password"
                         placeholder="Enter your password"
@@ -50,7 +53,7 @@ class Login extends Component {
                     />
                 </form>
                 <br></br>
-                <Button className="submitLogin" onClick={this.submitHandler} >เข้าสู่ระบบ</Button>
+                <Button className="submitLogin" onClick={this.submitLogin} >Submit</Button>
             </div>
         );
     }
