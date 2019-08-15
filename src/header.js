@@ -4,7 +4,8 @@ import logo from './logo-green.png';
 import user from './man-user.png';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
-import {Link,Router} from 'react-router-dom';
+import {BrowserRouter as Router,Link,Route} from 'react-router-dom';
+import AddTree from './Tree';
 
 class Header extends Component {
   constructor(props) {
@@ -24,20 +25,26 @@ class Header extends Component {
   }
   render() {
     return (
+      <Router>
         <div className="header">
           <img src={logo} className="logo" alt="logo" />
           <div className="manage">
-            <Button className="addProduct">เพิ่มลดสินค้า</Button>
-            <Button className="order">จัดการคำสั่งซื้อ</Button>
-
+           <Button className="addProduct">เพิ่มลดสินค้า</Button>
+           <Button href="/order" className="order">จัดการคำสั่งซื้อ</Button>
           </div>
 
           <img src={user} className="user" alt="user" />
 
         </div>
+
+        <Route exact path="/addTree" component={AddTree}></Route>
+
+
+        </Router>
     );
   }
 
 }
 export default Header;
+
 

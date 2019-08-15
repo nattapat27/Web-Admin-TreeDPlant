@@ -8,7 +8,7 @@ div{
     position:static;
     margin-top:8% ;   
 }
-input{
+.search{
     position: static;
     width: 30%;
     height: 30%;

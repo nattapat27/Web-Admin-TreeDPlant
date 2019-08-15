@@ -16,7 +16,7 @@ class Order extends Component {
         <h1 className="head">จัดการคำสั่งซื้อ</h1>
         
         <form>
-          <input type="text" name="search" placeholder="SEARCH" />
+          <input type="text" className="search" placeholder="SEARCH" />
 
         </form>
         <div className="btn-group">
