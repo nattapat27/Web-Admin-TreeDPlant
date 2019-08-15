@@ -5,7 +5,7 @@ import user from './man-user.png';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import {BrowserRouter as Router,Link,Route} from 'react-router-dom';
-import AddTree from './Tree';
+import AddTree from './Product';
 
 class Header extends Component {
   constructor(props) {
@@ -23,14 +23,15 @@ class Header extends Component {
         })
       })
   }
+  
   render() {
     return (
       <Router>
         <div className="header">
           <img src={logo} className="logo" alt="logo" />
           <div className="manage">
-           <Button className="addProduct">เพิ่มลดสินค้า</Button>
-           <Button href="/order" className="order">จัดการคำสั่งซื้อ</Button>
+          <a href="/add-product"><Button className="addProduct">เพิ่มลดสินค้า</Button></a>
+          <a href="/order"><Button className="order">จัดการคำสั่งซื้อ</Button></a>
           </div>
 
           <img src={user} className="user" alt="user" />

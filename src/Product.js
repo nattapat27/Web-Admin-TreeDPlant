@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import './Tree.css'
+import './Product.css'
 import Header from './header';
 //import Search from './header';
 import tree from './tree.png';
 //import ShowPlants from './App';
 import { Button} from 'react-bootstrap';
 
-class AddTree extends Component {
+class AddProduct extends Component {
 
   render() {
     return (
@@ -31,7 +31,7 @@ class AddTree extends Component {
   }
 
 }
-export default AddTree;
+export default AddProduct;
 
 class ShowTree extends Component{
   render(){

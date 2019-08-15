@@ -3,6 +3,7 @@ import logo from './logo-white.png';
 import './Login.css'
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
+import AddTree from './Product';
 
 
 class Login extends Component {
@@ -24,10 +25,13 @@ class Login extends Component {
         // const apiURL = 'http://localhost:8080/admin/login'
         axios.post(apiURL, this.state)
             .then(response => {
-                console.log(response.data)
+               //if(response=this.state){
+                this.props.history.push(`/order`)
+              // }
+                
             })
             .catch(error=>{
-                console.log(error.response.data)
+                
             })
          
 
