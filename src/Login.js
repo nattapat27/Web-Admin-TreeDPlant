@@ -3,7 +3,7 @@ import logo from './logo-white.png';
 import './Login.css'
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
-import AddTree from './Product';
+
 
 
 class Login extends Component {
@@ -16,24 +16,24 @@ class Login extends Component {
     }
     changeHandler = (e) => {
         this.setState({ [e.target.name]: e.target.value })
-        console.log(e.target.value);
+        //console.log(e.target.value);
     }
     submitLogin = e => {
-        e.preventDefault()
-        console.log(this.state)
-        const apiURL = 'https://treedp.doge.in.th/admin/login'
-        // const apiURL = 'http://localhost:8080/admin/login'
-        axios.post(apiURL, this.state)
-            .then(response => {
-               //if(response=this.state){
-                this.props.history.push(`/order`)
-              // }
+        // e.preventDefault()
+        this.props.history.push('/product')
+        // console.log(this.state)
+        // const apiURL = 'https://treedp.doge.in.th/admin/login'
+        // // const apiURL = 'http://localhost:8080/admin/login'
+        // axios.post(apiURL, this.state)
+        //     .then(response => {
                 
-            })
-            .catch(error=>{
+              
                 
-            })
-         
+        //     })
+        //     .catch(error=>{
+                
+        //     })
+        
 
 
     }
@@ -58,7 +58,8 @@ class Login extends Component {
                     />
                 </form>
                 <br></br>
-                <Button className="submitLogin" onClick={this.submitLogin} >Submit</Button>
+                <Button className="submitLogin" 
+                onClick={this.submitLogin} >Submit</Button>
             </div>
         );
     }

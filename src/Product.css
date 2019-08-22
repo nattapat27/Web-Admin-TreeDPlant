@@ -7,12 +7,13 @@
     color:#577863;
     text-align: center;
     position:static;
-    margin-top:8% ;   
+       
 }
 .add{
-    position: absolute;
+    position: fixed;
     overflow: auto;
-    right:10%;
+    bottom: 5%;
+    right:5%;
     border-radius: 50%;
     background:url(add.png);
     background-size: 60px;
@@ -26,6 +27,8 @@
 }
 .search{
     position: static;
+    margin-right: auto;
+    margin-left: auto;
     width: 30%;
     height: 30%;
     font-size: 16px;
@@ -38,8 +41,6 @@
     font-family: 'Kanit';
     font-weight: lighter;
     display: block;
-    margin-right: auto;
-    margin-left: auto;
     border-style: none;
 }
 .bu{
@@ -113,7 +114,85 @@ p{
     color:white;
     background-color: #577863;
 }
+.close{
+    background:url(cancel.png);
+    width: 30px;
+    height: 30px;
+    float: right;
 }
+.close:hover{
+    background:url(cancel.png);
+    box-shadow: 0 0px 0px 0 , 0 0px 0px 0 rgba(0,0,0,0.19);
+}
+.headAdd{
+    color:#577863;
+    text-align: center;
+    position:static;
+    margin-top: 1%;
+}
+p{
+    padding: 1px;
+    color:#577863;
+    margin: 1%;
+}
+.formAdd {  
+    position:absolute;
+    right: 10%;
+    width: 50%;
+    overflow:auto;
+    display:block;
+    font-size: 18px;
+    left: 37%;
+    
+}
+.formAdd input {
+    position:static;
+    width:400px;
+    height:30px;
+    background-color: #DAE0D8;
+    padding: 2px;
+    font-size: 16px;
+    font-family: 'Kanit' ;
+    font-weight: lighter;
+    padding-left: 2%;
+}
+
+.detail p{
+    top: 80%;
+    padding: 1px;
+    color:#577863;
+    margin-left: 1%;
+    position: absolute;
+}
+.detail textarea{
+    float: left;
+    width: 1000px;
+    height: 200px;
+    margin-left: 1%;
+    position: absolute;
+    top: 88%;
+}
+.uploadImage{
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    margin-left: 5%;
+    color: black;
+    background-color: #577863;
+}
+.save{
+    color:white;
+    background-color: #577863;
+    width: 100px;
+    position: absolute;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+  
+ }
 @media only screen and (max-width: 400px) {
     div{
     font-family: 'Kanit', medium;

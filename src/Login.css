@@ -1,13 +1,13 @@
 @media only screen and (min-width: 961px) {
     .bg{
-    background: #5d7c68 url(bg.png);
+    background: url(bg.png);
+    background-color:  #5d7c68;
     top: 0%;
     left: 0%;
     width: 100%;
     height: 100%;
     margin-right: auto;
     margin-left: auto;
-    background-color: ;
     opacity: 0.85;
     position:fixed;
     background-size: auto;

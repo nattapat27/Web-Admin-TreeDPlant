@@ -4,7 +4,7 @@ import Header from './header';
 //import Search from './header';
 //import ShowPlants from './App';
 import { Button} from 'react-bootstrap';
-import Popup from "reactjs-popup";
+//import Popup from "reactjs-popup";
 
 
 class Order extends Component {
