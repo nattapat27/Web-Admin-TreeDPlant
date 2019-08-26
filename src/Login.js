@@ -19,20 +19,22 @@ class Login extends Component {
         //console.log(e.target.value);
     }
     submitLogin = e => {
-        // e.preventDefault()
-        this.props.history.push('/product')
-        // console.log(this.state)
-        // const apiURL = 'https://treedp.doge.in.th/admin/login'
-        // // const apiURL = 'http://localhost:8080/admin/login'
-        // axios.post(apiURL, this.state)
-        //     .then(response => {
+        e.preventDefault()
+        
+         console.log(this.state)
+        const apiURL = 'https://treedp.doge.in.th/admin/login'
+        // const apiURL = 'http://localhost:8080/admin/login'
+        axios.post(apiURL, this.state)
+             .then(response => {
                 
-              
                 
-        //     })
-        //     .catch(error=>{
+                this.props.history.push('/product')
                 
-        //     })
+                
+             })
+             .catch(error=>{
+                
+             })
         
 
 

@@ -58,7 +58,7 @@ class Product extends Component {
               <h1 className="headAdd">เพิ่มสินค้า</h1>
               <label class="uploadImage">
                 Upload Image
-                <input type="file"  />
+                <input type="file" />
               </label>
 
 
@@ -70,13 +70,14 @@ class Product extends Component {
                 <div> ราคา<input type="text" /></div><br></br>
 
               </form>
-               
-                <form className="detail">
-                  <p >รายละเอียดสินค้า</p>
-                  <textarea type="text" />
-                </form>
 
-                <button className="save">บันทึก</button>
+              <form className="detail">
+                <p >รายละเอียดสินค้า</p>
+                <textarea type="text" />
+                
+              </form>
+            <button className="save">บันทึก</button>
+              
 
             </div>
 

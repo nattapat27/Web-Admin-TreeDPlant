@@ -1,8 +1,5 @@
 @media only screen and (min-width: 961px) {
-    div{
-    font-family: 'Kanit', medium;
-    position: static;
-}
+   
 .head{
     color:#577863;
     text-align: center;
@@ -16,14 +13,12 @@
     right:5%;
     border-radius: 50%;
     background:url(add.png);
-    background-size: 60px;
+    background-size: 100%;
     color: white;
     width: 60px;
     height: 60px;
     font-size: 30px;
     box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
-
-    
 }
 .search{
     position: static;
@@ -116,13 +111,17 @@ p{
 }
 .close{
     background:url(cancel.png);
+    background-size: 100%;
     width: 30px;
     height: 30px;
     float: right;
+    border: none;
 }
 .close:hover{
     background:url(cancel.png);
+    background-size: 100%;
     box-shadow: 0 0px 0px 0 , 0 0px 0px 0 rgba(0,0,0,0.19);
+    border: none;
 }
 .headAdd{
     color:#577863;
@@ -170,7 +169,9 @@ p{
     height: 200px;
     margin-left: 1%;
     position: absolute;
-    top: 88%;
+    margin-top:32%;
+    margin-bottom: 5%; 
+    
 }
 .uploadImage{
     position: absolute;
@@ -181,130 +182,24 @@ p{
     background-color: #577863;
 }
 .save{
-    color:white;
-    background-color: #577863;
-    width: 100px;
     position: absolute;
+    width: 150px;
+    height: 30px;
+    font-family: 'Kanit';
+    background-color:#DAE0D8;
+    color: #577863;
+    border: none;
+    
+    
 }
-
+.save:hover{
+    color:#DAE0D8;
+    background-color: #577863;
+    
+}
 input[type="file"] {
     display: none;
 }
 
   
  }
-@media only screen and (max-width: 400px) {
-    div{
-    font-family: 'Kanit', medium;
-    position: static;
-}
-.head{
-    color:#577863;
-    text-align: center;
-    position:sticky;
-    margin-top:25% ; 
-    font-size:20px; 
-    width: 100%;
-}
-.add{
-    position: absolute;
-    overflow: auto;
-    right:15%;
-    bottom: 20%;
-    border-radius: 50%;
-    background:url(add.png);
-    background-size: 60px;
-    color: white;
-    width: 60px;
-    height: 60px;
-    font-size: 30px;
-    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
-
-    
-}
-.search{
-    position: static;
-    width: 30%;
-    height: 15px;
-    font-size: 12px;
-    background-color: #DAE0D8;
-    color: #577863;
-    background-image: url('search-icon.svg');
-    background-position: 30px 10px; 
-    background-repeat: no-repeat;
-    padding: 10px 25px 12px 70px;
-    font-family: 'Kanit';
-    font-weight: lighter;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-    border-style: none;
-}
-.bu{
-    position: relative;
-    overflow: auto;
-    margin: 0px 0px 0px 0px; 
-    color: #000;
-    font-size: 20px;
-    font-weight: lighter;
-    width: 200px;
-    
-}
-.tablePlant{
-    margin: 10px 20px 20px 5px;
-    width: 150px;
-    color: #577863;
-    font-size: 20px;
-    text-align: center;
-    text-decoration: none;
-    font-family: 'Kanit';
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.24), 0 2px 5px 0 rgba(0,0,0,0.19);
-    padding: 20px 0px 0px 0px;
-}
-p{
-    font-family: 'Kanit';
-}
-.name{
-    margin: 0px 30px 0px 20px;
-    text-align:left;
-    font-size:20px;
-    font-weight: bolder;
-    width: 50%;
-    overflow: auto;
-    position: static;
-}
-.tree{
-    max-width:100px;
-    max-height:100px;
-}
-.detail{
-    width: 50%;
-    margin: 0px 30px 20px 20px;
-    text-decoration: underline;
-    text-align:left;
-    font-size:15px;
-    position: static;
-    overflow: auto;
-}
-.price{
-    position: static;
-    float:right;
-    margin: 10px 20px 10px 20px; 
-    width: 90px;
-    height: 35px;
-    color:white;
-    font-size: 15px;
-    border: none;
-    text-align: center;
-    font-family: 'Kanit';
-    background-color: #577863;
-    overflow: auto;
-    font-weight: lighter;
-}
-.price:hover{
-    box-shadow: 0 0px 0px 0 rgba(0,0,0,0.24), 0 0px 0px 0 rgba(0,0,0,0.19);
-}
-.price:active{
-    color:white;
-    background-color: #577863;
-}}

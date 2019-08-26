@@ -26,7 +26,7 @@ div{
     margin-left: auto;
     border-style: none;
 }
-.bu{
+.bu {
     position: relative;
     overflow: auto;
     margin: 0px 0px 0px 0px; 
@@ -37,11 +37,17 @@ div{
     width: 200px;
     
 }
-.btn-group{
+.btn-group {
     display: block;
     text-align: center;
-    margin: 20px 0px 0px 0px; 
+    margin: 20px 0px 0px 0px;    
 }
+.btn-group button{
+    font-family: 'Kanit';
+    border: none;
+    height: 40px;
+}
+
 .tableAllOrder{
     display: block;
     width: 352px;

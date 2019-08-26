@@ -35,7 +35,7 @@ class Header extends Component {
           </div>
 
           <img src={user} className="user" alt="user" />
-
+          
         </div>
 
         <Route exact path="/addTree" component={AddTree}></Route>
