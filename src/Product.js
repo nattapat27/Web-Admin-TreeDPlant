@@ -56,28 +56,32 @@ class Product extends Component {
             <button onClick={this.closeModal} className="close"></button>
             <div>
               <h1 className="headAdd">เพิ่มสินค้า</h1>
-              <label class="uploadImage">
-                Upload Image
+              <label className="uploadImage">
+
                 <input type="file" />
               </label>
 
 
 
               <form className="formAdd">
-                <div>ชื่อ<input type="text" /></div><br></br>
-                <div>ขนาด<input type="text" /></div><br></br>
-                <div>ประเภท<input type="text" /></div><br></br>
-                <div> ราคา<input type="text" /></div><br></br>
+                <div><p>ชื่อ</p><input type="text" /></div>
+                <div><p>ขนาด</p><input type="text" /></div>
+                <div><p>ประเภท</p>
+                  <select className="type">
+                    <option value="tree">Tree</option>
+                    <option value="asset">Asset</option>
+                  </select>
+                </div>
+                <div><p>ราคา</p><input type="text" /></div>
 
               </form>
 
               <form className="detail">
-                <p >รายละเอียดสินค้า</p>
-                <textarea type="text" />
-                
+                <p>รายละเอียดสินค้า</p>
+                <textarea ></textarea>
               </form>
-            <button className="save">บันทึก</button>
-              
+
+              <button className="save">บันทึก</button>
 
             </div>
 
