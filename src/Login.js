@@ -3,6 +3,8 @@ import logo from './logo-white.png';
 import './Login.css'
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
+//import Modal from 'react-modal';
+
 
 
 
@@ -26,10 +28,11 @@ class Login extends Component {
         // const apiURL = 'http://localhost:8080/admin/login'
         axios.post(apiURL, this.state)
             .then(response => {
-                if (response != null) {
-                    console.log(response)
+                if (response.data.email != null) {
                     this.props.history.push('/product')
-                } 
+                }else{
+                   
+                }
 
             })
             .catch(error => {

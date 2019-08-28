@@ -4,8 +4,9 @@ import logo from './logo-green.png';
 import user from './man-user.png';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
-import {BrowserRouter as Router,Route} from 'react-router-dom';
-import AddTree from './Product';
+import {BrowserRouter as Router} from 'react-router-dom';
+
+
 
 class Header extends Component {
   constructor(props) {
@@ -38,8 +39,7 @@ class Header extends Component {
           
         </div>
 
-        <Route exact path="/addTree" component={AddTree}></Route>
-
+        
 
         </Router>
     );

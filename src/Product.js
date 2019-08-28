@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './Product.css'
 import Header from './header';
-//import Search from './header';
 import tree from './tree.png';
+//import Search from './header';
 //import ShowPlants from './App';
 import { Button } from 'react-bootstrap';
 import Modal from 'react-modal';
+//import axios from 'axios';
+
 
 
 class Product extends Component {
@@ -45,7 +47,7 @@ class Product extends Component {
         </form>
         <div className="btn-group">
           <Button className="bu">ทั้งหมด</Button>
-          <Button className="bu">ต้นไม้</Button>
+          <Button className="bu" onClick>ต้นไม้</Button>
           <Button className="bu">อุปกรณ์</Button>
 
           <Modal
@@ -64,7 +66,7 @@ class Product extends Component {
 
 
               <form className="formAdd">
-                <div><p>ชื่อ</p><input type="text" /></div>
+                <div><p>ชื่อ</p><input type="text" value="" /></div>
                 <div><p>ขนาด</p><input type="text" /></div>
                 <div><p>ประเภท</p>
                   <select className="type">
@@ -88,7 +90,7 @@ class Product extends Component {
           </Modal>
 
         </div>
-        <ShowTree />
+        <ShowAll />
 
       </div>
     );
@@ -98,17 +100,25 @@ class Product extends Component {
 
 export default Product;
 
-class ShowTree extends Component {
+class ShowAll extends Component {
+  
   render() {
+
+    
     return (
       <div className='tablePlant'>
+
         <img src={tree} className="tree" alt="tree" />
-        <Button className="price">75 บาท</Button>
-        <p className="name">ยางอินเดีย</p>
-        <p className="detail">รายละเอียดสินค้า</p>
+        <Button className="price">sssss</Button>
+        <p  className="name"></p>
+        <p className="detail"></p>
+
+
+
+
+
       </div>
 
     )
   }
 }
-
