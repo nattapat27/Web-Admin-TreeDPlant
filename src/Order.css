@@ -30,12 +30,19 @@ div{
     position: relative;
     overflow: auto;
     margin: 0px 0px 0px 0px; 
-    color: #000;
+    color:#577863;
     background-color: #ffffff;
     font-size: 20px;
-    font-weight: lighter;
     width: 200px;
     
+}
+.bu:hover{
+    color: #ffffff;
+    background-color: #577863;
+}
+.bu:active{
+    color: #ffffff;
+    background-color: #577863;
 }
 .btn-group {
     display: block;

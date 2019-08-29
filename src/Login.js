@@ -23,15 +23,15 @@ class Login extends Component {
 
     submitLogin = e => {
         e.preventDefault()
-        console.log(this.state)
+        //console.log(this.state)
         const apiURL = 'https://treedp.doge.in.th/admin/login'
         // const apiURL = 'http://localhost:8080/admin/login'
         axios.post(apiURL, this.state)
             .then(response => {
                 if (response.data.email != null) {
-                    this.props.history.push('/product')
-                }else{
-                   
+                    this.props.history.push('/order')
+                } else {
+
                 }
 
             })
@@ -49,8 +49,11 @@ class Login extends Component {
                 <img src={logo} className="logoLogin" alt="logo" />
                 <br></br><br></br>
                 <form >
-                    <input type="text" className="email" name="email"
-                        placeholder="Enter your e-mail" value={email}
+                    <input type="text"
+                        className="email"
+                        name="email"
+                        placeholder="Enter your e-mail"
+                        value={email}
                         onChange={this.changeHandler}
                     />
                     <br></br>
@@ -64,7 +67,7 @@ class Login extends Component {
                 </form>
                 <br></br>
                 <Button className="submitLogin"
-                    onClick={this.submitLogin} >Submit</Button>
+                    onClick={this.submitLogin}> Submit </Button>
             </div>
         );
     }

@@ -3,27 +3,13 @@ import './header.css';
 import logo from './logo-green.png';
 import user from './man-user.png';
 import { Button } from 'react-bootstrap';
-import axios from 'axios';
+//import axios from 'axios';
 import {BrowserRouter as Router} from 'react-router-dom';
 
 
 
 class Header extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      user: []
-    }
-  }
 
-  async componentDidMount() {
-    await axios.get('https://treedp.doge.in.th/admin/login')
-      .then(response => {
-        this.setState({
-          user: response.data
-        })
-      })
-  }
   
   render() {
     return (

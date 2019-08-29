@@ -49,6 +49,11 @@
     background-color: white;
     
 }
+.bu:hover,.bu:link{
+    color: #ffffff;
+    background-color: #577863;
+}
+
 .btn-group{
     display: block;
     text-align: center;
@@ -151,18 +156,19 @@ p{
     background-color: #DAE0D8;
     font-size: 16px;
     font-family: 'Kanit' ;
-    font-weight: lighter;
     padding-left: 2%;
     margin-top: 2%;
     margin-bottom:2%; 
-    left:15%;
+    left:20%;
+    color:#577863;
 }
 .type:hover{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.2), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 .formAdd p{
     display: inline;
-    
+    color:#577863;
+    position: sticky;
 }
 
 .uploadImage{
@@ -171,9 +177,8 @@ p{
     height: 250px;
     margin-left: 5%;
     margin-bottom: 10%;
-    background-image:url('upload.svg');
-    background-color: #577863 ;
-    background-position: 30px 10px; 
+    background-image:url('upload.png');
+    background-size: 100%;
     background-repeat: no-repeat;
 }
 
@@ -193,6 +198,8 @@ input[type="file"] {
     width: 90%;
     height: 100px;
     margin-left: 1%;
+    font-size:16px; 
+    color:#577863;
 }
 .save{
     margin-left:auto;

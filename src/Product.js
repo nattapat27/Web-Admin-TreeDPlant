@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import './Product.css'
 import Header from './header';
 import tree from './tree.png';
-//import Search from './header';
-//import ShowPlants from './App';
 import { Button } from 'react-bootstrap';
 import Modal from 'react-modal';
-//import axios from 'axios';
+import axios from 'axios';
 
 
 
@@ -46,8 +44,8 @@ class Product extends Component {
           <input type="text" className="search" placeholder="SEARCH" />
         </form>
         <div className="btn-group">
-          <Button className="bu">ทั้งหมด</Button>
-          <Button className="bu" onClick>ต้นไม้</Button>
+          <Button className="bu" >ทั้งหมด</Button>
+          <Button className="bu">ต้นไม้</Button>
           <Button className="bu">อุปกรณ์</Button>
 
           <Modal
@@ -58,23 +56,24 @@ class Product extends Component {
             <button onClick={this.closeModal} className="close"></button>
             <div>
               <h1 className="headAdd">เพิ่มสินค้า</h1>
-              <label className="uploadImage">
-
+              
+              <label className="uploadImage" img src={tree}>
                 <input type="file" />
               </label>
 
 
 
               <form className="formAdd">
-                <div><p>ชื่อ</p><input type="text" value="" /></div>
-                <div><p>ขนาด</p><input type="text" /></div>
+                <div><p>ชื่อ</p><input type="text"  /></div>
+                <div><p>กว้าง (ซ.ม.)</p><input type="number" /></div>
+                <div><p>สูง (ซ.ม.)</p><input type="number" /></div>
                 <div><p>ประเภท</p>
                   <select className="type">
                     <option value="tree">Tree</option>
                     <option value="asset">Asset</option>
                   </select>
                 </div>
-                <div><p>ราคา</p><input type="text" /></div>
+                <div><p>ราคา (บาท)</p><input type="number" /></div>
 
               </form>
 
@@ -91,6 +90,7 @@ class Product extends Component {
 
         </div>
         <ShowAll />
+        <ShowTree />
 
       </div>
     );
@@ -101,22 +101,46 @@ class Product extends Component {
 export default Product;
 
 class ShowAll extends Component {
-  
+  componentDidMount(){
+    axios.get('https://treedp.doge.in.th/asset/getAllAsset')
+    .then(response=>{
+      console.log(response.data)
+      
+    })
+  }
+   
   render() {
 
-    
+    return (
+      <div className='tablePlant'>
+
+        <img src={tree} className="tree" alt="tree" />
+        <Button className="price"></Button>
+        <p className="name"></p>
+        <p className="detail"></p>
+      </div>
+
+    )
+  }
+}
+class ShowTree extends Component {
+  componentDidMount(){
+    axios.get('https://treedp.doge.in.th/asset/getAllAsset/tree')
+    .then(response=>{
+      console.log(response.data)
+    })
+  }
+   
+  render() {
+
+
     return (
       <div className='tablePlant'>
 
         <img src={tree} className="tree" alt="tree" />
         <Button className="price">sssss</Button>
-        <p  className="name"></p>
+        <p className="name"></p>
         <p className="detail"></p>
-
-
-
-
-
       </div>
 
     )
