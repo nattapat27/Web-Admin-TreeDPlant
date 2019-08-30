@@ -8,6 +8,7 @@ import axios from 'axios';
 
 
 
+
 class Product extends Component {
   constructor() {
     super();
@@ -31,7 +32,9 @@ class Product extends Component {
   closeModal() {
     this.setState({ modalIsOpen: false });
   }
-
+  componentDidMount() {
+    Modal.setAppElement('body');
+  }
   render() {
     return (
       <div>
@@ -44,51 +47,18 @@ class Product extends Component {
           <input type="text" className="search" placeholder="SEARCH" />
         </form>
         <div className="btn-group">
-          <Button className="bu" >ทั้งหมด</Button>
-          <Button className="bu">ต้นไม้</Button>
-          <Button className="bu">อุปกรณ์</Button>
-
-          <Modal
-            isOpen={this.state.modalIsOpen}
-            onAfterOpen={this.afterOpenModal}
-            onRequestClose={this.closeModal}>
-
-            <button onClick={this.closeModal} className="close"></button>
-            <div>
-              <h1 className="headAdd">เพิ่มสินค้า</h1>
-              
-              <label className="uploadImage" img src={tree}>
-                <input type="file" />
-              </label>
-
-
-
-              <form className="formAdd">
-                <div><p>ชื่อ</p><input type="text"  /></div>
-                <div><p>กว้าง (ซ.ม.)</p><input type="number" /></div>
-                <div><p>สูง (ซ.ม.)</p><input type="number" /></div>
-                <div><p>ประเภท</p>
-                  <select className="type">
-                    <option value="tree">Tree</option>
-                    <option value="asset">Asset</option>
-                  </select>
-                </div>
-                <div><p>ราคา (บาท)</p><input type="number" /></div>
-
-              </form>
-
-              <form className="detail">
-                <p>รายละเอียดสินค้า</p>
-                <textarea ></textarea>
-              </form>
-
-              <button className="save">บันทึก</button>
-
-            </div>
-
-          </Modal>
-
+          <Button>ทั้งหมด</Button>
+          <Button>ต้นไม้</Button>
+          <Button>อุปกรณ์</Button>
         </div>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onAfterOpen={this.afterOpenModal}
+          onRequestClose={this.closeModal} >
+
+          <ModalAdd />
+
+        </Modal>
         <ShowAll />
         <ShowTree />
 
@@ -100,15 +70,164 @@ class Product extends Component {
 
 export default Product;
 
-class ShowAll extends Component {
-  componentDidMount(){
-    axios.get('https://treedp.doge.in.th/asset/getAllAsset')
-    .then(response=>{
-      console.log(response.data)
-      
+class ModalAdd extends Component {
+  constructor() {
+    super()
+    this.state = {
+      trees: true,
+      assets: false,
+      asset: {
+        asset_name: '',
+        asset_image: '',
+        price: '',
+        asset_detail: '',
+        width: '',
+        height: ''
+      }
+    }
+
+  }
+  assets() {
+    this.setState({
+      trees: false,
+      assets: true
     })
   }
-   
+  trees() {
+    this.setState({
+      trees: true,
+      assets: false
+    })
+  }
+  addTree = e => {
+    e.preventDefault()
+    const apiURL = 'https://treedp.doge.in.th/asset/save/tree'
+    axios.post(apiURL, this.state.asset)
+      .then(response => {
+        console.log(response.data)
+      }
+      )
+  }
+  addAsset = e => {
+    e.preventDefault()
+    const apiURL = 'https://treedp.doge.in.th/asset/save'
+    axios.post(apiURL, this.state.asset)
+      .then(response => {
+        console.log(response.data)
+      }
+      )
+  }
+  changeHandler = (e) => {
+    const asset = { ...this.state.asset, [e.target.name]: e.target.value }
+    this.setState({ asset })
+    console.log(asset);
+  }
+  render() {
+    const { asset_name, asset_image, price, asset_detail, width, height } = this.state.asset;
+    return (
+      <div className="modal">
+
+        <h1 className="headAdd">เพิ่มสินค้า</h1>
+
+        <label className="uploadImage" >
+          <input type="file"
+            name="image"
+            value={asset_image}
+            onChange={this.changeHandler}
+          />
+        </label>
+
+        <div className="typeAsset">
+          <Button className="bu" onClick={() => this.trees()}>ต้นไม้</Button>
+          <Button className="bu" onClick={() => this.assets()}>อุปกรณ์</Button>
+        </div>
+
+
+        {this.state.trees ?
+          <div>
+            <form className="formTree">
+              <div><p>ชื่อ</p>
+                <input type="text"
+                  name="asset_name"
+                  value={asset_name}
+                  onChange={this.changeHandler} /></div>
+
+              <div><p>ราคา (บาท)</p>
+                <input type="number"
+                  name="price"
+                  value={price}
+                  onChange={this.changeHandler} /></div>
+              <div><p>กว้าง (ซ.ม.)</p>
+                <input type="number"
+                  name="width"
+                  value={width}
+                  onChange={this.changeHandler} /></div>
+              <div><p>สูง (ซ.ม.)</p>
+                <input type="number"
+                  name="height"
+                  value={height}
+                  onChange={this.changeHandler} /></div>
+            </form>
+            <form className="detail">
+              <p>รายละเอียดสินค้า</p>
+              <textarea
+                name="asset_detail"
+                value={asset_detail}
+                onChange={this.changeHandler}></textarea>
+            </form>
+            <button className="save" onClick={this.addTree}>บันทึก</button>
+          </div>
+          : null
+        }
+
+
+
+        {this.state.assets ?
+          <div>
+            <form className="formAdd">
+              <div><p>ชื่อ</p>
+                <input type="text"
+                  name="asset_name"
+                  value={asset_name}
+                  onChange={this.changeHandler} /></div>
+
+              <div><p>ราคา (บาท)</p>
+                <input type="number"
+                  name="price"
+                  value={price}
+                  onChange={this.changeHandler} /></div>
+
+            </form>
+
+            <form className="detail">
+              <p>รายละเอียดสินค้า</p>
+              <textarea
+                name="asset_detail"
+                value={asset_detail}
+                onChange={this.changeHandler}></textarea>
+            </form>
+            <button className="save" onClick={this.addAsset}>บันทึก</button>
+          </div>
+          : null
+        }
+
+
+
+
+      </div>
+    )
+  }
+}
+
+class ShowAll extends Component {
+  componentDidMount() {
+    axios.get('https://treedp.doge.in.th/asset/getAllAsset')
+      .then(response => {
+        console.log(response.data)
+
+      })
+  }
+
   render() {
 
     return (
@@ -124,13 +243,16 @@ class ShowAll extends Component {
   }
 }
 class ShowTree extends Component {
-  componentDidMount(){
+  componentDidMount() {
     axios.get('https://treedp.doge.in.th/asset/getAllAsset/tree')
-    .then(response=>{
-      console.log(response.data)
-    })
+      .then(response => {
+
+        console.log(response.data.assetId)
+
+
+      })
   }
-   
+
   render() {
 
 
@@ -146,3 +268,4 @@ class ShowTree extends Component {
     )
   }
 }
+

@@ -81,4 +81,6 @@ div{
     float: right;
     position: relative;;
     overflow: auto;
+    color: #577863;
+    font-size: 100%;
 }

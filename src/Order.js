@@ -1,12 +1,9 @@
 import React, { Component } from 'react';
 import './Order.css'
 import Header from './header';
-//import Search from './header';
-//import ShowPlants from './App';
+//import Modal from 'react-modal';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
-//import Popup from "reactjs-popup";
-
 
 class Order extends Component {
 
@@ -73,19 +70,23 @@ class Order extends Component {
 export default Order;
 
 class AllOrders extends Component {
+  
+  
   componentDidMount() {
     console.log()
     axios.get('https://treedp.doge.in.th//order/getAllOrder')
       .then(response => {
         console.log(response.data)
+        
       })
   }
   render() {
+
     return (
       <div className='tableAllOrder'>
         <div className="noOrder">
           <p className="headText">รหัสคำสั่งซื้อ</p>
-          <p className="number">2344543544</p>
+          <p className="number"></p>
         </div>
 
         <p className="name">ยางอินเดีย</p>
