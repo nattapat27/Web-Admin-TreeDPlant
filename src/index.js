@@ -9,10 +9,10 @@ import {BrowserRouter,Route} from 'react-router-dom' ;
 
 
 ReactDOM.render(
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Route exact path="/" component={Login}/>
-    <Route exact path="/product" component={Product}/>
-    <Route exact path="/order" component={Order}/>
+    <Route path="/product" component={Product}/>
+    <Route path="/order" component={Order}/>
     </BrowserRouter>
     
     ,document.getElementById('root'));
