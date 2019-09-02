@@ -77,6 +77,12 @@ class ModalAdd extends Component {
       trees: true,
       assets: false,
       asset: {
+        price: '',
+        name: '',
+        image: '',
+        detail: '',
+      },
+      tree: {
         asset_name: '',
         asset_image: '',
         price: '',
@@ -102,7 +108,7 @@ class ModalAdd extends Component {
   addTree = e => {
     e.preventDefault()
     const apiURL = 'https://treedp.doge.in.th/asset/save/tree'
-    axios.post(apiURL, this.state.asset)
+    axios.post(apiURL, this.state.tree)
       .then(response => {
         console.log(response.data)
       }
@@ -123,7 +129,7 @@ class ModalAdd extends Component {
     console.log(asset);
   }
   render() {
-    const { asset_name, asset_image, price, asset_detail, width, height } = this.state.asset;
+    const { name, image, price, detail, width, height } = this.state.asset;
     return (
       <div className="modal">
 
@@ -132,7 +138,7 @@ class ModalAdd extends Component {
         <label className="uploadImage" >
           <input type="file"
             name="image"
-            value={asset_image}
+            value={image}
             onChange={this.changeHandler}
           />
         </label>
@@ -148,8 +154,8 @@ class ModalAdd extends Component {
             <form className="formTree">
               <div><p>ชื่อ</p>
                 <input type="text"
-                  name="asset_name"
-                  value={asset_name}
+                  name="name"
+                  value={name}
                   onChange={this.changeHandler} /></div>
 
               <div><p>ราคา (บาท)</p>
@@ -171,8 +177,8 @@ class ModalAdd extends Component {
             <form className="detail">
               <p>รายละเอียดสินค้า</p>
               <textarea
-                name="asset_detail"
-                value={asset_detail}
+                name="detail"
+                value={detail}
                 onChange={this.changeHandler}></textarea>
             </form>
             <button className="save" onClick={this.addTree}>บันทึก</button>
@@ -180,15 +186,13 @@ class ModalAdd extends Component {
           : null
         }
 
-
-
         {this.state.assets ?
           <div>
             <form className="formAdd">
               <div><p>ชื่อ</p>
                 <input type="text"
-                  name="asset_name"
-                  value={asset_name}
+                  name="name"
+                  value={name}
                   onChange={this.changeHandler} /></div>
 
               <div><p>ราคา (บาท)</p>
@@ -202,24 +206,27 @@ class ModalAdd extends Component {
             <form className="detail">
               <p>รายละเอียดสินค้า</p>
               <textarea
-                name="asset_detail"
-                value={asset_detail}
+                name="detail"
+                value={detail}
                 onChange={this.changeHandler}></textarea>
             </form>
             <button className="save" onClick={this.addAsset}>บันทึก</button>
           </div>
           : null
         }
-
-
-
-
-      </div>
+        </div>
     )
   }
 }
 
 class ShowAll extends Component {
+  constructor() {
+    super()
+    this.state = {
+       
+    }
+
+  }
   componentDidMount() {
     axios.get('https://treedp.doge.in.th/asset/getAllAsset')
       .then(response => {
@@ -242,6 +249,7 @@ class ShowAll extends Component {
     )
   }
 }
+
 class ShowTree extends Component {
   componentDidMount() {
     axios.get('https://treedp.doge.in.th/asset/getAllAsset/tree')

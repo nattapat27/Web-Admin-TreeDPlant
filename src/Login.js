@@ -29,7 +29,7 @@ class Login extends Component {
         axios.post(apiURL, this.state)
             .then(response => {
                 if (response.data.email != null) {
-                    this.props.history.push('/order')
+                    this.props.history.push('/product')
                 } else {
                     alert("Incorrect Email or Password")
                 }
