@@ -4,7 +4,6 @@ import Header from './header';
 import { Button } from 'react-bootstrap';
 import Modal from 'react-modal';
 import axios from 'axios';
-import { Image } from 'cloudinary-react';
 
 
 
