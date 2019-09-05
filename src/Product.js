@@ -98,7 +98,6 @@ class Product extends Component {
           assets.map(asset =>
             <div className='tablePlant' >
 
-              <Image publicId={asset.assetImage}/>
                 <div className='price' key={asset.price}>{asset.price} THB</div>
                 <p key={asset.assetName}>{asset.assetName}</p>
                 <p className='detail'>รายละเอียดสินค้า</p>
