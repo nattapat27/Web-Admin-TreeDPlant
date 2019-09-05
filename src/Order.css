@@ -56,31 +56,41 @@ div{
 }
 
 .tableAllOrder{
-    display: block;
-    width: 352px;
-    margin: 20px 0px 0px 40px;
+    display: inline-block;
+    width: 23%;
+    margin:2%;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.24), 0 2px 5px 0 rgba(0,0,0,0.19);
-    padding: 0px 0px 0px 0px;
+    padding-bottom: 1%;
 }
-.noOrder{
-    display: block;
+.orderNumber{
+    padding: 5%; 
     background-color: #DAE0D8;
-    position:static;
-    margin: 0px 0px 0px 0px; 
-    overflow: auto;
-    color: #577863;
+
 }
-.headText{
-    position:static;
-    overflow: auto;
-    margin: 5px 0px 0px 10px;
+.orderNumber p{
+    display: inline;
+    color: #577863;
+     
+}
+.orderId{
+    float: right;
+}
+.detailOrder p{
+    color:#383939;
+    font-weight:lighter;
+    opacity: 1;
     
 }
-.number{
-    margin: 0px 10px 0px 0px;
+.detailOrder {
+    padding: 4%
+}
+.orderStatus{
+    background: #577863 0% 0% no-repeat padding-box;
+    opacity: 1;
     float: right;
-    position: relative;;
-    overflow: auto;
-    color: #577863;
-    font-size: 100%;
+    padding:2%; 
+    color: #ffffff;
+    width: 40%;
+    font-weight: lighter;
+    text-align: center;
 }

@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './Product.css'
 import Header from './header';
-import tree from './tree.png';
 import { Button } from 'react-bootstrap';
 import Modal from 'react-modal';
 import axios from 'axios';
+import { Image } from 'cloudinary-react';
+
 
 
 
@@ -14,7 +15,8 @@ class Product extends Component {
     super();
 
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: false,
+      assets: []
     };
 
     this.openModal = this.openModal.bind(this);
@@ -34,8 +36,43 @@ class Product extends Component {
   }
   componentDidMount() {
     Modal.setAppElement('body');
+    console.log()
+    axios.get('https://treedp.doge.in.th/asset/getAllAsset')
+      .then(response => {
+        console.log(response.data)
+        this.setState({ assets: response.data })
+      })
+  }
+  allProduct = e => {
+    e.preventDefault()
+    console.log()
+    axios.get('https://treedp.doge.in.th/asset/getAllAsset')
+      .then(response => {
+        //console.log(response.data)
+        this.setState({ assets: response.data })
+      })
+  }
+  showTree = e => {
+    e.preventDefault()
+    console.log()
+    axios.get('https://treedp.doge.in.th/asset/getAllAsset/tree')
+      .then(response => {
+        //console.log(response.data)
+        this.setState({ assets: response.data })
+      })
+  }
+  showAsset = e => {
+    e.preventDefault()
+    console.log()
+    axios.get('https://treedp.doge.in.th/asset/getTypeAsset')
+      .then(response => {
+        //console.log(response.data)
+        this.setState({ assets: response.data })
+
+      })
   }
   render() {
+    const { assets } = this.state
     return (
       <div>
         <Header />
@@ -47,43 +84,51 @@ class Product extends Component {
           <input type="text" className="search" placeholder="SEARCH" />
         </form>
         <div className="btn-group">
-          <Button>ทั้งหมด</Button>
-          <Button>ต้นไม้</Button>
-          <Button>อุปกรณ์</Button>
+          <Button onClick={this.allProduct}>ทั้งหมด</Button>
+          <Button onClick={this.showTree}>ต้นไม้</Button>
+          <Button onClick={this.showAsset}>อุปกรณ์</Button>
         </div>
         <Modal
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal} >
-
           <ModalAdd />
-
         </Modal>
-        <ShowAll />
-        <ShowTree />
 
+        {assets.length ?
+          assets.map(asset =>
+            <div className='tablePlant' >
+
+              <Image publicId={asset.assetImage}/>
+                <div className='price' key={asset.price}>{asset.price} THB</div>
+                <p key={asset.assetName}>{asset.assetName}</p>
+                <p className='detail'>รายละเอียดสินค้า</p>
+            </div>
+              ) : null
+            }
+    
       </div>
-    );
+          );
 
-  }
-}
-
-export default Product;
-
+        }
+      }
+      
+      export default Product;
+      
 class ModalAdd extends Component {
-  constructor() {
-    super()
+          constructor() {
+        super()
     this.state = {
-      trees: true,
-      assets: false,
+          trees: true,
+        assets: false,
       asset: {
-        price: '',
+          price: '',
         name: '',
         image: '',
         detail: '',
       },
       tree: {
-        asset_name: '',
+          asset_name: '',
         asset_image: '',
         price: '',
         asset_detail: '',
@@ -94,186 +139,133 @@ class ModalAdd extends Component {
 
   }
   assets() {
-    this.setState({
-      trees: false,
-      assets: true
-    })
-  }
-  trees() {
-    this.setState({
-      trees: true,
-      assets: false
-    })
-  }
-  addTree = e => {
-    e.preventDefault()
+          this.setState({
+            trees: false,
+            assets: true
+          })
+        }
+        trees() {
+          this.setState({
+            trees: true,
+            assets: false
+          })
+        }
+        addTree = e => {
+          e.preventDefault()
     const apiURL = 'https://treedp.doge.in.th/asset/save/tree'
-    axios.post(apiURL, this.state.tree)
+        axios.post(apiURL, this.state.tree)
       .then(response => {
-        console.log(response.data)
-      }
-      )
-  }
+          //console.log(response.data)
+
+        }
+        )
+    }
   addAsset = e => {
-    e.preventDefault()
+          e.preventDefault()
     const apiURL = 'https://treedp.doge.in.th/asset/save'
-    axios.post(apiURL, this.state.asset)
+        axios.post(apiURL, this.state.asset)
       .then(response => {
-        console.log(response.data)
-      }
-      )
-  }
+          //console.log(response.data)
+
+        }
+        )
+    }
   changeHandler = (e) => {
-    const asset = { ...this.state.asset, [e.target.name]: e.target.value }
-    this.setState({ asset })
-    console.log(asset);
-  }
+    const asset = {...this.state.asset, [e.target.name]: e.target.value }
+    this.setState({asset})
+        //console.log(asset);
+      }
   render() {
-    const { name, image, price, detail, width, height } = this.state.asset;
-    return (
+    const {name, image, price, detail, width, height } = this.state.asset;
+        return (
       <div className="modal">
 
-        <h1 className="headAdd">เพิ่มสินค้า</h1>
+          <h1 className="headAdd">เพิ่มสินค้า</h1>
 
-        <label className="uploadImage" >
-          <input type="file"
-            name="image"
-            value={image}
-            onChange={this.changeHandler}
-          />
-        </label>
+          <label className="uploadImage" >
+            <input type="file"
+              name="image"
+              value={image}
+              onChange={this.changeHandler}
+            />
+          </label>
 
-        <div className="typeAsset">
-          <Button className="bu" onClick={() => this.trees()}>ต้นไม้</Button>
-          <Button className="bu" onClick={() => this.assets()}>อุปกรณ์</Button>
-        </div>
-
-
-        {this.state.trees ?
-          <div>
-            <form className="formTree">
-              <div><p>ชื่อ</p>
-                <input type="text"
-                  name="name"
-                  value={name}
-                  onChange={this.changeHandler} /></div>
-
-              <div><p>ราคา (บาท)</p>
-                <input type="number"
-                  name="price"
-                  value={price}
-                  onChange={this.changeHandler} /></div>
-              <div><p>กว้าง (ซ.ม.)</p>
-                <input type="number"
-                  name="width"
-                  value={width}
-                  onChange={this.changeHandler} /></div>
-              <div><p>สูง (ซ.ม.)</p>
-                <input type="number"
-                  name="height"
-                  value={height}
-                  onChange={this.changeHandler} /></div>
-            </form>
-            <form className="detail">
-              <p>รายละเอียดสินค้า</p>
-              <textarea
-                name="detail"
-                value={detail}
-                onChange={this.changeHandler}></textarea>
-            </form>
-            <button className="save" onClick={this.addTree}>บันทึก</button>
+          <div className="typeAsset">
+            <Button className="bu"
+              onClick={() => this.trees()}>ต้นไม้</Button>
+            <Button className="bu"
+              onClick={() => this.assets()}>อุปกรณ์</Button>
           </div>
-          : null
-        }
 
-        {this.state.assets ?
-          <div>
-            <form className="formAdd">
-              <div><p>ชื่อ</p>
-                <input type="text"
-                  name="name"
-                  value={name}
-                  onChange={this.changeHandler} /></div>
 
-              <div><p>ราคา (บาท)</p>
-                <input type="number"
-                  name="price"
-                  value={price}
-                  onChange={this.changeHandler} /></div>
+          {this.state.trees ?
+            <div>
+              <form className="formTree">
+                <div><p>ชื่อ</p>
+                  <input type="text"
+                    name="name"
+                    value={name}
+                    onChange={this.changeHandler} /></div>
 
-            </form>
+                <div><p>ราคา (บาท)</p>
+                  <input type="number"
+                    name="price"
+                    value={price}
+                    onChange={this.changeHandler} /></div>
+                <div><p>กว้าง (ซ.ม.)</p>
+                  <input type="number"
+                    name="width"
+                    value={width}
+                    onChange={this.changeHandler} /></div>
+                <div><p>สูง (ซ.ม.)</p>
+                  <input type="number"
+                    name="height"
+                    value={height}
+                    onChange={this.changeHandler} /></div>
+              </form>
+              <form className="detail">
+                <p>รายละเอียดสินค้า</p>
+                <textarea
+                  name="detail"
+                  value={detail}
+                  onChange={this.changeHandler}></textarea>
+              </form>
+              <button className="save" onClick={this.addTree}>บันทึก</button>
+            </div>
+            : null
+          }
 
-            <form className="detail">
-              <p>รายละเอียดสินค้า</p>
-              <textarea
-                name="detail"
-                value={detail}
-                onChange={this.changeHandler}></textarea>
-            </form>
-            <button className="save" onClick={this.addAsset}>บันทึก</button>
-          </div>
-          : null
-        }
+          {this.state.assets ?
+            <div>
+              <form className="formAdd">
+                <div><p>ชื่อ</p>
+                  <input type="text"
+                    name="name"
+                    value={name}
+                    onChange={this.changeHandler} /></div>
+
+                <div><p>ราคา (บาท)</p>
+                  <input type="number"
+                    name="price"
+                    value={price}
+                    onChange={this.changeHandler} /></div>
+
+              </form>
+
+              <form className="detail">
+                <p>รายละเอียดสินค้า</p>
+                <textarea
+                  name="detail"
+                  value={detail}
+                  onChange={this.changeHandler}></textarea>
+              </form>
+              <button className="save" onClick={this.addAsset}>บันทึก</button>
+            </div>
+            : null
+          }
         </div>
-    )
-  }
-}
-
-class ShowAll extends Component {
-  constructor() {
-    super()
-    this.state = {
-       
+        )
+      }
     }
-
-  }
-  componentDidMount() {
-    axios.get('https://treedp.doge.in.th/asset/getAllAsset')
-      .then(response => {
-        console.log(response.data)
-
-      })
-  }
-
-  render() {
-
-    return (
-      <div className='tablePlant'>
-
-        <img src={tree} className="tree" alt="tree" />
-        <Button className="price"></Button>
-        <p className="name"></p>
-        <p className="detail"></p>
-      </div>
-
-    )
-  }
-}
-
-class ShowTree extends Component {
-  componentDidMount() {
-    axios.get('https://treedp.doge.in.th/asset/getAllAsset/tree')
-      .then(response => {
-
-        console.log(response.data.assetId)
-
-
-      })
-  }
-
-  render() {
-
-
-    return (
-      <div className='tablePlant'>
-
-        <img src={tree} className="tree" alt="tree" />
-        <Button className="price">sssss</Button>
-        <p className="name"></p>
-        <p className="detail"></p>
-      </div>
-
-    )
-  }
-}
-
+    
+    

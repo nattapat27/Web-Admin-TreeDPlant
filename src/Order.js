@@ -6,13 +6,24 @@ import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
 class Order extends Component {
-
+  state = {
+    orders: []
+  }
+  componentDidMount() {
+    console.log()
+    axios.get('https://treedp.doge.in.th//order/getAllOrder')
+      .then(response => {
+        console.log(response.data)
+        this.setState({ orders: response.data })
+      })
+  }
   allOrder = e => {
     e.preventDefault()
     console.log()
     axios.get('https://treedp.doge.in.th//order/getAllOrder')
       .then(response => {
         console.log(response.data)
+        this.setState({ orders: response.data })
       })
   }
 
@@ -22,6 +33,7 @@ class Order extends Component {
     axios.get('https://treedp.doge.in.th/show/status/1')
       .then(response => {
         console.log(response.data)
+        this.setState({ orders: response.data })
       })
   }
 
@@ -31,6 +43,7 @@ class Order extends Component {
     axios.get('https://treedp.doge.in.th/show/status/2')
       .then(response => {
         console.log(response.data)
+        this.setState({ orders: response.data })
       })
   }
 
@@ -40,11 +53,13 @@ class Order extends Component {
     axios.get('https://treedp.doge.in.th/show/status/3')
       .then(response => {
         console.log(response.data)
+        this.setState({ orders: response.data })
       })
   }
 
 
   render() {
+    const { orders } = this.state
     return (
       <div>
         <Header />
@@ -61,7 +76,30 @@ class Order extends Component {
           <Button className="bu" onClick={this.complete}>เสร็จสมบูรณ์</Button>
         </div>
 
-        <AllOrders />
+        <div >
+
+          {orders.length ?
+            orders.map(order =>
+              <div className='tableAllOrder'>
+
+                <div className='orderNumber'>
+                  <p>  รหัสคำสั่งซื้อ</p>
+                  <p className='orderId' key={order.orderId}># {order.orderId}</p>
+                </div>
+                <div className='detailOrder'>
+                  <p key={order.profileId}><b>ชื่อ</b>   {order.profileId.name}</p>
+                  <p key={order.addressDetail}><b>ที่อยู่</b>   {order.addressId.addressDetail}</p>
+                  <br></br>
+                  <p key={order.datePurchase}><b>วันที่ : </b>   {order.datePurchase}</p>
+                  <div className='orderStatus'>{order.statusId.statusName}</div>
+
+
+                </div>
+              </div>
+            ) : null
+          }
+
+        </div>
       </div>
     );
   }
@@ -69,32 +107,6 @@ class Order extends Component {
 }
 export default Order;
 
-class AllOrders extends Component {
-  
-  
-  componentDidMount() {
-    console.log()
-    axios.get('https://treedp.doge.in.th//order/getAllOrder')
-      .then(response => {
-        console.log(response.data)
-        
-      })
-  }
-  render() {
-
-    return (
-      <div className='tableAllOrder'>
-        <div className="noOrder">
-          <p className="headText">รหัสคำสั่งซื้อ</p>
-          <p className="number"></p>
-        </div>
-
-        <p className="name">ยางอินเดีย</p>
-        <p className="detail">รายละเอียดสินค้า</p>
-      </div>
-    )
-  }
-}
 
 
 

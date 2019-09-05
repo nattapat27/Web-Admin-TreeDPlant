@@ -6,6 +6,7 @@
     "@version/react-router-v3": "^1.0.0",
     "axios": "^0.18.1",
     "bootstrap": "^4.3.1",
+    "cloudinary": "^1.14.0",
     "formik": "^1.5.7",
     "material-table": "^1.32.0",
     "react": "^16.8.5",
