@@ -68,9 +68,9 @@ div{
 
 }
 .orderNumber p{
-    display: inline;
+    display: inline-block;
     color: #577863;
-     
+    margin: 0%;
 }
 .orderId{
     float: right;
@@ -78,12 +78,14 @@ div{
 .detailOrder p{
     color:#383939;
     font-weight:lighter;
-    opacity: 1;
-    
+    opacity: 0.75;
+    margin: 4%;
+
 }
 .detailOrder {
-    padding: 4%
+    padding: 3%;
 }
+
 .orderStatus{
     background: #577863 0% 0% no-repeat padding-box;
     opacity: 1;

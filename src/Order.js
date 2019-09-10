@@ -89,7 +89,6 @@ class Order extends Component {
                 <div className='detailOrder'>
                   <p key={order.profileId}><b>ชื่อ</b>   {order.profileId.name}</p>
                   <p key={order.addressDetail}><b>ที่อยู่</b>   {order.addressId.addressDetail}</p>
-                  <br></br>
                   <p key={order.datePurchase}><b>วันที่ : </b>   {order.datePurchase}</p>
                   <div className='orderStatus'>{order.statusId.statusName}</div>
 
