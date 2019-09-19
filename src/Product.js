@@ -148,10 +148,9 @@ class ModalAdd extends Component {
         height: '',
         model: '',
         shader: '',
-        scale: '0.1',
+        scale: 0.1,
       }
     }
-
 
   }
   assets() {
@@ -169,7 +168,7 @@ class ModalAdd extends Component {
   addTree = e => {
     e.preventDefault()
     const apiURL = 'https://treedp.doge.in.th/asset/save/tree'
-    axios.post(apiURL, this.state.asset)
+    axios.post(apiURL, this.state.tree)
       .then(response => {
         alert(response.data.assetName)
       }
@@ -180,7 +179,6 @@ class ModalAdd extends Component {
     const apiURL = 'https://treedp.doge.in.th/asset/save'
     axios.post(apiURL, this.state.asset)
       .then(response => {
-
         alert(response.data.assetName)
       }
       )
@@ -190,7 +188,6 @@ class ModalAdd extends Component {
     const tree = { ...this.state.tree, [e.target.name]: e.target.value }
     this.setState({ asset })
     this.setState({ tree })
-    console.log(asset);
   }
   render() {
     const { name, image, price, detail } = this.state.asset;
