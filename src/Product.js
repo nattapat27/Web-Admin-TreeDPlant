@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import './Product.css'
 import Header from './header';
-import { Button } from 'react-bootstrap';
+//import { Button } from 'react-bootstrap';
 import Modal from 'react-modal';
 import axios from 'axios';
+
 
 class Product extends Component {
   constructor() {
     super();
-
     this.state = {
       modalAddIsOpen: false,
       modalDetailIsOpen: false,
@@ -26,6 +26,7 @@ class Product extends Component {
   }
   openModalDetail() {
     this.setState({ modalDetailIsOpen: true });
+
   }
 
   afterOpenModal() {
@@ -74,10 +75,23 @@ class Product extends Component {
   }
   render() {
     const { assets } = this.state
+    let productAsset = assets.map(asset =>
+      <div key={asset.assetId} name='id' className='tablePlant' >
+        <img alt={asset.asssetName}
+          className='img-asset'
+          key={asset.asssetImage}
+          src={asset.asssetImage}>
+        </img>
+        <div className='price' key={asset.price}>{asset.price} THB</div>
+        <p key={asset.assetName}>{asset.assetName}</p>
+        <p className='detailProduct' onClick={() => { this.openModalDetail(asset.assetId) }}>รายละเอียดสินค้า</p>
+      </div>
+    )
+
     return (
       <div>
         <Header />
-        <Button className="add" onClick={this.openModalAdd} ></Button>
+        <button className="add" onClick={this.openModalAdd} ></button>
 
         <h1 className="head">เพิ่ม-ลด สินค้า</h1>
 
@@ -85,35 +99,25 @@ class Product extends Component {
           <input type="text" className="search" placeholder="SEARCH" />
         </form>
         <div className="btn-group">
-          <Button onClick={this.allProduct}>ทั้งหมด</Button>
-          <Button onClick={this.showTree}>ต้นไม้</Button>
-          <Button onClick={this.showAsset}>อุปกรณ์</Button>
+          <button onClick={this.allProduct}>ทั้งหมด</button>
+          <button onClick={this.showTree}>ต้นไม้</button>
+          <button onClick={this.showAsset}>อุปกรณ์</button>
         </div>
+        {productAsset}
+        
         <Modal
           isOpen={this.state.modalAddIsOpen}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal} >
           <ModalAdd />
-        </Modal>
 
+        </Modal>
         <Modal
           isOpen={this.state.modalDetailIsOpen}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal} >
-          <div>rrrr</div>
+          <ModalDetail/>
         </Modal>
-
-        {assets.length ?
-          assets.map(asset =>
-            <div key={asset.assetId} className='tablePlant' >
-              <img alt='treeD-Plant' className='img-asset' key={asset.asssetImage} src={asset.asssetImage}></img>
-              <div className='price' key={asset.price}>{asset.price} THB</div>
-              <p key={asset.assetName}>{asset.assetName}</p>
-              <p className='detail' onClick={this.openModalDetail}>รายละเอียดสินค้า</p>
-            </div>
-          ) : null
-        }
-
       </div>
 
 
@@ -121,7 +125,6 @@ class Product extends Component {
 
   }
 }
-
 export default Product;
 
 class ModalAdd extends Component {
@@ -137,15 +140,15 @@ class ModalAdd extends Component {
         detail: '',
       },
       tree: {
-        asset_name: '',
-        asset_image: '',
+        name: '',
+        image: '',
         price: '',
-        asset_detail: '',
+        detail: '',
         width: '',
         height: '',
         model: '',
         shader: '',
-        scale: 0.1,
+        scale: '0.1',
       }
     }
 
@@ -166,9 +169,9 @@ class ModalAdd extends Component {
   addTree = e => {
     e.preventDefault()
     const apiURL = 'https://treedp.doge.in.th/asset/save/tree'
-    axios.post(apiURL, this.state.tree)
+    axios.post(apiURL, this.state.asset)
       .then(response => {
-        //console.log(response.data)
+        alert(response.data.assetName)
       }
       )
   }
@@ -177,52 +180,58 @@ class ModalAdd extends Component {
     const apiURL = 'https://treedp.doge.in.th/asset/save'
     axios.post(apiURL, this.state.asset)
       .then(response => {
+
         alert(response.data.assetName)
       }
       )
   }
   changeHandler = (e) => {
     const asset = { ...this.state.asset, [e.target.name]: e.target.value }
+    const tree = { ...this.state.tree, [e.target.name]: e.target.value }
     this.setState({ asset })
+    this.setState({ tree })
     console.log(asset);
   }
   render() {
-    const { name, image, price, detail, width, height, model, shader } = this.state.asset;
+    const { name, image, price, detail } = this.state.asset;
+    const { tree_name, tree_image, tree_price, tree_detail,
+      width, height, model, shader } = this.state.tree;
+
     return (
       <div className="modal">
 
         <h1 className="headAdd">เพิ่มสินค้า</h1>
 
-        <label className="uploadImage" >
-          <input type="file"
-            name="image"
-            value={image}
-            onChange={this.changeHandler}
-            src={this.state.file}
-          />
-        </label>
+
 
         <div className="typeAsset">
-          <Button className="bu"
-            onClick={() => this.trees()}>ต้นไม้</Button>
-          <Button className="bu"
-            onClick={() => this.assets()}>อุปกรณ์</Button>
+          <button className="bu"
+            onClick={() => this.trees()}>ต้นไม้</button>
+          <button className="bu"
+            onClick={() => this.assets()}>อุปกรณ์</button>
         </div>
 
 
         {this.state.trees ?
           <div>
+            <label className="uploadImage" >
+              <input type="file"
+                name="image"
+                value={tree_image}
+                onChange={this.changeHandler}
+              />
+            </label>
             <form className="formTree">
               <div><p>ชื่อ</p>
                 <input type="text"
                   name="name"
-                  value={name}
+                  value={tree_name}
                   onChange={this.changeHandler} /></div>
 
               <div><p>ราคา (บาท)</p>
                 <input type="number"
                   name="price"
-                  value={price}
+                  value={tree_price}
                   onChange={this.changeHandler} /></div>
               <div><p>กว้าง (ซ.ม.)</p>
                 <input type="number"
@@ -234,24 +243,24 @@ class ModalAdd extends Component {
                   name="height"
                   value={height}
                   onChange={this.changeHandler} /></div>
-                  <div>
-              <p > อัพโหลดโมเดล</p>
-              <label >
-                <input type="file"
-                  name="model"
-                  value={model}
-                  onChange={this.changeHandler}
-                />
-              </label></div>
               <div>
-              <p > อัพโหลดพื้นผิว</p>
-              <label >
-                <input type="file"
-                  name="shader"
-                  value={shader}
-                  onChange={this.changeHandler}
-                />
-              </label>
+                <p >อัพโหลดโมเดล</p>
+                <label >
+                  <input type="file"
+                    name="model"
+                    value={model}
+                    onChange={this.changeHandler}
+                  />
+                </label></div>
+              <div>
+                <p >อัพโหลดพื้นผิว</p>
+                <label >
+                  <input type="file"
+                    name="shader"
+                    value={shader}
+                    onChange={this.changeHandler}
+                  />
+                </label>
               </div>
             </form>
 
@@ -259,7 +268,7 @@ class ModalAdd extends Component {
               <p>รายละเอียดสินค้า</p>
               <textarea
                 name="detail"
-                value={detail}
+                value={tree_detail}
                 onChange={this.changeHandler}></textarea>
             </form>
             <br></br>
@@ -271,6 +280,13 @@ class ModalAdd extends Component {
 
         {this.state.assets ?
           <div>
+            <label className="uploadImage" >
+              <input type="file"
+                name="image"
+                value={image}
+                onChange={this.changeHandler}
+              />
+            </label>
             <form className="formAdd">
               <div><p>ชื่อ</p>
                 <input type="text"
@@ -299,6 +315,19 @@ class ModalAdd extends Component {
           : null
         }
       </div>
+    )
+  }
+}
+
+class ModalDetail extends Component{
+
+  render(){
+    return(
+      <div className="modal-detail">
+    <h1 className="headDetail">รายละเอียดสินค้า</h1>
+    <p>ชื่อ</p>
+    <div className="detail-form"></div>
+    </div>
     )
   }
 }
