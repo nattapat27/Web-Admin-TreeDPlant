@@ -119,7 +119,39 @@ p{
     position:static;
     margin-top: 1%;
 }
+.detail-table p{
+    display: inline; 
+}
+.detail-table{
+    position: static;
+    right: 30%;
+    overflow:auto;
+    display:block;
+}
+.detail-table div{
+    margin-top: 4%;
+    margin-bottom:4%; 
+   
+}
+.detail-field{
+    position: sticky;
+    width:400px;
+    height:20px;
+    background-color: #DAE0D8;
+    font-size: 16px;
+    font-family: 'Kanit' ;
+    padding-left: 2%;
+    margin-top: 2%;
+    margin-bottom:2%; 
+    left:20%;
+    color: #000000;;
+    padding: 10px 20px 10px 20px;
+    border-radius: 8px;   
 
+}
+.img-detail{
+    width: 500px;
+}
 
 .typeAsset{
     right: 10%;

@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import './Product.css'
 import Header from './header';
-//import { Button } from 'react-bootstrap';
 import Modal from 'react-modal';
 import axios from 'axios';
 
 
 class Product extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       modalAddIsOpen: false,
       modalDetailIsOpen: false,
-      assets: []
+      assets: [],
+      detail: [],
     };
 
     this.openModalAdd = this.openModalAdd.bind(this);
@@ -24,9 +24,10 @@ class Product extends Component {
   openModalAdd() {
     this.setState({ modalAddIsOpen: true });
   }
-  openModalDetail() {
+  openModalDetail(id) {
     this.setState({ modalDetailIsOpen: true });
-
+    this.setState({ detail: this.state.assets.filter(assets => assets.assetId === id) })
+    setTimeout(() => { console.log(this.state.detail) }, 1000)
   }
 
   afterOpenModal() {
@@ -38,10 +39,9 @@ class Product extends Component {
   }
   componentDidMount() {
     Modal.setAppElement('body');
-    console.log()
     axios.get('https://treedp.doge.in.th/asset/getAllAsset')
       .then(response => {
-        console.log(response.data)
+        //console.log(response.data)
         this.setState({ assets: response.data })
       })
   }
@@ -84,7 +84,36 @@ class Product extends Component {
         </img>
         <div className='price' key={asset.price}>{asset.price} THB</div>
         <p key={asset.assetName}>{asset.assetName}</p>
-        <p className='detailProduct' onClick={() => { this.openModalDetail(asset.assetId) }}>รายละเอียดสินค้า</p>
+        <p className='detailProduct'
+          onClick={() => { this.openModalDetail(asset.assetId) }}>รายละเอียดสินค้า</p>
+      </div>
+    )
+
+    let detailAsset = this.state.detail.map(detail =>
+      <div key={detail.asssetId} >
+        <h1>รายละเอียดสินค้า</h1>
+        <img alt={detail.asssetImage}
+        className='img-detail'
+          key={detail.asssetImage}
+          src={detail.asssetImage}>
+        </img>
+        <div className="detail-table">
+          <div><p>ชื่อ</p>
+            <p className='detail-field' key={detail.asssetName}>{detail.assetName}</p></div>
+
+          <div><p>สูง</p>
+            <p className='detail-field' key={detail.height}>{detail.treeId.height}</p></div>
+
+          <div><p>กว้าง</p>
+            <p className='detail-field' key={detail.width}>{detail.treeId.width}</p></div>
+
+          <div><p>ราคา</p>
+            <p className='detail-field' key={detail.price}>{detail.price} </p></div>
+
+          <div><p>รายละเอียดสินค้า</p>
+            <p className='detail-field' key={detail.assetDetail}>{detail.assetDetail} </p></div>
+
+        </div>
       </div>
     )
 
@@ -103,8 +132,9 @@ class Product extends Component {
           <button onClick={this.showTree}>ต้นไม้</button>
           <button onClick={this.showAsset}>อุปกรณ์</button>
         </div>
+
         {productAsset}
-        
+
         <Modal
           isOpen={this.state.modalAddIsOpen}
           onAfterOpen={this.afterOpenModal}
@@ -112,11 +142,12 @@ class Product extends Component {
           <ModalAdd />
 
         </Modal>
+
         <Modal
           isOpen={this.state.modalDetailIsOpen}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal} >
-          <ModalDetail/>
+          {detailAsset}
         </Modal>
       </div>
 
@@ -316,15 +347,4 @@ class ModalAdd extends Component {
   }
 }
 
-class ModalDetail extends Component{
 
-  render(){
-    return(
-      <div className="modal-detail">
-    <h1 className="headDetail">รายละเอียดสินค้า</h1>
-    <p>ชื่อ</p>
-    <div className="detail-form"></div>
-    </div>
-    )
-  }
-}
