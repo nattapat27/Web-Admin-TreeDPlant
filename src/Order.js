@@ -76,7 +76,7 @@ class Order extends Component {
           <Button className="bu" onClick={this.complete}>เสร็จสมบูรณ์</Button>
         </div>
 
-        <div >
+        <div className='table-order'>
 
           {orders.length ?
             orders.map(order =>

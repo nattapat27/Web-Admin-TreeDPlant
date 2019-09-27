@@ -5,6 +5,7 @@
   "dependencies": {
     "@version/react-router-v3": "^1.0.0",
     "axios": "^0.18.1",
+    "babel-loader": "^8.0.6",
     "bootstrap": "^4.3.1",
     "cloudinary": "^1.14.0",
     "formik": "^1.5.7",
@@ -17,7 +18,7 @@
     "react-modal-resizable-draggable": "^0.1.2",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8",
+    "react-scripts": "^3.1.2",
     "reactjs-popup": "^1.4.2"
   },
   "scripts": {

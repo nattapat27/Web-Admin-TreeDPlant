@@ -54,13 +54,13 @@ div{
     border: none;
     height: 40px;
 }
-
 .tableAllOrder{
     display: inline-block;
-    width: 23%;
-    margin:2%;
+    width: 25%;
+    margin:4%;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.24), 0 2px 5px 0 rgba(0,0,0,0.19);
     padding-bottom: 1%;
+    text-align: left;
 }
 .orderNumber{
     padding: 5%; 

@@ -75,6 +75,7 @@ class Product extends Component {
   }
   render() {
     const { assets } = this.state
+    let detailAsset
     let productAsset = assets.map(asset =>
       <div key={asset.assetId} name='id' className='tablePlant' >
         <img alt={asset.asssetName}
@@ -89,8 +90,10 @@ class Product extends Component {
       </div>
     )
 
-    let detailAsset = this.state.detail.map(detail =>
-      <div key={detail.asssetId} >
+    this.state.detail.map(detail =>{
+      
+      if(this.state.detail[0].typeId.typeId == 1){
+        detailAsset=<div key={detail.asssetId} >
         <h1>รายละเอียดสินค้า</h1>
         <img alt={detail.asssetImage}
         className='img-detail'
@@ -115,6 +118,30 @@ class Product extends Component {
 
         </div>
       </div>
+
+      }else if(this.state.detail[0].typeId.typeId == 2){
+        detailAsset=<div key={detail.asssetId} >
+        <h1>รายละเอียดสินค้า</h1>
+        <img alt={detail.asssetImage}
+        className='img-detail'
+          key={detail.asssetImage}
+          src={detail.asssetImage}>
+        </img>
+        <div className="detail-table">
+          <div><p>ชื่อ</p>
+            <p className='detail-field' key={detail.asssetName}>{detail.assetName}</p></div>
+
+          <div><p>ราคา</p>
+            <p className='detail-field' key={detail.price}>{detail.price} </p></div>
+
+          <div><p>รายละเอียดสินค้า</p>
+            <p className='detail-field' key={detail.assetDetail}>{detail.assetDetail} </p></div>
+
+        </div>
+      </div>
+      }
+    }
+      
     )
 
     return (
