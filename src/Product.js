@@ -91,8 +91,8 @@ class Product extends Component {
       </div>
     )
 
-    this.state.detail.map(detail =>{
-      if(this.state.detail[0].typeId.typeId == 1){
+    this.state.detail.forEach(detail =>{
+      if(this.state.detail[0].typeId.typeId === 1){
         detailAsset=
         <div key={detail.asssetId} >
         <h1 className="headAdd">รายละเอียดสินค้า</h1>
@@ -120,7 +120,7 @@ class Product extends Component {
         </div>
       </div>
 
-      }else if(this.state.detail[0].typeId.typeId == 2){
+      }else if(this.state.detail[0].typeId.typeId === 2){
         detailAsset=
         <div key={detail.asssetId} >
         <h1 className="headAdd">รายละเอียดสินค้า</h1>
@@ -143,7 +143,7 @@ class Product extends Component {
       </div>
       }
     }
-      
+       
     )
 
     return (
