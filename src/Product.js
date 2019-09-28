@@ -77,7 +77,8 @@ class Product extends Component {
     const { assets } = this.state
     let detailAsset
     let productAsset = assets.map(asset =>
-      <div key={asset.assetId} name='id' className='tablePlant' >
+      <div key={asset.assetId} name='id' className='tablePlant' 
+      onClick={() => { this.openModalDetail(asset.assetId) }}>
         <img alt={asset.asssetName}
           className='img-asset'
           key={asset.asssetImage}
@@ -91,10 +92,10 @@ class Product extends Component {
     )
 
     this.state.detail.map(detail =>{
-      
       if(this.state.detail[0].typeId.typeId == 1){
-        detailAsset=<div key={detail.asssetId} >
-        <h1>รายละเอียดสินค้า</h1>
+        detailAsset=
+        <div key={detail.asssetId} >
+        <h1 className="headAdd">รายละเอียดสินค้า</h1>
         <img alt={detail.asssetImage}
         className='img-detail'
           key={detail.asssetImage}
@@ -113,29 +114,30 @@ class Product extends Component {
           <div><p>ราคา</p>
             <p className='detail-field' key={detail.price}>{detail.price} </p></div>
 
-          <div><p>รายละเอียดสินค้า</p>
-            <p className='detail-field' key={detail.assetDetail}>{detail.assetDetail} </p></div>
+          <div className='detail-textarea'><p>รายละเอียดสินค้า</p>
+            <p key={detail.assetDetail}>{detail.assetDetail} </p></div>
 
         </div>
       </div>
 
       }else if(this.state.detail[0].typeId.typeId == 2){
-        detailAsset=<div key={detail.asssetId} >
-        <h1>รายละเอียดสินค้า</h1>
+        detailAsset=
+        <div key={detail.asssetId} >
+        <h1 className="headAdd">รายละเอียดสินค้า</h1>
         <img alt={detail.asssetImage}
         className='img-detail'
           key={detail.asssetImage}
           src={detail.asssetImage}>
         </img>
         <div className="detail-table">
-          <div><p>ชื่อ</p>
+        <div><p>ชื่อ</p>
             <p className='detail-field' key={detail.asssetName}>{detail.assetName}</p></div>
 
           <div><p>ราคา</p>
             <p className='detail-field' key={detail.price}>{detail.price} </p></div>
 
-          <div><p>รายละเอียดสินค้า</p>
-            <p className='detail-field' key={detail.assetDetail}>{detail.assetDetail} </p></div>
+          <div className='detail-textarea'><p>รายละเอียดสินค้า</p>
+            <p key={detail.assetDetail}>{detail.assetDetail} </p></div>
 
         </div>
       </div>
@@ -256,13 +258,10 @@ class ModalAdd extends Component {
       <div className="modal">
 
         <h1 className="headAdd">เพิ่มสินค้า</h1>
-
-
-
         <div className="typeAsset">
-          <button className="bu"
+          <button
             onClick={() => this.trees()}>ต้นไม้</button>
-          <button className="bu"
+          <button
             onClick={() => this.assets()}>อุปกรณ์</button>
         </div>
 
@@ -276,7 +275,7 @@ class ModalAdd extends Component {
                 onChange={this.changeHandler}
               />
             </label>
-            <form className="formTree">
+            <form className="formAdd">
               <div><p>ชื่อ</p>
                 <input type="text"
                   name="name"
@@ -357,7 +356,7 @@ class ModalAdd extends Component {
 
             </form>
 
-            <form className="detail">
+            <form className="detail-asset">
               <p>รายละเอียดสินค้า</p>
               <textarea
                 name="detail"

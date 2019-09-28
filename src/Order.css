@@ -25,6 +25,7 @@ div{
     margin-right: auto;
     margin-left: auto;
     border-style: none;
+    border-radius: 15px;
 }
 .bu {
     position: relative;
@@ -53,6 +54,7 @@ div{
     font-family: 'Kanit';
     border: none;
     height: 40px;
+    transition-duration: 0.4s;
 }
 .tableAllOrder{
     display: inline-block;
@@ -61,6 +63,10 @@ div{
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.24), 0 2px 5px 0 rgba(0,0,0,0.19);
     padding-bottom: 1%;
     text-align: left;
+    cursor: pointer;
+}
+.tableAllOrder:hover{
+    box-shadow: 0 15px 15px 0 rgba(0,0,0,0.24), 0 15px 15px 0 rgba(0,0,0,0.19);
 }
 .orderNumber{
     padding: 5%; 

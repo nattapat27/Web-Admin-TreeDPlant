@@ -14,13 +14,15 @@
 .manage button{
     display: inline-block;
     color: #577863;
-    font-size: 20px;
+    font-size: 18px;
     border: none;
     text-align: center;
     font-family: 'Kanit', medium;
     font-weight: lighter;
     border:1px;
     padding: 5px 15px 5px 15px;
+    transition-duration: 0.4s;
+    border-radius: 15px;
 }
 .manage{
     position: absolute;

@@ -80,7 +80,7 @@ class Order extends Component {
 
           {orders.length ?
             orders.map(order =>
-              <div className='tableAllOrder'>
+              <div className='tableAllOrder' >
 
                 <div className='orderNumber'>
                   <p>  รหัสคำสั่งซื้อ</p>
