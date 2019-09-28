@@ -70,7 +70,6 @@ class Product extends Component {
   }
   showAsset = e => {
     e.preventDefault()
-    console.log()
     axios.get('https://treedp.doge.in.th/asset/getTypeAsset')
       .then(response => {
         //console.log(response.data)
@@ -82,7 +81,7 @@ class Product extends Component {
   deleteAsset = e => {
     e.preventDefault()
     const apiURL = 'https://treedp.doge.in.th/asset/delete'
-    console.log(this.state.id)
+    this.setState({ modalDetailIsOpen: false });
     axios.post(apiURL,this.state.id)
       .then(response => {
         alert("Delete",(response.data.assetName))
@@ -122,17 +121,17 @@ class Product extends Component {
           <div><p>ชื่อ</p>
             <p className='detail-field' key={detail.asssetName}>{detail.assetName}</p></div>
 
-          <div><p>สูง</p>
-            <p className='detail-field' key={detail.height}>{detail.treeId.height}</p></div>
-
-          <div><p>กว้าง</p>
+          <div><p>สูง (ซม.)</p>
+            <p className='detail-field' key={detail.height}>{detail.treeId.height}</p> </div>
+          
+          <div><p>กว้าง (ซม.)</p>
             <p className='detail-field' key={detail.width}>{detail.treeId.width}</p></div>
 
-          <div><p>ราคา</p>
+          <div><p>ราคา (บาท)</p>
             <p className='detail-field' key={detail.price}>{detail.price} </p></div>
 
-          <div className='detail-textarea'><p>รายละเอียดสินค้า</p>
-            <p key={detail.assetDetail}>{detail.assetDetail} </p></div>
+          <p>รายละเอียดสินค้า</p>
+            <div><p key={detail.assetDetail} className='detail-textarea'>{detail.assetDetail}  </p></div>
 
         </div>
       </div>
@@ -150,11 +149,11 @@ class Product extends Component {
         <div><p>ชื่อ</p>
             <p className='detail-field' key={detail.asssetName}>{detail.assetName}</p></div>
 
-          <div><p>ราคา</p>
+          <div><p>ราคา (บาท)</p>
             <p className='detail-field' key={detail.price}>{detail.price} </p></div>
 
-          <div className='detail-textarea'><p>รายละเอียดสินค้า</p>
-            <p key={detail.assetDetail}>{detail.assetDetail} </p></div>
+            <p>รายละเอียดสินค้า</p>
+            <div><p key={detail.assetDetail} className='detail-textarea'>{detail.assetDetail}  </p></div>
 
         </div>
       </div>

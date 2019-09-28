@@ -19,9 +19,9 @@
     text-align: center;
     font-family: 'Kanit', medium;
     font-weight: lighter;
-    padding: 4%;
     transition-duration: 0.4s;
     border-radius: 15px;
+    background-color:none; 
 }
 .manage{
     position:absolute;
@@ -35,11 +35,10 @@
     background-color:#577863;
   }
 .manage button:active {
-    background-color:white;
     color:#577863;
     font-weight: bold;
     
-  }  
+  }   
 .user{
     width: 30px;
     height: 30px;

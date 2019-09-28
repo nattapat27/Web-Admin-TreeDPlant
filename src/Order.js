@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import './Order.css'
 import Header from './header';
-//import Modal from 'react-modal';
+import Modal from 'react-modal';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
 class Order extends Component {
-  state = {
-    orders: []
+  constructor(props) {
+    super(props);
+    this.state = {
+      orders: [],
+      detail: []
+    }
+    
+
   }
+  
   componentDidMount() {
     console.log()
     axios.get('https://treedp.doge.in.th//order/getAllOrder')
@@ -57,9 +64,17 @@ class Order extends Component {
       })
   }
 
+  modalOrderDetail(id) {
+    this.setState({ modalOrderDetailIsOpen: true });
+    this.setState({ detail: this.state.orders.filter(order => order.orderId === id) })
+    setTimeout(() => { console.log(this.state.detail) }, 1000)
+
+  }
 
   render() {
     const { orders } = this.state
+    
+
     return (
       <div>
         <Header />
@@ -80,8 +95,7 @@ class Order extends Component {
 
           {orders.length ?
             orders.map(order =>
-              <div className='tableAllOrder' >
-
+              <div className='tableAllOrder'>
                 <div className='orderNumber'>
                   <p>  รหัสคำสั่งซื้อ</p>
                   <p className='orderId' key={order.orderId}># {order.orderId}</p>
@@ -99,7 +113,9 @@ class Order extends Component {
           }
 
         </div>
+        
       </div>
+
     );
   }
 

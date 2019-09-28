@@ -141,31 +141,37 @@ p{
 .detail-table{
     position:absolute;
     font-size: 18px;
-    display: inline-block;
-}.detail-table div{
-    margin-top: 15%;
-    margin-bottom:20%; 
-    text-align: left;
-    width: 100%;
+    display: inline-block; 
+    margin-top:2%; 
+}
+.detail-table div{
+    margin-bottom: 30%;
+    padding: 0;
 }
 .detail-field{
     position: absolute;
     width:400px;
-    height:25px;
+    height:35px;
+    padding-left:8%;
+    padding-top:1%; 
     background-color: #DAE0D8;
     font-size: 16px;
     font-family: 'Kanit' ;
-    padding-left: 2%;
-    margin-top: 2%;
-    margin-bottom:2%; 
-    left:50%;
+    margin: 0;
+    left:90%;
     color:#577863;
-    padding: 10px 20px 10px 20px;
-    border-radius: 8px;    
+    border-radius: 10px;
 }
 .detail-textarea{
-    width:400px;
-    height:25px;
+    position:absolute;
+    padding: 5%;
+    background-color: #DAE0D8;
+    width: 500px;
+    height: 100px;
+    margin-left: 1%;
+    font-size:16px; 
+    color:#577863;
+    border-radius: 5px;
 }
 .img-detail{
     width: 450px;
@@ -199,6 +205,7 @@ p{
     transition-duration: 0.4s;
 }
 .delete-btn{
+    position: static;
     color:#ffffff;
     font-size: 20px;
     width: 20%;
@@ -212,6 +219,8 @@ p{
     margin-right: auto; 
     overflow:auto;
     display:block;
+    margin-bottom: 0%;
+    margin-top:5%; 
     
 }
 .delete-btn:hover{
