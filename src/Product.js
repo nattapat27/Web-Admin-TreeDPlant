@@ -13,6 +13,9 @@ class Product extends Component {
       modalDetailIsOpen: false,
       assets: [],
       detail: [],
+      id:{
+        assetID: 0,
+      },
     };
 
     this.openModalAdd = this.openModalAdd.bind(this);
@@ -28,6 +31,8 @@ class Product extends Component {
     this.setState({ modalDetailIsOpen: true });
     this.setState({ detail: this.state.assets.filter(assets => assets.assetId === id) })
     setTimeout(() => { console.log(this.state.detail) }, 1000)
+    this.state.id.assetID=id
+    
   }
 
   afterOpenModal() {
@@ -73,6 +78,18 @@ class Product extends Component {
 
       })
   }
+
+  deleteAsset = e => {
+    e.preventDefault()
+    const apiURL = 'https://treedp.doge.in.th/asset/delete'
+    console.log(this.state.id)
+    axios.post(apiURL,this.state.id)
+      .then(response => {
+        alert("Delete",(response.data.assetName))
+      }
+      )
+  }
+
   render() {
     const { assets } = this.state
     let detailAsset
@@ -177,6 +194,7 @@ class Product extends Component {
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal} >
           {detailAsset}
+          <button className="delete-btn" onClick={this.deleteAsset}>ลบ</button>
         </Modal>
       </div>
 

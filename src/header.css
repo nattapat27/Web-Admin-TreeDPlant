@@ -19,16 +19,14 @@
     text-align: center;
     font-family: 'Kanit', medium;
     font-weight: lighter;
-    border:1px;
-    padding: 5px 15px 5px 15px;
+    padding: 4%;
     transition-duration: 0.4s;
     border-radius: 15px;
 }
 .manage{
-    position: absolute;
-    right:22%;
+    position:absolute;
+    right:25%;
     top: 30%;
-    
     
 }
 .manage button:hover {
