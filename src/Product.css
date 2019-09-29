@@ -85,6 +85,7 @@ p{
     font-size: 20px;
     cursor: pointer;
     border-radius: 15px;
+    text-align: left;
 }
 .tablePlant p{
     margin: 0%;
@@ -329,6 +330,22 @@ p{
     font-size:14px; 
     text-decoration: underline;
 }
-
-
+.delete-popup{
+    text-align: center;
+}
+.delete-popup button{
+    background-color: #DAE0D8;
+    color: #577863;
+    font-family: 'Kanit';
+    width: 20%;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    margin: 1%;
+    cursor: pointer;
+    transition-duration: 0.4s;}
+.delete-popup button:hover{
+    background-color: #577863;
+    color: #DAE0D8;
+}
 }
