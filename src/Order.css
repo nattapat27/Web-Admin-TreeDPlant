@@ -57,15 +57,18 @@ div{
     transition-duration: 0.4s;
 }
 .tableAllOrder{
+    text-align: center;
+}
+.table-order{
     display: inline-block;
     width: 25%;
-    margin:4%;
+    margin:2%;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,0.24), 0 2px 5px 0 rgba(0,0,0,0.19);
     padding-bottom: 1%;
     text-align: left;
     cursor: pointer;
 }
-.tableAllOrder:hover{
+.table-order:hover{
     box-shadow: 0 15px 15px 0 rgba(0,0,0,0.24), 0 15px 15px 0 rgba(0,0,0,0.19);
 }
 .orderNumber{

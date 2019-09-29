@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Order.css'
 import Header from './header';
-import Modal from 'react-modal';
+//import Modal from 'react-modal';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 
@@ -91,11 +91,11 @@ class Order extends Component {
           <Button className="bu" onClick={this.complete}>เสร็จสมบูรณ์</Button>
         </div>
 
-        <div className='table-order'>
+        <div className='tableAllOrder'>
 
           {orders.length ?
             orders.map(order =>
-              <div className='tableAllOrder'>
+              <div className='table-order'>
                 <div className='orderNumber'>
                   <p>  รหัสคำสั่งซื้อ</p>
                   <p className='orderId' key={order.orderId}># {order.orderId}</p>

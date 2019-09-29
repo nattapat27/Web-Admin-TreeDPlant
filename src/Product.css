@@ -73,6 +73,9 @@ p{
     margin: 20px 0px 0px 0px; 
     
 }
+.table-plants{
+    text-align: center;
+}
 .tablePlant{
     display: inline-block;
     width: 20%;
@@ -147,13 +150,14 @@ p{
 .detail-table div{
     margin-bottom: 30%;
     padding: 0;
+    margin-left: 10%;
 }
 .detail-field{
     position: absolute;
     width:400px;
     height:35px;
-    padding-left:8%;
-    padding-top:1%; 
+    padding-left:10%;
+    padding-top:5%; 
     background-color: #DAE0D8;
     font-size: 16px;
     font-family: 'Kanit' ;
@@ -172,11 +176,11 @@ p{
     font-size:16px; 
     color:#577863;
     border-radius: 5px;
+    margin-bottom: 25%;
 }
 .img-detail{
     width: 450px;
     margin-left:2%;
-
 }
 .typeAsset{
     right: 10%;
@@ -205,7 +209,7 @@ p{
     transition-duration: 0.4s;
 }
 .delete-btn{
-    position: static;
+    position:sticky;
     color:#ffffff;
     font-size: 20px;
     width: 20%;
@@ -219,17 +223,12 @@ p{
     margin-right: auto; 
     overflow:auto;
     display:block;
-    margin-bottom: 0%;
-    margin-top:5%; 
-    
 }
 .delete-btn:hover{
     background-color: #DAE0D8;
     color: #577863;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
-
-
 .formAdd {  
     position:static;
     right: 10%;

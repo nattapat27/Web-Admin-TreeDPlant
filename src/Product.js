@@ -13,7 +13,7 @@ class Product extends Component {
       modalDetailIsOpen: false,
       assets: [],
       detail: [],
-      id:{
+      id: {
         assetID: 0,
       },
     };
@@ -31,8 +31,8 @@ class Product extends Component {
     this.setState({ modalDetailIsOpen: true });
     this.setState({ detail: this.state.assets.filter(assets => assets.assetId === id) })
     setTimeout(() => { console.log(this.state.detail) }, 1000)
-    this.state.id.assetID=id
-    
+    this.state.id.assetID = id
+
   }
 
   afterOpenModal() {
@@ -82,9 +82,10 @@ class Product extends Component {
     e.preventDefault()
     const apiURL = 'https://treedp.doge.in.th/asset/delete'
     this.setState({ modalDetailIsOpen: false });
-    axios.post(apiURL,this.state.id)
+    axios.post(apiURL, this.state.id)
       .then(response => {
-        alert("Delete",(response.data.assetName))
+        alert("Delete", (response.data.assetName))
+        window.location.reload();
       }
       )
   }
@@ -93,8 +94,9 @@ class Product extends Component {
     const { assets } = this.state
     let detailAsset
     let productAsset = assets.map(asset =>
-      <div key={asset.assetId} name='id' className='tablePlant' 
-      onClick={() => { this.openModalDetail(asset.assetId) }}>
+
+      <div key={asset.assetId} name='id' className='tablePlant'
+        onClick={() => { this.openModalDetail(asset.assetId) }}>
         <img alt={asset.asssetName}
           className='img-asset'
           key={asset.asssetImage}
@@ -107,59 +109,59 @@ class Product extends Component {
       </div>
     )
 
-    this.state.detail.forEach(detail =>{
-      if(this.state.detail[0].typeId.typeId === 1){
-        detailAsset=
-        <div key={detail.asssetId} >
-        <h1 className="headAdd">รายละเอียดสินค้า</h1>
-        <img alt={detail.asssetImage}
-        className='img-detail'
-          key={detail.asssetImage}
-          src={detail.asssetImage}>
-        </img>
-        <div className="detail-table">
-          <div><p>ชื่อ</p>
-            <p className='detail-field' key={detail.asssetName}>{detail.assetName}</p></div>
+    this.state.detail.forEach(detail => {
+      if (this.state.detail[0].typeId.typeId === 1) {
+        detailAsset =
+          <div key={detail.asssetId} >
+            <h1 className="headAdd">รายละเอียดสินค้า</h1>
+            <img alt={detail.asssetImage}
+              className='img-detail'
+              key={detail.asssetImage}
+              src={detail.asssetImage}>
+            </img>
+            <div className="detail-table">
+              <div><p>ชื่อ</p>
+                <p className='detail-field' key={detail.asssetName}>{detail.assetName}</p></div>
 
-          <div><p>สูง (ซม.)</p>
-            <p className='detail-field' key={detail.height}>{detail.treeId.height}</p> </div>
-          
-          <div><p>กว้าง (ซม.)</p>
-            <p className='detail-field' key={detail.width}>{detail.treeId.width}</p></div>
+              <div><p>สูง (ซม.)</p>
+                <p className='detail-field' key={detail.height}>{detail.treeId.height}</p> </div>
 
-          <div><p>ราคา (บาท)</p>
-            <p className='detail-field' key={detail.price}>{detail.price} </p></div>
+              <div><p>กว้าง (ซม.)</p>
+                <p className='detail-field' key={detail.width}>{detail.treeId.width}</p></div>
 
-          <p>รายละเอียดสินค้า</p>
-            <div><p key={detail.assetDetail} className='detail-textarea'>{detail.assetDetail}  </p></div>
+              <div><p>ราคา (บาท)</p>
+                <p className='detail-field' key={detail.price}>{detail.price} </p></div>
 
-        </div>
-      </div>
+              <p>รายละเอียดสินค้า</p>
+              <div><p key={detail.assetDetail} className='detail-textarea'>{detail.assetDetail}  </p></div>
 
-      }else if(this.state.detail[0].typeId.typeId === 2){
-        detailAsset=
-        <div key={detail.asssetId} >
-        <h1 className="headAdd">รายละเอียดสินค้า</h1>
-        <img alt={detail.asssetImage}
-        className='img-detail'
-          key={detail.asssetImage}
-          src={detail.asssetImage}>
-        </img>
-        <div className="detail-table">
-        <div><p>ชื่อ</p>
-            <p className='detail-field' key={detail.asssetName}>{detail.assetName}</p></div>
+            </div>
+          </div>
 
-          <div><p>ราคา (บาท)</p>
-            <p className='detail-field' key={detail.price}>{detail.price} </p></div>
+      } else if (this.state.detail[0].typeId.typeId === 2) {
+        detailAsset =
+          <div key={detail.asssetId} >
+            <h1 className="headAdd">รายละเอียดสินค้า</h1>
+            <img alt={detail.asssetImage}
+              className='img-detail'
+              key={detail.asssetImage}
+              src={detail.asssetImage}>
+            </img>
+            <div className="detail-table">
+              <div><p>ชื่อ</p>
+                <p className='detail-field' key={detail.asssetName}>{detail.assetName}</p></div>
 
-            <p>รายละเอียดสินค้า</p>
-            <div><p key={detail.assetDetail} className='detail-textarea'>{detail.assetDetail}  </p></div>
+              <div><p>ราคา (บาท)</p>
+                <p className='detail-field' key={detail.price}>{detail.price} </p></div>
 
-        </div>
-      </div>
+              <p>รายละเอียดสินค้า</p>
+              <div><p key={detail.assetDetail} className='detail-textarea'>{detail.assetDetail}  </p></div>
+
+            </div>
+          </div>
       }
     }
-       
+
     )
 
     return (
@@ -177,9 +179,9 @@ class Product extends Component {
           <button onClick={this.showTree}>ต้นไม้</button>
           <button onClick={this.showAsset}>อุปกรณ์</button>
         </div>
-
-        {productAsset}
-
+        <div className='table-plants'>
+          {productAsset}
+        </div>
         <Modal
           isOpen={this.state.modalAddIsOpen}
           onAfterOpen={this.afterOpenModal}
@@ -193,7 +195,7 @@ class Product extends Component {
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal} >
           {detailAsset}
-          <button className="delete-btn" onClick={this.deleteAsset}>ลบ</button>
+          <div className="btn-div"><button className="delete-btn" onClick={this.deleteAsset}>ลบ</button></div>
         </Modal>
       </div>
 
@@ -248,6 +250,7 @@ class ModalAdd extends Component {
     axios.post(apiURL, this.state.tree)
       .then(response => {
         alert(response.data.assetName)
+        window.location.reload();
       }
       )
   }
@@ -257,6 +260,7 @@ class ModalAdd extends Component {
     axios.post(apiURL, this.state.asset)
       .then(response => {
         alert(response.data.assetName)
+        window.location.reload();
       }
       )
   }
