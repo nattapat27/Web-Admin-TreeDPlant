@@ -195,7 +195,7 @@ class Product extends Component {
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal} >
           {detailAsset}
-          <div className="btn-div"><button className="delete-btn" onClick={this.deleteAsset}>ลบ</button></div>
+         <button className="delete-btn" onClick={this.deleteAsset}>ลบ</button>
         </Modal>
       </div>
 

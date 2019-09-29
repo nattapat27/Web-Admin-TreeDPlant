@@ -8,6 +8,11 @@ div{
     position:static;
     margin-top:8% ;   
 }
+.head-detail{
+    color:#577863;
+    text-align: center;
+    position:static;
+}
 .search{
     position: static;
     width: 30%;
@@ -104,4 +109,18 @@ div{
     width: 40%;
     font-weight: lighter;
     text-align: center;
+}
+.detail-order div{
+    display: inline-block;
+    overflow: auto;
+    color: #ffffff;
+    background: #577863;
+    margin-right:10%;
+    position: static;
+    text-align: center;
+    padding: 2%;
+}
+.detail-order p{
+    display:block;
+    overflow: auto;
 }
