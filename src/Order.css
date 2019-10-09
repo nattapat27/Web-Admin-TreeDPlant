@@ -6,7 +6,7 @@ div{
     color:#577863;
     text-align: center;
     position:static;
-    margin-top:8% ;   
+    margin: 0%;
 }
 .head-detail{
     color:#577863;
@@ -16,7 +16,7 @@ div{
 .search{
     position: static;
     width: 30%;
-    height: 30%;
+    height: 20%;
     font-size: 16px;
     background-color: #DAE0D8;
     color: #577863;
@@ -27,39 +27,39 @@ div{
     font-family: 'Kanit';
     font-weight: lighter;
     display: block;
+    margin-top: 2%;
     margin-right: auto;
     margin-left: auto;
     border-style: none;
-    border-radius: 15px;
+    border-radius: 25px;
 }
-.bu {
+.btn-group button{
+    font-family: 'Kanit', medium;
     position: relative;
     overflow: auto;
     margin: 0px 0px 0px 0px; 
     color:#577863;
-    background-color: #ffffff;
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: lighter;
     width: 200px;
+    background-color: white;
+    border: 1px black;
+    transition-duration: 0.4s;
+    border-radius: 15px;
+    margin: 0.5%;
     
 }
-.bu:hover{
+.btn-group Button:hover,.btn-group Button:link,.btn-group Button:visited{
     color: #ffffff;
-    background-color: #577863;
+    background-color: #de425b;
+    transition-duration: 0.4s;
 }
-.bu:active{
-    color: #ffffff;
-    background-color: #577863;
-}
-.btn-group {
+
+.btn-group{
     display: block;
     text-align: center;
-    margin: 20px 0px 0px 0px;    
-}
-.btn-group button{
-    font-family: 'Kanit';
-    border: none;
-    height: 40px;
-    transition-duration: 0.4s;
+    margin: 20px 0px 0px 0px; 
+    
 }
 .tableAllOrder{
     text-align: center;
@@ -75,6 +75,7 @@ div{
 }
 .table-order:hover{
     box-shadow: 0 15px 15px 0 rgba(0,0,0,0.24), 0 15px 15px 0 rgba(0,0,0,0.19);
+    
 }
 .orderNumber{
     padding: 5%; 

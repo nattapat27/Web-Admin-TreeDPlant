@@ -7,7 +7,7 @@ p{
     color:#577863;
     text-align: center;
     position:static;
-       
+    top: 0%;
 }
 .add{
     position: fixed;
@@ -27,13 +27,12 @@ p{
     box-shadow:  rgba(0,0,0,0.24), 0 15px 15px 0 rgba(0,0,0,0.19);
     width: 95px;
     height: 95px;
+    transition-duration: 0.4s;
 }
 .search{
     position: static;
-    margin-right: auto;
-    margin-left: auto;
     width: 30%;
-    height: 30%;
+    height: 20%;
     font-size: 16px;
     background-color: #DAE0D8;
     color: #577863;
@@ -44,14 +43,18 @@ p{
     font-family: 'Kanit';
     font-weight: lighter;
     display: block;
+    margin-top: 2%;
+    margin-right: auto;
+    margin-left: auto;
     border-style: none;
-    border-radius: 15px;
+    border-radius: 25px;
 }
 .btn-group button{
+    font-family: 'Kanit', medium;
     position: relative;
     overflow: auto;
     margin: 0px 0px 0px 0px; 
-    color:#577863;
+    color:#de425b;
     font-size: 18px;
     font-weight: lighter;
     width: 200px;
@@ -59,12 +62,13 @@ p{
     border: 1px black;
     transition-duration: 0.4s;
     border-radius: 15px;
-    margin: 0%;
+    margin: 0.5%;
+    
     
 }
-.btn-group Button:hover,.btn-group Button:link{
+.btn-group Button:hover,.btn-group Button:link,.btn-group Button:visited{
     color: #ffffff;
-    background-color: #577863;
+    background-color: #de425b;
 }
 
 .btn-group{
@@ -80,7 +84,7 @@ p{
     display: inline-block;
     width: 20%;
     margin:2% 3% 3% 5%;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.24), 0 2px 5px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 2px 5px 0 rgba(0,0,0,0.19);
     padding: 1.5%;
     font-size: 20px;
     cursor: pointer;
@@ -91,7 +95,8 @@ p{
     margin: 0%;
 }
 .tablePlant:hover{
-    box-shadow: 0 15px 15px 0 rgba(0,0,0,0.24), 0 12px 15px 0 rgba(0,0,0,0.19);
+    box-shadow: 0 25px 25px 0 rgba(0,0,0,0.24), 0 12px 15px 0 rgba(0,0,0,0.19);
+    transition-duration: 0.4s;
 }
 .detail{
     text-align: left;
@@ -108,15 +113,16 @@ p{
     position: static;
 }
 .price{
-    background: #577863 0% 0% no-repeat padding-box;
+    background: #de425b 0% 0% no-repeat padding-box;
     opacity: 1;
     float: right;
     padding:2%; 
     color: #ffffff;
-    width: 40%;
-    font-weight: lighter;
+    width: 35%;
     text-align: center;
-    border-radius: 15px;
+    border-radius: 25px;
+    font-size: 17px;
+    font-weight: inherit;
 }
 
 .close{
@@ -213,7 +219,7 @@ p{
     font-size: 20px;
     width: 20%;
     height: 50px;
-    background-color:#577863;
+    background-color:#de425b;
     font-family: 'Kanit';
     border: none;
     cursor: pointer; 
@@ -225,8 +231,6 @@ p{
     margin-top:5%; 
 }
 .delete-btn:hover{
-    background-color: #DAE0D8;
-    color: #577863;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 .formAdd {  
@@ -347,5 +351,8 @@ p{
 .delete-popup button:hover{
     background-color: #577863;
     color: #DAE0D8;
+}
+.manage-btn{
+    display: inline;
 }
 }

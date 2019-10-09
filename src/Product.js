@@ -195,14 +195,17 @@ class Product extends Component {
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal} >
           {detailAsset}
-          <Popup  trigger={<button className="delete-btn"> ลบ </button>} modal>
-            <h1 className="headAdd">ต้องการที่จะลบใช่หรือไม่</h1>
-            <div className="delete-popup">
-            <button onClick={this.deleteAsset}> ใช่ </button>
-            <button onClick={this.closeModal}> ไม่ใช่ </button>
-            </div>
-          </Popup>
-
+          <div className="manage-btn">
+            <button className="edit-btn"> แก้ไข </button>
+            
+            <Popup trigger={<button className="delete-btn"> ลบ </button>} modal>
+              <h1 className="headAdd">ต้องการที่จะลบใช่หรือไม่</h1>
+              <div className="delete-popup">
+                <button onClick={this.deleteAsset}> ใช่ </button>
+                <button onClick={this.closeModal}> ไม่ใช่ </button>
+              </div>
+            </Popup>
+          </div>
 
         </Modal>
       </div>
