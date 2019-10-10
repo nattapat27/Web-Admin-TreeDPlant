@@ -4,6 +4,7 @@ import Header from './header';
 import Modal from 'react-modal';
 import axios from 'axios';
 import Popup from "reactjs-popup";
+import upload from './upload.png';
 
 class Product extends Component {
   constructor(props) {
@@ -225,6 +226,7 @@ class ModalAdd extends Component {
     this.state = {
       trees: true,
       assets: false,
+      file:upload,
       asset: {
         price: '',
         name: '',
@@ -278,6 +280,9 @@ class ModalAdd extends Component {
       )
   }
   changeHandler = (e) => {
+    this.setState({
+      file: URL.createObjectURL(e.target.files[0])
+    })
     const asset = { ...this.state.asset, [e.target.name]: e.target.value }
     const tree = { ...this.state.tree, [e.target.name]: e.target.value }
     this.setState({ asset })
@@ -302,7 +307,8 @@ class ModalAdd extends Component {
 
         {this.state.trees ?
           <div>
-            <label className="uploadImage" >
+            <label>
+              <img src={this.state.file} className="uploadImage"/>
               <input type="file"
                 name="image"
                 value={tree_image}
@@ -368,13 +374,15 @@ class ModalAdd extends Component {
 
         {this.state.assets ?
           <div>
-            <label className="uploadImage" >
+            <label>
+              <img src={this.state.file} className="uploadImage"/>
               <input type="file"
                 name="image"
-                value={image}
+                value={tree_image}
                 onChange={this.changeHandler}
               />
             </label>
+            
             <form className="formAdd">
               <div><p>ชื่อ</p>
                 <input type="text"

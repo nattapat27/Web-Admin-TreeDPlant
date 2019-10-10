@@ -41,7 +41,8 @@ div{
     color:#577863;
     font-size: 18px;
     font-weight: lighter;
-    width: 200px;
+    width: 15%;
+    padding: 0.4%;
     background-color: white;
     border: 1px black;
     transition-duration: 0.4s;
