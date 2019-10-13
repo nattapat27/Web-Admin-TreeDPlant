@@ -103,8 +103,8 @@ class Product extends Component {
           key={asset.asssetImage}
           src={asset.asssetImage}>
         </img>
-        <div className='price' key={asset.price}>{asset.price} THB</div>
         <p key={asset.assetName}>{asset.assetName}</p>
+        <div className='price' key={asset.price}>{asset.price} THB</div>
         <p className='detailProduct'
           onClick={() => { this.openModalDetail(asset.assetId) }}>รายละเอียดสินค้า</p>
       </div>
@@ -198,7 +198,7 @@ class Product extends Component {
           {detailAsset}
           <div className="manage-btn">
             <button className="edit-btn"> แก้ไข </button>
-            
+
             <Popup trigger={<button className="delete-btn"> ลบ </button>} modal>
               <h1 className="headAdd">ต้องการที่จะลบใช่หรือไม่</h1>
               <div className="delete-popup">
@@ -226,7 +226,7 @@ class ModalAdd extends Component {
     this.state = {
       trees: true,
       assets: false,
-      file:upload,
+      file: upload,
       asset: {
         price: '',
         name: '',
@@ -280,13 +280,13 @@ class ModalAdd extends Component {
       )
   }
   changeHandler = (e) => {
-    this.setState({
-      file: URL.createObjectURL(e.target.files[0])
-    })
     const asset = { ...this.state.asset, [e.target.name]: e.target.value }
     const tree = { ...this.state.tree, [e.target.name]: e.target.value }
     this.setState({ asset })
     this.setState({ tree })
+    this.setState({
+     file: URL.createObjectURL(e.target.files[0])
+    })
   }
   render() {
     const { name, image, price, detail } = this.state.asset;
@@ -307,9 +307,9 @@ class ModalAdd extends Component {
 
         {this.state.trees ?
           <div>
-            <label>
-              <img src={this.state.file} className="uploadImage"/>
-              <input type="file"
+            <label className="uploadImage">
+              <img src={this.state.file} title="Upload Image" />
+              <input className="img-upload" type="file"
                 name="image"
                 value={tree_image}
                 onChange={this.changeHandler}
@@ -374,15 +374,17 @@ class ModalAdd extends Component {
 
         {this.state.assets ?
           <div>
-            <label>
-              <img src={this.state.file} className="uploadImage"/>
-              <input type="file"
+            <label className="uploadImage">
+              <img src={this.state.file} />
+
+              <input className="img-upload" type="file"
                 name="image"
                 value={tree_image}
                 onChange={this.changeHandler}
+
               />
             </label>
-            
+
             <form className="formAdd">
               <div><p>ชื่อ</p>
                 <input type="text"
@@ -414,5 +416,4 @@ class ModalAdd extends Component {
     )
   }
 }
-
 

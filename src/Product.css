@@ -70,6 +70,7 @@ p{
 .btn-group Button:hover,.btn-group Button:link,.btn-group Button:visited{
     color: #ffffff;
     background-color: #de425b;
+    cursor: pointer;
 }
 
 .btn-group{
@@ -96,8 +97,8 @@ p{
     margin: 0%;
 }
 .tablePlant:hover{
-    box-shadow: 0 25px 25px 0 rgba(0,0,0,0.24), 0 12px 15px 0 rgba(0,0,0,0.19);
-    transition-duration: 0.4s;
+    box-shadow: 0 25px 35px 0 rgba(0,0,0,0.24), 0 12px 15px 0 rgba(0,0,0,0.19);
+    transition-duration: 0.2s;
 }
 .detail{
     text-align: left;
@@ -233,6 +234,7 @@ p{
 }
 .delete-btn:hover{
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    transition-duration: 0.2s;
 }
 .formAdd {  
     position:static;
@@ -273,7 +275,7 @@ p{
     position: sticky;
 }
 
-.uploadImage{
+.uploadImage img{
     position: absolute;
     width: 250px;
     height: 250px;
@@ -282,7 +284,12 @@ p{
     background-repeat: no-repeat;
     cursor: pointer;
 }
-.uploadImage input[type="file"] {
+.uploadImage img:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    transition-duration: 0.4s;
+    opacity: 0.2;
+}
+.img-upload{
     display: none;
 }
 .detail,.detail-asset{
@@ -328,7 +335,7 @@ p{
     background-color: #DAE0D8;
     color: #577863;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-}
+    transition-duration: 0.4s;}
 .detailProduct{
     color: #707070;
     font-size:14px; 
@@ -343,6 +350,362 @@ p{
     font-family: 'Kanit';
     width: 20%;
     font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    margin: 1%;
+    cursor: pointer;
+    transition-duration: 0.4s;}
+.delete-popup button:hover{
+    background-color: #577863;
+    color: #DAE0D8;
+}
+.manage-btn{
+    display: inline;
+}}
+
+@media only screen and (max-width: 400px) {
+    div{
+        font-family: 'Kanit';
+        color: #577863;
+}
+    .head{
+        color:#577863;
+        text-align: center;
+        position:static;
+        top: 0%;
+        font-size: 20px;
+}
+    .add{
+        position: fixed;
+        overflow: auto;
+        bottom: 10%;
+        right:5%;
+        background:url(add.png);
+        background-size: 100%;
+        color: white;
+        width: 70px;
+        height: 70px;
+        border: none;
+        box-shadow:  rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
+        cursor: pointer;
+}
+    .add:hover{
+        box-shadow:  rgba(0,0,0,0.24), 0 15px 15px 0 rgba(0,0,0,0.19);
+        width: 75px;
+        height: 75px;
+        transition-duration: 0.4s;
+}
+.search{
+    position: static;
+    width: 30%;
+    height: 15%;
+    font-size: 12px;
+    background-color: #DAE0D8;
+    color: #577863;
+    background-image: url(/static/media/search-icon.1c25d905.svg);
+    background-position: 20px 5px;
+    background-repeat: no-repeat;
+    padding: 7px 35px 6px 60px;
+    font-family: 'Kanit';
+    font-weight: lighter;
+    display: block;
+    margin-top: 2%;
+    margin-right: auto;
+    margin-left: auto;
+    border-style: none;
+    border-radius: 25px;
+}
+.btn-group button{
+    font-family: 'Kanit', medium;
+    position: relative;
+    overflow: auto;
+    margin: 0px 0px 0px 0px; 
+    color:#de425b;
+    font-size: 18px;
+    font-weight: lighter;
+    width: 15%;
+    padding: 0.4%;
+    background-color: white;
+    border: 1px black;
+    transition-duration: 0.4s;
+    border-radius: 15px;
+    margin: 0.5%;
+    
+    
+}
+.btn-group Button:hover,.btn-group Button:link,.btn-group Button:visited{
+    color: #ffffff;
+    background-color: #de425b;
+    cursor: pointer;
+}
+
+.btn-group{
+    display: block;
+    text-align: center;
+    margin: 20px 0px 0px 0px; 
+    
+}
+.table-plants{
+    text-align: center;
+}
+.tablePlant{
+    display: inline-block;
+    width: 30%;
+    margin:2% 3% 3% 5%;
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 2px 5px 0 rgba(0,0,0,0.19);
+    padding: 1.5%;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 15px;
+    text-align: left;
+    text-align: center;
+}
+.tablePlant p{
+    margin: 0%;
+}
+.tablePlant:hover{
+    box-shadow: 0 25px 35px 0 rgba(0,0,0,0.24), 0 12px 15px 0 rgba(0,0,0,0.19);
+    transition-duration: 0.2s;
+}
+.detail{
+    text-align: left;
+    text-decoration: underline;
+    letter-spacing: 0;
+    color: #707070;
+    opacity: 1;
+    font-size: 14px;
+    margin:0%;
+}
+.img-asset{
+    width: 100%;
+    height: 120px; 
+    position: static;
+}
+.price{
+    background: #de425b 0% 0% no-repeat padding-box;
+    opacity: 1;
+    padding:2%; 
+    color: #ffffff;
+    width: 35%;
+    text-align: center;
+    border-radius: 25px;
+    font-size: 9px;
+    font-weight: inherit;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+}
+
+
+.headAdd{
+    color:#577863;
+    text-align: center;
+    position:static;
+    margin-top: 1%;
+    font-size:20px ;
+}
+.detail-table p{
+    display: inline;
+}
+.detail-table{
+    position:absolute;
+    font-size: 10px;
+    margin-top:2%; 
+    margin-bottom:10%; 
+    display: block;
+    margin-left:10% ;
+}
+.detail-table div{
+    margin-bottom: 30%;
+    padding: 0;
+    margin-left: 10%;
+}
+.detail-field{
+    position: absolute;
+    width:100px;
+    height:20px;
+    padding-left:20%;
+    padding-top:5%; 
+    background-color: #DAE0D8;
+    font-size: 10px;
+    font-family: 'Kanit' ;
+    margin: 0;
+    left:100%;
+    color:#577863;
+    border-radius: 10px;
+}
+.detail-textarea{
+    position:absolute;
+    padding: 5%;
+    background-color: #DAE0D8;
+    width: 200px;
+    height: 50px;
+    font-size:10px; 
+    color:#577863;
+    border-radius: 5px;
+}
+.img-detail{
+    width: 150px;
+    margin-left:auto;
+    margin-right: auto;
+    overflow:auto;
+    display: block;
+}
+.typeAsset{
+    font-size: 18px;
+    margin-left:auto;
+    margin-right:auto ;    
+    display: block;
+    overflow: auto;
+}
+.typeAsset Button{
+    border: 1px;
+    position: relative;
+    overflow: auto;
+    color:#577863;
+    font-size: 10px;
+    font-weight: lighter;
+    width: 50%;
+    height: 30px;
+    background-color: white;
+    font-family: 'Kanit';
+    border: 1px solid #b3b3b3;
+    margin-bottom:5% ;
+}
+.delete-btn{
+    position: absolute;
+    color:#ffffff;
+    font-size: 10px;
+    width: 20%;
+    height: 20px;
+    background-color:#de425b;
+    font-family: 'Kanit';
+    border: none;
+    cursor: pointer; 
+    border-radius:15px; 
+    margin-left:auto;
+    margin-right: auto; 
+    overflow:auto;
+    display:block;
+    bottom:15%; 
+}
+.delete-btn:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    transition-duration: 0.2s;
+}
+.formAdd {  
+    position:static;
+    right: 10%;
+    width: 100%;
+    overflow:auto;
+    display:block;
+    font-size: 12px;
+    margin-top: 1%;
+}
+.formAdd input[type="number"],.formAdd input[type="text"]
+{
+    position: sticky;
+    width:100px;
+    height:10px;
+    background-color: #DAE0D8;
+    font-size: 12px;
+    font-family: 'Kanit' ;
+    font-weight: lighter;
+    margin-top: 2%;
+    margin-bottom:3%; 
+    left:40%;
+    color:#577863;
+    padding: 10px 20px 10px 20px;
+    border: 1px solid #b3b3b3;
+    border-radius: 8px;   
+}
+.formAdd input[type="file"]{
+    margin-top: 3%;
+    margin-bottom:2%; 
+    font-family: 'Kanit';
+    font-size: 10px;
+}
+
+.formAdd p{
+    display: inline;
+    color:#577863;
+    position: sticky;
+}
+
+.uploadImage img{
+    overflow: auto;
+    display: block;
+    width: 150px;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin-bottom:5%; 
+}
+.img-upload{
+    display: none;
+}
+.detail,.detail-asset{
+    overflow:auto;
+    display:block;
+    width: 100%;
+    color: #707070;
+    font-size:12px; 
+    text-decoration: underline;
+    cursor: pointer;
+}
+.detail-asset{
+    margin-top:10%; 
+}
+.detail textarea,.detail-asset textarea{
+    font-family: 'Kanit';
+    left: 20%;
+    width: 90%;
+    height: 100px;
+    margin-left: 1%;
+    font-size:12px; 
+    color:#577863;
+}
+.hide{
+    position: static;
+    height: 70px;
+}
+.save{
+    margin-left:auto;
+    margin-right: auto; 
+    overflow:auto;
+    display:block;
+    font-family: 'Kanit';
+    font-size: 16px;
+    width: 20%;
+    color: white;
+    background-color: #577863;
+    border-radius:10px;
+    border: none;
+    height: 50px;
+
+}
+.save:hover{
+    background-color: #DAE0D8;
+    color: #577863;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    transition-duration: 0.4s;}
+.detailProduct{
+    color: #707070;
+    font-size:9px; 
+    text-decoration: underline;
+    visibility: hidden;
+}
+.delete-popup{
+    text-align: center;
+}
+.delete-popup button{
+    background-color: #DAE0D8;
+    color: #577863;
+    font-family: 'Kanit';
+    width: 20%;
+    font-size: 10px;
     border: none;
     border-radius: 5px;
     margin: 1%;

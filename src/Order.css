@@ -1,3 +1,4 @@
+@media only screen and (min-width: 961px) {
 div{
     font-family: 'Kanit', medium;
     position: static;
@@ -54,6 +55,7 @@ div{
     color: #ffffff;
     background-color: #de425b;
     transition-duration: 0.4s;
+    cursor: pointer;
 }
 
 .btn-group{
@@ -125,4 +127,24 @@ div{
 .detail-order p{
     display:block;
     overflow: auto;
+}}
+
+@media only screen and (max-width: 400px) {
+    .btn-group button{
+        font-family: 'Kanit', medium;
+        position: relative;
+        overflow: auto;
+        color:#de425b;
+        font-size: 14px;
+        font-weight: lighter;
+        width: 15%;
+        padding: 0.4%;
+        background-color: white;
+        border: 1px black;
+        transition-duration: 0.4s;
+        border-radius: 15px;
+        margin: 0.5%;
+               
+    }
+
 }
