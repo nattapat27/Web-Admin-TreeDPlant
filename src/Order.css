@@ -34,7 +34,7 @@ div{
     border-style: none;
     border-radius: 25px;
 }
-.btn-group button{
+.btn-process button{
     font-family: 'Kanit', medium;
     position: relative;
     overflow: auto;
@@ -51,14 +51,14 @@ div{
     margin: 0.5%;
     
 }
-.btn-group Button:hover,.btn-group Button:link,.btn-group Button:visited{
+.btn-process Button:hover,.btn-process Button:link,.btn-process Button:visited{
     color: #ffffff;
     background-color: #de425b;
     transition-duration: 0.4s;
     cursor: pointer;
 }
 
-.btn-group{
+.btn-process{
     display: block;
     text-align: center;
     margin: 20px 0px 0px 0px; 
@@ -130,20 +130,136 @@ div{
 }}
 
 @media only screen and (max-width: 400px) {
-    .btn-group button{
+    div{
+        font-family: 'Kanit', medium;
+        position: static;
+    }
+    .head{
+        color:#577863;
+        text-align: center;
+        position:static;
+        margin: 0%;
+    }
+    .head-detail{
+        color:#577863;
+        text-align: center;
+        position:static;
+        font-size: 20px;
+    }
+    .search{
+        position: static;
+    width: 30%;
+    height: 15%;
+    font-size: 12px;
+    background-color: #DAE0D8;
+    color: #577863;
+    background-image: url(/static/media/search-icon.1c25d905.svg);
+    background-position: 20px 5px;
+    background-repeat: no-repeat;
+    padding: 7px 35px 6px 60px;
+    font-family: 'Kanit';
+    font-weight: lighter;
+    display: block;
+    margin-top: 2%;
+    margin-right: auto;
+    margin-left: auto;
+    border-style: none;
+    border-radius: 25px;
+    }
+    .btn-process button{
         font-family: 'Kanit', medium;
         position: relative;
         overflow: auto;
+        margin: 0px 0px 0px 0px; 
         color:#de425b;
-        font-size: 14px;
+        font-size: 12px;
         font-weight: lighter;
-        width: 15%;
+        width: 25%;
         padding: 0.4%;
         background-color: white;
         border: 1px black;
         transition-duration: 0.4s;
-        border-radius: 15px;
-        margin: 0.5%;
+        border-radius: 15px;   
+    }
+    .btn-process Button:hover,.btn-process Button:link,.btn-process Button:visited{
+        color: #ffffff;
+        background-color: #de425b;
+        transition-duration: 0.4s;
+        cursor: pointer;
+    }
+    
+    .btn-process{
+        display: block;
+        text-align: center;
+        margin: 5% 0% 3% 0%; 
+        
+    }
+    .tableAllOrder{
+        text-align: center;
+    }
+    .table-order{
+        display: inline-block;
+        width: 40%;
+        margin:2%;
+        box-shadow: 0 2px 2px 0 rgba(0,0,0,0.24), 0 2px 5px 0 rgba(0,0,0,0.19);
+        padding-bottom: 1%;
+        text-align: left;
+        cursor: pointer;
+        font-size: 10px;
+    }
+    .table-order:hover{
+        box-shadow: 0 15px 15px 0 rgba(0,0,0,0.24), 0 15px 15px 0 rgba(0,0,0,0.19);
+        
+    }
+    .orderNumber{
+        padding: 5%; 
+        background-color: #DAE0D8;
+    
+    }
+    .orderNumber p{
+        display: inline-block;
+        color: #577863;
+        margin: 0%;
+    }
+    .orderId{
+        float: right;
+    }
+    .detailOrder p{
+        color:#383939;
+        font-weight:lighter;
+        opacity: 0.75;
+        margin: 4%;
+        font-size: 9px;
+    
+    }
+    .detailOrder {
+        padding: 3%;
+    }
+    
+    .orderStatus{
+        background: #577863 0% 0% no-repeat padding-box;
+        opacity: 1;
+        float: right;
+        padding:2%; 
+        color: #ffffff;
+        width: 40%;
+        font-weight: lighter;
+        text-align: center;
+    }
+    .detail-order div{
+        display: inline-block;
+        overflow: auto;
+        color: #ffffff;
+        background: #577863;
+        margin-right:10%;
+        position: static;
+        text-align: center;
+        padding: 2%;
+    }
+    .detail-order p{
+        display:block;
+        overflow: auto;
+        font-size:12px ;
                
     }
 

@@ -115,11 +115,11 @@ class Order extends Component {
           <input type="text" className="search" placeholder="SEARCH" />
 
         </form>
-        <div className="btn-group">
-          <Button className="bu" onClick={this.allOrder}>ทั้งหมด</Button>
-          <Button className="bu" onClick={this.waiting}>รอดำเนินการ</Button>
-          <Button className="bu" onClick={this.prepare}>เตรียมจัดส่ง</Button>
-          <Button className="bu" onClick={this.complete}>เสร็จสมบูรณ์</Button>
+        <div className="btn-process">
+          <Button onClick={this.allOrder}>ทั้งหมด</Button>
+          <Button onClick={this.waiting}>รอดำเนินการ</Button>
+          <Button onClick={this.prepare}>เตรียมจัดส่ง</Button>
+          <Button onClick={this.complete}>เสร็จสมบูรณ์</Button>
         </div>
 
         <div className='tableAllOrder'>
