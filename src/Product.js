@@ -32,6 +32,7 @@ class Product extends Component {
   openModalAdd() {
     this.setState({ modalAddIsOpen: true });
   }
+
   openModalDetail(id) {
     this.setState({ modalDetailIsOpen: true });
     this.setState({ detail: this.state.assets.filter(assets => assets.assetId === id) })
@@ -201,12 +202,12 @@ class Product extends Component {
         <div className='table-plants'>
           {productAsset}
         </div>
+
         <Modal
           isOpen={this.state.modalAddIsOpen}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal} >
-          <ModalAdd />
-
+          <ModalAdd/>
         </Modal>
 
         <Modal

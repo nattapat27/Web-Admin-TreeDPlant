@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import './header.css';
-import logo from './logo-green.png';
-import user from './man-user.png';
-import { Button } from 'react-bootstrap';
-//import axios from 'axios';
 import { BrowserRouter as Router } from 'react-router-dom';
-//import Login from './Login';
 
 
 class Header extends Component {

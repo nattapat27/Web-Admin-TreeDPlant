@@ -4,6 +4,7 @@ import axios from 'axios';
 import upload from './upload.png';
 import 'bootstrap/dist/css/bootstrap.css';
 
+
 class ModalAdd extends Component {
     constructor() {
       super()
@@ -76,7 +77,7 @@ class ModalAdd extends Component {
         width, height, model, shader } = this.state.tree;
   
       return (
-        <div className="modal">
+        <div>
   
           <h1 className="headAdd">เพิ่มสินค้า</h1>
           <div className="typeAsset">

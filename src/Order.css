@@ -132,7 +132,7 @@ div{
     overflow: auto;
 }}
 
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 961px) {
     div{
         font-family: 'Kanit', medium;
         position: static;
@@ -151,7 +151,7 @@ div{
     }
     .search{
         position: static;
-        width: 30%;
+        width: 70%;
         height: 15%;
         font-size: 9px;
         color: #577863;
@@ -164,6 +164,7 @@ div{
         font-weight: lighter;
         display: block;
         margin-top: 2%;
+        margin-bottom:0% ;
         margin-right: auto;
         margin-left: auto;
         outline: 0;
@@ -171,6 +172,7 @@ div{
         border-color: #577863;
     }
     #dropdown-basic{
+        margin-top: 4%;
         margin-bottom: 4%;
         margin-left:auto;
         margin-right:auto;
@@ -180,11 +182,11 @@ div{
         background-color:#de425b;
         color: #ffffff;
         font-size: 14px;
-        width: 50%;
+        width: 70%;
     }
-    
     .btn-process{
         visibility: hidden;
+        display: none;
         
     }
     .tableAllOrder{
