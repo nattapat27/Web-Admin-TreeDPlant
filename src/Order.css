@@ -34,6 +34,9 @@ div{
     border-style: none;
     border-radius: 25px;
 }
+#dropdown-basic{
+    visibility: hidden;
+}
 .btn-process button{
     font-family: 'Kanit', medium;
     position: relative;
@@ -129,7 +132,7 @@ div{
     overflow: auto;
 }}
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
     div{
         font-family: 'Kanit', medium;
         position: static;
@@ -148,50 +151,40 @@ div{
     }
     .search{
         position: static;
-    width: 30%;
-    height: 15%;
-    font-size: 12px;
-    background-color: #DAE0D8;
-    color: #577863;
-    background-image: url(/static/media/search-icon.1c25d905.svg);
-    background-position: 20px 5px;
-    background-repeat: no-repeat;
-    padding: 7px 35px 6px 60px;
-    font-family: 'Kanit';
-    font-weight: lighter;
-    display: block;
-    margin-top: 2%;
-    margin-right: auto;
-    margin-left: auto;
-    border-style: none;
-    border-radius: 25px;
-    }
-    .btn-process button{
-        font-family: 'Kanit', medium;
-        position: relative;
-        overflow: auto;
-        margin: 0px 0px 0px 0px; 
-        color:#de425b;
-        font-size: 12px;
+        width: 30%;
+        height: 15%;
+        font-size: 9px;
+        color: #577863;
+        background-image: url(/static/media/search-icon.1c25d905.svg);
+        background-size: 35px 15px;
+        background-position: 2px 5px;
+        background-repeat: no-repeat;
+        padding: 7px 35px 6px 50px;
+        font-family: 'Kanit';
         font-weight: lighter;
-        width: 25%;
-        padding: 0.4%;
-        background-color: white;
-        border: 1px black;
-        transition-duration: 0.4s;
-        border-radius: 15px;   
+        display: block;
+        margin-top: 2%;
+        margin-right: auto;
+        margin-left: auto;
+        outline: 0;
+        border-width: 0 0 0.1px;
+        border-color: #577863;
     }
-    .btn-process Button:hover,.btn-process Button:link,.btn-process Button:visited{
+    #dropdown-basic{
+        margin-bottom: 4%;
+        margin-left:auto;
+        margin-right:auto;
+        display: block;
+        overflow: auto;
+        border: none;
+        background-color:#de425b;
         color: #ffffff;
-        background-color: #de425b;
-        transition-duration: 0.4s;
-        cursor: pointer;
+        font-size: 14px;
+        width: 50%;
     }
     
     .btn-process{
-        display: block;
-        text-align: center;
-        margin: 5% 0% 3% 0%; 
+        visibility: hidden;
         
     }
     .tableAllOrder{

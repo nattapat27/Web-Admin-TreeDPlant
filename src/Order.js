@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './Order.css'
 import Header from './header';
 import Modal from 'react-modal';
-import { Button } from 'react-bootstrap';
+import { Button , Dropdown} from 'react-bootstrap';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.css';
 
 class Order extends Component {
   constructor(props) {
@@ -121,6 +122,18 @@ class Order extends Component {
           <Button onClick={this.prepare}>เตรียมจัดส่ง</Button>
           <Button onClick={this.complete}>เสร็จสมบูรณ์</Button>
         </div>
+
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic" >
+            ทั้งหมด
+            </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={this.allOrder}>ทั้งหมด</Dropdown.Item>
+            <Dropdown.Item onClick={this.waiting}>รอดำเนินการ</Dropdown.Item>
+            <Dropdown.Item onClick={this.prepare}>เตรียมจัดส่ง</Dropdown.Item>
+            <Dropdown.Item onClick={this.complete}>เสร็จสมบูรณ์</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
 
         <div className='tableAllOrder'>
 

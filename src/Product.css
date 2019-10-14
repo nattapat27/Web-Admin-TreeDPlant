@@ -49,7 +49,7 @@ p{
     border-style: none;
     border-radius: 25px;
 }
-.btn-group button{
+.btn-type button{
     font-family: 'Kanit', medium;
     position: relative;
     overflow: auto;
@@ -67,13 +67,13 @@ p{
     
     
 }
-.btn-group Button:hover,.btn-group Button:link,.btn-group Button:visited{
+.btn-type Button:hover,.btn-type Button:link,.btn-type Button:visited{
     color: #ffffff;
     background-color: #de425b;
     cursor: pointer;
 }
 
-.btn-group{
+.btn-type{
     display: block;
     text-align: center;
     margin: 20px 0px 0px 0px; 
@@ -190,6 +190,9 @@ p{
 .img-detail{
     width: 450px;
     margin-left:2%;
+}
+#dropdown-basic{
+    visibility: hidden;
 }
 .typeAsset{
     right: 10%;
@@ -363,7 +366,7 @@ p{
     display: inline;
 }}
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
     div{
         font-family: 'Kanit';
         color: #577863;
@@ -396,65 +399,54 @@ p{
         transition-duration: 0.4s;
 }
 .search{
-    position: static;
-    width: 30%;
-    height: 15%;
-    font-size: 12px;
-    background-color: #DAE0D8;
-    color: #577863;
-    background-image: url(/static/media/search-icon.1c25d905.svg);
-    background-position: 20px 5px;
-    background-repeat: no-repeat;
-    padding: 7px 35px 6px 60px;
-    font-family: 'Kanit';
-    font-weight: lighter;
-    display: block;
-    margin-top: 2%;
-    margin-right: auto;
-    margin-left: auto;
-    border-style: none;
-    border-radius: 25px;
+        position: static;
+        width: 30%;
+        height: 15%;
+        font-size: 9px;
+        color: #577863;
+        background-image: url(/static/media/search-icon.1c25d905.svg);
+        background-size: 35px 15px;
+        background-position: 2px 5px;
+        background-repeat: no-repeat;
+        padding: 7px 35px 6px 50px;
+        font-family: 'Kanit';
+        font-weight: lighter;
+        display: block;
+        margin-top: 2%;
+        margin-right: auto;
+        margin-left: auto;
+        outline: 0;
+        border-width: 0 0 0.1px;
+        border-color: #577863;
 }
-.btn-group button{
-    font-family: 'Kanit', medium;
-    position: relative;
+.btn-type{
+    visibility: hidden;
+}
+#dropdown-basic{
+    margin-bottom: 4%;
+    margin-left:auto;
+    margin-right:auto;
+    display: block;
     overflow: auto;
-    margin: 0px 0px 0px 0px; 
-    color:#577863;
-    font-size: 14px;
-    font-weight: lighter;
-    width: 15%;
-    padding: 0.4%;
-    background-color: white;
-    border: 1px black;
-    transition-duration: 0.4s;
-    border-radius: 15px;
-    margin: 0.5%;
-    
-    
-}
-.btn-group Button:hover,.btn-group Button:link,.btn-group Button:visited{
+    border: none;
+    background-color:#de425b;
     color: #ffffff;
-    background-color: #de425b;
-    cursor: pointer;
+    font-size: 14px;
+    width: 50%;
 }
-
-.btn-group{
-    display: block;
-    text-align: center;
-    margin: 20px 0px 0px 0px; 
-    
+.dropdown-item{
+    font-size: 12px;
 }
 .table-plants{
     text-align: center;
 }
 .tablePlant{
     display: inline-block;
-    width: 30%;
+    width: 50%;
     margin:2% 3% 3% 5%;
     box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 2px 5px 0 rgba(0,0,0,0.19);
     padding: 1.5%;
-    font-size: 14px;
+    font-size: 16px;
     cursor: pointer;
     border-radius: 15px;
     text-align: left;
@@ -478,18 +470,18 @@ p{
 }
 .img-asset{
     width: 100%;
-    height: 120px; 
+    height: 180px; 
     position: static;
 }
 .price{
     background: #de425b 0% 0% no-repeat padding-box;
     opacity: 1;
-    padding:2%; 
+    padding:3%; 
     color: #ffffff;
-    width: 35%;
+    width: 45%;
     text-align: center;
     border-radius: 25px;
-    font-size: 9px;
+    font-size: 12px;
     font-weight: inherit;
     margin-left: auto;
     margin-right: auto;
