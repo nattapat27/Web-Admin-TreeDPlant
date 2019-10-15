@@ -67,7 +67,7 @@ p{
     
     
 }
-.btn-type Button:hover,.btn-type Button:link,.btn-type Button:visited{
+.btn-type Button:hover,.btn-type Button:link,.btn-type Button.active{
     color: #ffffff;
     background-color: #de425b;
     cursor: pointer;
@@ -193,6 +193,7 @@ p{
 }
 #dropdown-basic{
     visibility: hidden;
+    display: none;
 }
 .typeAsset{
     right: 10%;
@@ -606,7 +607,6 @@ p{
     font-family: 'Kanit' ;
     font-weight: lighter;
     margin-top: 2%;
-    margin-bottom:3%; 
     left:40%;
     color:#577863;
     padding: 10px 20px 10px 20px;

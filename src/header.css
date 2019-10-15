@@ -4,6 +4,10 @@
     width: 100%;
     display: inline-block;    
 }
+.hamburger{
+    visibility: hidden;
+    display: none;
+}
 .tree{
     float: left;
     color: #577863;
@@ -27,29 +31,26 @@
 }
 @media only screen and (max-width: 951px) {
     .header {
-        top: 0%;
-        width: 100%;
-        display: inline-block;    
+        visibility: hidden;
+        display: none;
+        }
+    .container div{
+        margin-top:0%;
+        margin-bottom:2%;
     }
-    .tree{
-        float: left;
-        color: #577863;
-        margin-left:5%; 
-        font-size: 14px;
+    .nav-item p{
+        color: #ffffff;
+        margin-top: 0;
+        margin-bottom: 0.3rem;
     }
-    .header a{
-        margin-top:1%; 
-        margin-right: 6%;
-        float: right;
-        color: #577863;
-        text-decoration: none;
-        font-size: 12px;
+    .nav-item{
+        background-color: #de425b;
+        padding-left:3% ;
+        padding-top: 2%;
     }
-    .header a :hover{
-        outline: solid;
-        padding-right: 8px;
-        padding-left: 8px;
-        outline-width: 2px;
-        transition-duration: 0.4s;
+    .navbar-collapse li{
+        border: solid #ffffff;
+        border-width: 0 0 0.1px;
     }
+
 }

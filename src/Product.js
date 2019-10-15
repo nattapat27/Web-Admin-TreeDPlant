@@ -16,6 +16,7 @@ class Product extends Component {
     this.state = {
       modalAddIsOpen: false,
       modalDetailIsOpen: false,
+      typeAsset: 'ทั้งหมด',
       assets: [],
       detail: [],
       id: {
@@ -67,6 +68,7 @@ class Product extends Component {
   }
   showTree = e => {
     e.preventDefault()
+    this.setState({ typeAsset: 'ต้นไม้' })
     console.log()
     axios.get('https://treedp.doge.in.th/asset/getAllAsset/tree')
       .then(response => {
@@ -76,6 +78,7 @@ class Product extends Component {
   }
   showAsset = e => {
     e.preventDefault()
+    this.setState({ typeAsset: 'อุปกรณ์' })
     axios.get('https://treedp.doge.in.th/asset/getTypeAsset')
       .then(response => {
         //console.log(response.data)
@@ -95,6 +98,12 @@ class Product extends Component {
       }
       )
   }
+
+  searchAsset() {
+
+  }
+
+  
 
   render() {
     const { assets } = this.state
@@ -173,71 +182,74 @@ class Product extends Component {
     return (
       <div>
         <Header />
-        <button className="add" onClick={this.openModalAdd} ></button>
 
-        <h1 className="head">เพิ่ม-ลด สินค้า</h1>
+        
 
-        <form>
-          <input type="text" className="search" placeholder="SEARCH" />
-        </form>
-        <div className="btn-type">
-          <button onClick={this.allProduct}>ทั้งหมด</button>
-          <button onClick={this.showTree}>ต้นไม้</button>
-          <button onClick={this.showAsset}>อุปกรณ์</button>
-        </div>
+          <button className="add" onClick={this.openModalAdd} ></button>
 
-        <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdown-basic" >
-            ทั้งหมด
-            </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item onClick={this.allProduct}>ทั้งหมด</Dropdown.Item>
-            <Dropdown.Item onClick={this.showTree}>ต้นไม้</Dropdown.Item>
-            <Dropdown.Item onClick={this.showAsset}>อุปกรณ์</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
+          <h1 className="head">เพิ่ม-ลด สินค้า</h1>
 
-
-
-        <div className='table-plants'>
-          {productAsset}
-        </div>
-
-        <Modal
-          isOpen={this.state.modalAddIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal} >
-          <ModalAdd/>
-        </Modal>
-
-        <Modal
-          isOpen={this.state.modalDetailIsOpen}
-          onAfterOpen={this.afterOpenModal}
-          onRequestClose={this.closeModal} >
-          {detailAsset}
-          <div className="manage-btn">
-            <button className="edit-btn"> แก้ไข </button>
-
-            <Popup trigger={<button className="delete-btn"> ลบ </button>} modal>
-              <h1 className="headAdd">ต้องการที่จะลบใช่หรือไม่</h1>
-              <div className="delete-popup">
-                <button onClick={this.deleteAsset}> ใช่ </button>
-                <button onClick={this.closeModal}> ไม่ใช่ </button>
-              </div>
-            </Popup>
+          <form>
+            <input type="text" className="search" placeholder="SEARCH" />
+          </form>
+          <div className="btn-type">
+            <button onClick={this.allProduct}>ทั้งหมด</button>
+            <button onClick={this.showTree}>ต้นไม้</button>
+            <button onClick={this.showAsset}>อุปกรณ์</button>
           </div>
 
-        </Modal>
-      </div >
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic" >
+              {this.state.typeAsset}
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={this.allProduct}>ทั้งหมด</Dropdown.Item>
+              <Dropdown.Item onClick={this.showTree}>ต้นไม้</Dropdown.Item>
+              <Dropdown.Item onClick={this.showAsset}>อุปกรณ์</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+
+
+
+          <div className='table-plants'>
+            {productAsset}
+          </div>
+
+          <Modal
+            isOpen={this.state.modalAddIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal} >
+            <ModalAdd />
+          </Modal>
+
+          <Modal
+            isOpen={this.state.modalDetailIsOpen}
+            onAfterOpen={this.afterOpenModal}
+            onRequestClose={this.closeModal} >
+            {detailAsset}
+            <div className="manage-btn">
+              <button className="edit-btn"> แก้ไข </button>
+
+              <Popup trigger={<button className="delete-btn"> ลบ </button>} modal>
+                <h1 className="headAdd">ต้องการที่จะลบใช่หรือไม่</h1>
+                <div className="delete-popup">
+                  <button onClick={this.deleteAsset}> ใช่ </button>
+                  <button onClick={this.closeModal}> ไม่ใช่ </button>
+                </div>
+              </Popup>
+            </div>
+
+          </Modal>
+        </div >
 
 
 
 
-    );
-
-  }
-}
-export default Product;
-
-
-
+        );
+    
+      }
+    }
+    export default Product;
+    
+    
+    

@@ -13,6 +13,7 @@ class Order extends Component {
       orders: [],
       detail: [],
       modalDetailOrderIsOpen: false,
+      typeOrder:'ทั้งหมด',
     };
     this.openModalDetail = this.openModalDetail.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -48,6 +49,7 @@ class Order extends Component {
   }
   allOrder = e => {
     e.preventDefault()
+    this.setState({typeOrder:'ทั้งหมด'})
     console.log()
     axios.get('https://treedp.doge.in.th//order/getAllOrder')
       .then(response => {
@@ -58,6 +60,7 @@ class Order extends Component {
 
   waiting = e => {
     e.preventDefault()
+    this.setState({typeOrder:'รอดำเนินการ'})
     console.log()
     axios.get('https://treedp.doge.in.th/show/status/1')
       .then(response => {
@@ -68,6 +71,7 @@ class Order extends Component {
 
   prepare = e => {
     e.preventDefault()
+    this.setState({typeOrder:'เตรียมจัดส่ง'})
     console.log()
     axios.get('https://treedp.doge.in.th/show/status/2')
       .then(response => {
@@ -78,6 +82,7 @@ class Order extends Component {
 
   complete = e => {
     e.preventDefault()
+    this.setState({typeOrder:'เสร็จสมบูรณ์'})
     console.log()
     axios.get('https://treedp.doge.in.th/show/status/3')
       .then(response => {
@@ -125,7 +130,7 @@ class Order extends Component {
 
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdown-basic" >
-            ทั้งหมด
+            {this.state.typeOrder}
             </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item onClick={this.allOrder}>ทั้งหมด</Dropdown.Item>
