@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './header.css';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { MDBNavbar, MDBNavbarBrand, NavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBContainer }
+import { MDBNavbar, MDBNavbarBrand, NavbarNav, MDBNavItem,MDBNavbarToggler, MDBCollapse, MDBContainer }
 from 'mdbreact';
 
 class Header extends Component {

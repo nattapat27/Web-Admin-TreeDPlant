@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './Order.css'
 import Header from './header';
 import Modal from 'react-modal';
-import { Button , Dropdown} from 'react-bootstrap';
+import { Button, Dropdown } from 'react-bootstrap';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -13,7 +13,10 @@ class Order extends Component {
       orders: [],
       detail: [],
       modalDetailOrderIsOpen: false,
-      typeOrder:'ทั้งหมด',
+      typeOrder: 'ทั้งหมด',
+      searchOrder: {
+        orderID: ''
+      },
     };
     this.openModalDetail = this.openModalDetail.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -49,7 +52,7 @@ class Order extends Component {
   }
   allOrder = e => {
     e.preventDefault()
-    this.setState({typeOrder:'ทั้งหมด'})
+    this.setState({ typeOrder: 'ทั้งหมด' })
     console.log()
     axios.get('https://treedp.doge.in.th//order/getAllOrder')
       .then(response => {
@@ -60,7 +63,7 @@ class Order extends Component {
 
   waiting = e => {
     e.preventDefault()
-    this.setState({typeOrder:'รอดำเนินการ'})
+    this.setState({ typeOrder: 'รอดำเนินการ' })
     console.log()
     axios.get('https://treedp.doge.in.th/show/status/1')
       .then(response => {
@@ -71,7 +74,7 @@ class Order extends Component {
 
   prepare = e => {
     e.preventDefault()
-    this.setState({typeOrder:'เตรียมจัดส่ง'})
+    this.setState({ typeOrder: 'เตรียมจัดส่ง' })
     console.log()
     axios.get('https://treedp.doge.in.th/show/status/2')
       .then(response => {
@@ -82,7 +85,7 @@ class Order extends Component {
 
   complete = e => {
     e.preventDefault()
-    this.setState({typeOrder:'เสร็จสมบูรณ์'})
+    this.setState({ typeOrder: 'เสร็จสมบูรณ์' })
     console.log()
     axios.get('https://treedp.doge.in.th/show/status/3')
       .then(response => {
@@ -91,7 +94,24 @@ class Order extends Component {
       })
   }
 
+  searchOrderId = e => {
+    if (e.key === 'Enter') {
+      e.preventDefault()
+      const apiURL = 'https://treedp.doge.in.th/search'
+      axios.post(apiURL, this.state.searchOrder)
+        .then(response => {
+          console.log(response.data)
+        }
+        )
+    }
+  }
+  changeHandler = (e) => {
+    const order = { ...this.state.searchOrder, [e.target.name]: e.target.value }
+    this.setState({ order })
+    console.log(order)
+  }
   render() {
+    const {order_Id} = this.state.searchOrder
     const { orders } = this.state
     let detailOrder = this.state.detail.map(order =>
       <div className='detail-order'>
@@ -118,9 +138,14 @@ class Order extends Component {
         <h1 className="head">จัดการคำสั่งซื้อ</h1>
 
         <form>
-          <input type="text" className="search" placeholder="SEARCH" />
+            <input type="text" className="search" placeholder="SEARCH" name="orderID"
+            value={order_Id}
+            onChange={this.changeHandler}
+            onKeyDown={this.searchOrderId}
+            />
+          </form>
 
-        </form>
+
         <div className="btn-process">
           <Button onClick={this.allOrder}>ทั้งหมด</Button>
           <Button onClick={this.waiting}>รอดำเนินการ</Button>
@@ -131,7 +156,7 @@ class Order extends Component {
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdown-basic" >
             {this.state.typeOrder}
-            </Dropdown.Toggle>
+          </Dropdown.Toggle>
           <Dropdown.Menu>
             <Dropdown.Item onClick={this.allOrder}>ทั้งหมด</Dropdown.Item>
             <Dropdown.Item onClick={this.waiting}>รอดำเนินการ</Dropdown.Item>

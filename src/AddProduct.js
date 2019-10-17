@@ -67,12 +67,14 @@ class ModalAdd extends Component {
     changeHandler = (e) => {
       const asset = { ...this.state.asset, [e.target.name]: e.target.value }
       const tree = { ...this.state.tree, [e.target.name]: e.target.value }
+      console.log(asset)
       this.setState({ asset })
+      
       this.setState({ tree })
       
     }
     render() {
-      const { name, image, price, detail } = this.state.asset;
+      const { name, price, detail } = this.state.asset;
       const { tree_name, tree_image, tree_price, tree_detail,
         width, height, model, shader } = this.state.tree;
   
@@ -91,7 +93,7 @@ class ModalAdd extends Component {
           {this.state.trees ?
             <div>
               <label className="uploadImage">
-                <img src={this.state.file} title="Upload Image" />
+                <img src={this.state.file} alt="Upload" />
                 <input className="img-upload" type="file"
                   name="image"
                   value={tree_image}
@@ -158,7 +160,7 @@ class ModalAdd extends Component {
           {this.state.assets ?
             <div>
               <label className="uploadImage">
-                <img src={this.state.file} />
+                <img src={this.state.file} alt="upload"/>
   
                 <input className="img-upload" type="file"
                   name="image"

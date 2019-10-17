@@ -219,26 +219,14 @@ p{
     background-color: #577863;
     transition-duration: 0.4s;
 }
-.delete-btn{
-    position: relative;
-    color:#ffffff;
-    font-size: 20px;
-    width: 20%;
-    height: 50px;
-    background-color:#de425b;
-    font-family: 'Kanit';
-    border: none;
-    cursor: pointer; 
-    border-radius:15px; 
+.manage-btn{
     margin-left:auto;
-    margin-right: auto; 
-    overflow:auto;
-    display:block;
-    margin-top:5%; 
-}
-.delete-btn:hover{
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    margin-right:auto ;    
+    display: block;
+    overflow: auto;
     transition-duration: 0.2s;
+    display: inline;
+    
 }
 .formAdd {  
     position:static;
@@ -363,9 +351,7 @@ p{
     background-color: #577863;
     color: #DAE0D8;
 }
-.manage-btn{
-    display: inline;
-}}
+}
 
 @media only screen and (max-width: 961px) {
     div{
@@ -377,7 +363,7 @@ p{
         text-align: center;
         position:static;
         top: 0%;
-        font-size: 20px;
+        font-size: 28px;
 }
     .add{
         position: fixed;
@@ -434,11 +420,12 @@ p{
     border: none;
     background-color:#de425b;
     color: #ffffff;
-    font-size: 14px;
+    font-size: 16px;
     width: 70%;
 }
-.dropdown-item{
-    font-size: 12px;
+.dropdown-item,.dropdown-menu.show,.dropdown-item:hover{
+    font-size: 16px;
+    width: 70%;
 }
 .table-plants{
     text-align: center;
@@ -449,7 +436,7 @@ p{
     margin:2% 3% 3% 5%;
     box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 2px 5px 0 rgba(0,0,0,0.19);
     padding: 1.5%;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
     border-radius: 15px;
     text-align: left;
@@ -484,7 +471,7 @@ p{
     width: 45%;
     text-align: center;
     border-radius: 25px;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: inherit;
     margin-left: auto;
     margin-right: auto;
@@ -504,11 +491,11 @@ p{
 }
 .detail-table{
     position:absolute;
-    font-size: 10px;
+    font-size: 14px;
     margin-top:2%; 
     margin-bottom:10%; 
     display: block;
-    margin-left:10% ;
+    margin-left:5% ;
 }
 .detail-table div{
     margin-bottom: 30%;
@@ -517,12 +504,12 @@ p{
 }
 .detail-field{
     position: absolute;
-    width:100px;
-    height:20px;
+    width:150px;
+    height:30px;
     padding-left:20%;
     padding-top:5%; 
     background-color: #DAE0D8;
-    font-size: 10px;
+    font-size: 14px;
     font-family: 'Kanit' ;
     margin: 0;
     left:100%;
@@ -533,9 +520,8 @@ p{
     position:absolute;
     padding: 5%;
     background-color: #DAE0D8;
-    width: 200px;
-    height: 50px;
-    font-size:10px; 
+    width: 250px;
+    font-size:14px; 
     color:#577863;
     border-radius: 5px;
 }
@@ -567,27 +553,15 @@ p{
     border: 1px solid #b3b3b3;
     margin-bottom:5% ;
 }
-.delete-btn{
-    position: absolute;
-    color:#ffffff;
-    font-size: 10px;
-    width: 20%;
-    height: 20px;
-    background-color:#de425b;
-    font-family: 'Kanit';
-    border: none;
-    cursor: pointer; 
-    border-radius:15px; 
+.manage-btn{
     margin-left:auto;
-    margin-right: auto; 
-    overflow:auto;
-    display:block;
-    bottom:15%; 
-}
-.delete-btn:hover{
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    margin-right:auto ;    
+    display: block;
+    overflow: auto;
     transition-duration: 0.2s;
+    display: inline;
 }
+
 .formAdd {  
     position:static;
     right: 10%;
@@ -708,8 +682,5 @@ p{
 .delete-popup button:hover{
     background-color: #577863;
     color: #DAE0D8;
-}
-.manage-btn{
-    display: inline;
 }
 }

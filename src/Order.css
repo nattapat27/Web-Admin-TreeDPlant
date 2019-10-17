@@ -143,6 +143,7 @@ div{
         text-align: center;
         position:static;
         margin: 0%;
+        font-size: 28px;
     }
     .head-detail{
         color:#577863;
@@ -182,7 +183,11 @@ div{
         border: none;
         background-color:#de425b;
         color: #ffffff;
-        font-size: 14px;
+        font-size: 16px;
+        width: 70%;
+    }
+    .dropdown-item,.dropdown-menu.show{
+        font-size: 16px;
         width: 70%;
     }
     .btn-process{
