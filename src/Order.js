@@ -14,9 +14,7 @@ class Order extends Component {
       detail: [],
       modalDetailOrderIsOpen: false,
       typeOrder: 'ทั้งหมด',
-      searchOrder: {
-        orderID: ''
-      },
+      searchOrder:null,
     };
     this.openModalDetail = this.openModalDetail.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -26,10 +24,10 @@ class Order extends Component {
   openModalDetail(id) {
     axios.get('https://treedp.doge.in.th/show/status/' + id)
       .then(response => {
-        console.log(response.data)
+        //console.log(response.data)
         //this.setState({ orders: response.data })
         this.setState({ modalDetailOrderIsOpen: true });
-        this.setState({ detail: this.state.orders.filter(order => order.orderId === id) })
+        this.setState({ detail: this.state.orders.filter(orders => orders.orderId === id) })
         setTimeout(() => { console.log(this.state.detail) }, 1000)
       })
 
@@ -44,6 +42,7 @@ class Order extends Component {
   }
 
   componentDidMount() {
+    Modal.setAppElement('body');
     axios.get('https://treedp.doge.in.th//order/getAllOrder')
       .then(response => {
         //console.log(response.data)
@@ -53,10 +52,9 @@ class Order extends Component {
   allOrder = e => {
     e.preventDefault()
     this.setState({ typeOrder: 'ทั้งหมด' })
-    console.log()
     axios.get('https://treedp.doge.in.th//order/getAllOrder')
       .then(response => {
-        console.log(response.data)
+        //console.log(response.data)
         this.setState({ orders: response.data })
       })
   }
@@ -64,10 +62,9 @@ class Order extends Component {
   waiting = e => {
     e.preventDefault()
     this.setState({ typeOrder: 'รอดำเนินการ' })
-    console.log()
     axios.get('https://treedp.doge.in.th/show/status/1')
       .then(response => {
-        console.log(response.data)
+        //console.log(response.data)
         this.setState({ orders: response.data })
       })
   }
@@ -75,10 +72,9 @@ class Order extends Component {
   prepare = e => {
     e.preventDefault()
     this.setState({ typeOrder: 'เตรียมจัดส่ง' })
-    console.log()
     axios.get('https://treedp.doge.in.th/show/status/2')
       .then(response => {
-        console.log(response.data)
+        //console.log(response.data)
         this.setState({ orders: response.data })
       })
   }
@@ -95,33 +91,42 @@ class Order extends Component {
   }
 
   searchOrderId = e => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && this.state.searchOrder.orderID !=='') {
       e.preventDefault()
-      const apiURL = 'https://treedp.doge.in.th/search'
-      axios.post(apiURL, this.state.searchOrder)
-        .then(response => {
-          console.log(response.data)
-        }
-        )
+      console.log(this.state.searchOrder.orderID)
+      this.setState({ orders: this.state.orders.filter(orders => orders.orderId === this.state.searchOrder.orderID) })
+
+    } else if (e.key === "Delete" || e.key === "Backspace") {
+      //console.log(this.state.searchName.assetName)
+      if (this.state.searchOrder.orderID ==='') {
+        axios.get('https://treedp.doge.in.th//order/getAllOrder')
+          .then(response => {
+           // console.log(response.data)
+            this.setState({ orders: response.data })
+          })
+      }
+
+
     }
   }
   changeHandler = (e) => {
     const order = { ...this.state.searchOrder, [e.target.name]: e.target.value }
     this.setState({ order })
-    console.log(order)
+    this.setState({ searchOrder: order })
+    //console.log(order)
   }
+
   render() {
-    const {order_Id} = this.state.searchOrder
     const { orders } = this.state
-    let detailOrder = this.state.detail.map(order =>
-      <div className='detail-order'>
+    let detailOrder = this.state.detail.map(orders =>
+      <div className='detail-order' key={orders.orderId}>
         <h1 className='head-detail'>รายละเอียดคำสั่งซื้อ</h1>
-        <p key={order.orderId}><b>รหัสคำสั่งซื้อ   #</b> {order.orderId}</p>
-        <p key={order.datePurchase}><b>วันที่ : </b>   {order.datePurchase}</p>
-        <p key={order.profileId}><b>ชื่อ</b>   {order.profileId.name}</p>
-        <p key={order.addressDetail}><b>ที่อยู่</b>   {order.addressId.addressDetail}</p>
-        <div>{order.statusId.statusName}</div>
-        <p>รวมทั้งหมด {order.totalPrice} บาท</p>
+        <p key={orders.orderId}><b>รหัสคำสั่งซื้อ   #</b> {orders.orderId}</p>
+        <p key={orders.datePurchase}><b>วันที่ : </b>   {orders.datePurchase}</p>
+        <p key={orders.profileId}><b>ชื่อ</b>   {orders.profileId.name}</p>
+        <p key={orders.addressDetail}><b>ที่อยู่</b>   {orders.addressId.addressDetail}</p>
+        <div>{orders.statusId.statusName}</div>
+        <p>รวมทั้งหมด {orders.totalPrice} บาท</p>
       </div>
 
     )
@@ -138,8 +143,8 @@ class Order extends Component {
         <h1 className="head">จัดการคำสั่งซื้อ</h1>
 
         <form>
-            <input type="text" className="search" placeholder="SEARCH" name="orderID"
-            value={order_Id}
+            <input type="number" className="search" placeholder="SEARCH" name="orderID"
+            value={this.searchOrder}
             onChange={this.changeHandler}
             onKeyDown={this.searchOrderId}
             />
@@ -168,17 +173,17 @@ class Order extends Component {
         <div className='tableAllOrder'>
 
           {orders.length ?
-            orders.map(order =>
-              <div className='table-order' onClick={() => { this.openModalDetail(order.orderId) }}>
+            orders.map(orders =>
+              <div className='table-order' key={orders.orderId} onClick={() => { this.openModalDetail(orders.orderId) }}>
                 <div className='orderNumber'>
                   <p>  รหัสคำสั่งซื้อ</p>
-                  <p className='orderId' key={order.orderId}># {order.orderId}</p>
+                  <p className='orderId' key={orders.orderId}># {orders.orderId}</p>
                 </div>
                 <div className='detailOrder'>
-                  <p key={order.profileId}><b>ชื่อ</b>   {order.profileId.name}</p>
-                  <p key={order.addressDetail}><b>ที่อยู่</b>   {order.addressId.addressDetail}</p>
-                  <p key={order.datePurchase}><b>วันที่ : </b>   {order.datePurchase}</p>
-                  <div className='orderStatus'>{order.statusId.statusName}</div>
+                  <p key={orders.profileId}><b>ชื่อ</b>   {orders.profileId.name}</p>
+                  <p key={orders.addressDetail}><b>ที่อยู่</b>   {orders.addressId.addressDetail}</p>
+                  <p key={orders.datePurchase}><b>วันที่ : </b>   {orders.datePurchase}</p>
+                  <div className='orderStatus'>{orders.statusId.statusName}</div>
 
 
                 </div>

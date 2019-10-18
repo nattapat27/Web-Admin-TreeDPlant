@@ -39,7 +39,8 @@ class Product extends Component {
     this.setState({ modalDetailIsOpen: true });
     this.setState({ detail: this.state.assets.filter(assets => assets.assetId === id) })
     //setTimeout(() => { console.log(this.state.detail) }, 1000)
-    this.state.id.assetID = id
+    this.setState({ assetID: id });
+    //this.state.id.assetID = id
 
   }
 
@@ -101,10 +102,21 @@ class Product extends Component {
   }
 
   searchAsset = (e) => {
-    if (e.key === 'Enter' && this.state.searchName !== null) {
+    if (e.key === 'Enter' && this.state.searchName.assetName !=='') {
       e.preventDefault()
-      console.log(this.state.searchName.assetName)
+      //console.log(this.state.assets)
       this.setState({ assets: this.state.assets.filter(assets => assets.assetName === this.state.searchName.assetName) })
+
+    } else if (e.key === "Delete" || e.key === "Backspace") {
+      //console.log(this.state.searchName.assetName)
+      if (this.state.searchName.assetName ==='') {
+        axios.get('https://treedp.doge.in.th/asset/getAllAsset')
+          .then(response => {
+           // console.log(response.data)
+            this.setState({ assets: response.data })
+          })
+      }
+
 
     }
 
