@@ -14,7 +14,11 @@ class Order extends Component {
       detail: [],
       modalDetailOrderIsOpen: false,
       typeOrder: 'ทั้งหมด',
-      searchOrder:null,
+      searchOrder: null,
+      statusOrder:{
+        status:'',
+        orderID:''
+      }
     };
     this.openModalDetail = this.openModalDetail.bind(this);
     this.afterOpenModal = this.afterOpenModal.bind(this);
@@ -28,7 +32,7 @@ class Order extends Component {
         //this.setState({ orders: response.data })
         this.setState({ modalDetailOrderIsOpen: true });
         this.setState({ detail: this.state.orders.filter(orders => orders.orderId === id) })
-        setTimeout(() => { console.log(this.state.detail) }, 1000)
+        //setTimeout(() => { console.log(this.state.detail) }, 1000)
       })
 
 
@@ -43,7 +47,7 @@ class Order extends Component {
 
   componentDidMount() {
     Modal.setAppElement('body');
-    axios.get('https://treedp.doge.in.th//order/getAllOrder')
+    axios.get('https://treedp.doge.in.th/order/getAllOrder')
       .then(response => {
         //console.log(response.data)
         this.setState({ orders: response.data })
@@ -52,7 +56,7 @@ class Order extends Component {
   allOrder = e => {
     e.preventDefault()
     this.setState({ typeOrder: 'ทั้งหมด' })
-    axios.get('https://treedp.doge.in.th//order/getAllOrder')
+    axios.get('https://treedp.doge.in.th/order/getAllOrder')
       .then(response => {
         //console.log(response.data)
         this.setState({ orders: response.data })
@@ -85,23 +89,24 @@ class Order extends Component {
     console.log()
     axios.get('https://treedp.doge.in.th/show/status/3')
       .then(response => {
-        console.log(response.data)
+        //console.log(response.data)
         this.setState({ orders: response.data })
       })
   }
 
   searchOrderId = e => {
-    if (e.key === 'Enter' && this.state.searchOrder.orderID !=='') {
+    if (e.key === 'Enter' && this.state.searchOrder.orderID !== '') {
       e.preventDefault()
       console.log(this.state.searchOrder.orderID)
-      this.setState({ orders: this.state.orders.filter(orders => orders.orderId === this.state.searchOrder.orderID) })
+      this.setState({ orders: this.state.orders.filter(orders => orders.orderId === 800003) })
+      console.log(this.state.orders)
 
     } else if (e.key === "Delete" || e.key === "Backspace") {
       //console.log(this.state.searchName.assetName)
-      if (this.state.searchOrder.orderID ==='') {
+      if (this.state.searchOrder.orderID === '') {
         axios.get('https://treedp.doge.in.th//order/getAllOrder')
           .then(response => {
-           // console.log(response.data)
+            // console.log(response.data)
             this.setState({ orders: response.data })
           })
       }
@@ -116,6 +121,37 @@ class Order extends Component {
     //console.log(order)
   }
 
+  editStatusWaiting (id){
+    console.log(id)
+    const apiURL = 'https://treedp.doge.in.th/order/editStatus'
+    this.state.statusOrder.orderID=id
+    this.state.statusOrder.status=1
+    console.log(this.state.statusOrder)
+    axios.post(apiURL, this.state.statusOrder)
+  }
+
+  editStatusPrepare (id){
+    console.log(id)
+    const apiURL = 'https://treedp.doge.in.th/order/editStatus'
+    this.state.statusOrder.orderID=id
+    this.state.statusOrder.status=2
+    console.log(this.state.statusOrder)
+    axios.post(apiURL, this.state.statusOrder)
+  }
+
+  editStatusComplete (id){
+    console.log(id)
+    const apiURL = 'https://treedp.doge.in.th/order/editStatus'
+    //this.setState({orderID:id})
+    this.state.statusOrder.orderID=id
+    //this.setState({status:3})
+    this.state.statusOrder.status=3
+    console.log(this.state.statusOrder)
+    axios.post(apiURL, this.state.statusOrder)
+  }
+
+
+
   render() {
     const { orders } = this.state
     let detailOrder = this.state.detail.map(orders =>
@@ -125,9 +161,22 @@ class Order extends Component {
         <p key={orders.datePurchase}><b>วันที่ : </b>   {orders.datePurchase}</p>
         <p key={orders.profileId}><b>ชื่อ</b>   {orders.profileId.name}</p>
         <p key={orders.addressDetail}><b>ที่อยู่</b>   {orders.addressId.addressDetail}</p>
-        <div>{orders.statusId.statusName}</div>
-        <p>รวมทั้งหมด {orders.totalPrice} บาท</p>
+        <p>รวมทั้งหมด   {orders.totalPrice}   บาท</p>
+
+        <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdownMenu">
+            {orders.statusId.statusName}
+          </Dropdown.Toggle>
+          <Dropdown.Menu className="dropdown-status">
+            <Dropdown.Item onClick={() => { this.editStatusWaiting(orders.orderId) }} >Waiting</Dropdown.Item>
+            <Dropdown.Item onClick={() => { this.editStatusPrepare(orders.orderId) }}>Prepare</Dropdown.Item>
+            <Dropdown.Item onClick={() => { this.editStatusComplete(orders.orderId) }}>Complete</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+        
       </div>
+
 
     )
 
@@ -143,12 +192,12 @@ class Order extends Component {
         <h1 className="head">จัดการคำสั่งซื้อ</h1>
 
         <form>
-            <input type="number" className="search" placeholder="SEARCH" name="orderID"
+          <input type="number" className="search" placeholder="SEARCH" name="orderID"
             value={this.searchOrder}
             onChange={this.changeHandler}
             onKeyDown={this.searchOrderId}
-            />
-          </form>
+          />
+        </form>
 
 
         <div className="btn-process">

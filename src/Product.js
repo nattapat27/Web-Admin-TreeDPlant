@@ -102,17 +102,16 @@ class Product extends Component {
   }
 
   searchAsset = (e) => {
-    if (e.key === 'Enter' && this.state.searchName.assetName !=='') {
+    if (e.key === 'Enter' && this.state.searchName.assetName !== '') {
       e.preventDefault()
-      //console.log(this.state.assets)
       this.setState({ assets: this.state.assets.filter(assets => assets.assetName === this.state.searchName.assetName) })
-
+      console.log(this.state.assets)
     } else if (e.key === "Delete" || e.key === "Backspace") {
       //console.log(this.state.searchName.assetName)
-      if (this.state.searchName.assetName ==='') {
+      if (this.state.searchName.assetName === '') {
         axios.get('https://treedp.doge.in.th/asset/getAllAsset')
           .then(response => {
-           // console.log(response.data)
+            // console.log(response.data)
             this.setState({ assets: response.data })
           })
       }
@@ -132,7 +131,6 @@ class Product extends Component {
   render() {
     const { assets } = this.state
     let productAsset = assets.map(asset =>
-
       <div key={asset.assetId} name='id' className='tablePlant'
         onClick={() => { this.openModalDetail(asset.assetId) }}>
         <img alt={asset.asssetName}
@@ -160,7 +158,8 @@ class Product extends Component {
             </img>
             <div className="detail-table">
               <div><p>ชื่อ</p>
-                <p className='detail-field' key={detail.asssetName}>{detail.assetName}</p></div>
+                <p className='detail-field' key={detail.asssetName}
+                  >{detail.assetName}</p></div>
 
               <div><p>สูง (ซม.)</p>
                 <p className='detail-field' key={detail.height}>{detail.treeId.height}</p> </div>
@@ -200,8 +199,8 @@ class Product extends Component {
           </div>
       }
     }
-
     )
+
 
     return (
       <div>
@@ -258,7 +257,9 @@ class Product extends Component {
           onRequestClose={this.closeModal} >
           {detailAsset}
           <div className="manage-btn">
-            <button className="edit-btn"> แก้ไข </button>
+
+            <button className="edit-btn" onClick> แก้ไข </button>
+
 
             <Popup trigger={<button className="delete-btn"> ลบ </button>} modal>
               <h1 className="headAdd">ต้องการที่จะลบใช่หรือไม่</h1>
@@ -268,10 +269,8 @@ class Product extends Component {
               </div>
             </Popup>
           </div>
-
         </Modal>
-      </div >
-
+      </div>
 
 
 

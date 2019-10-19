@@ -3,6 +3,7 @@ import './Product.css'
 import axios from 'axios';
 import upload from './upload.png';
 import 'bootstrap/dist/css/bootstrap.css';
+import { Dropdown } from 'react-bootstrap';
 
 
 class ModalAdd extends Component {
@@ -12,6 +13,7 @@ class ModalAdd extends Component {
         trees: true,
         assets: false,
         file: upload,
+        typeAsset:'ต้นไม้',
         asset: {
           price: '',
           name: '',
@@ -35,13 +37,15 @@ class ModalAdd extends Component {
     assets() {
       this.setState({
         trees: false,
-        assets: true
+        assets: true,
+        typeAsset:'อุปกรณ์'
       })
     }
     trees() {
       this.setState({
         trees: true,
-        assets: false
+        assets: false,
+        typeAsset:'ต้นไม้'
       })
     }
     addTree = e => {
@@ -89,7 +93,18 @@ class ModalAdd extends Component {
               onClick={() => this.assets()}>อุปกรณ์</button>
           </div>
   
-  
+          <Dropdown>
+          <Dropdown.Toggle variant="success" id="dropdown-basic" >
+            {this.state.typeAsset}
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={() => this.trees()}>ต้นไม้</Dropdown.Item>
+            <Dropdown.Item onClick={() => this.assets()}>อุปกรณ์</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+
+
           {this.state.trees ?
             <div>
               <label className="uploadImage">

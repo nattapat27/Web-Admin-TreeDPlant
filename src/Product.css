@@ -532,12 +532,9 @@ p{
     overflow:auto;
     display: block;
 }
-.typeAsset{
-    font-size: 18px;
-    margin-left:auto;
-    margin-right:auto ;    
-    display: block;
-    overflow: auto;
+.typeAsset{ 
+    display: none;
+    visibility: hidden;
 }
 .typeAsset Button{
     border: 1px;
@@ -574,7 +571,7 @@ p{
 .formAdd input[type="number"],.formAdd input[type="text"]
 {
     position: sticky;
-    width:100px;
+    width:50%;
     height:10px;
     background-color: #DAE0D8;
     font-size: 12px;
@@ -588,10 +585,12 @@ p{
     border-radius: 8px;   
 }
 .formAdd input[type="file"]{
-    margin-top: 3%;
-    margin-bottom:2%; 
+    margin-top: 5%;
+    margin-bottom:1%; 
     font-family: 'Kanit';
-    font-size: 10px;
+    font-size: 8px;
+    width: 100%;
+    margin-left:20%;
 }
 
 .formAdd p{
@@ -599,10 +598,12 @@ p{
     color:#577863;
     position: sticky;
 }
-
+.uploadImage{
+    display: block;
+    overflow: auto;
+}
 .uploadImage img{
     overflow: auto;
-    display: block;
     width: 150px;
     height: 150px;
     margin-left: auto;
@@ -610,6 +611,7 @@ p{
     background-size: 100%;
     background-repeat: no-repeat;
     margin-bottom:5%; 
+    display: block;
 }
 .img-upload{
     display: none;
