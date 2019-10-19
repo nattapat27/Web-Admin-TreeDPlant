@@ -127,6 +127,7 @@ div{
     font-size: 16px;
     transform: translate3d(48px, 349px, 0px);
 }
+
 }
 @media only screen and (max-width: 961px) {
     div{
@@ -244,21 +245,14 @@ div{
         text-align: center;
         margin:0% 2% 3% 3%;
     }
-    .detail-order div{
-        display: inline-block;
-        overflow: auto;
-        color: #ffffff;
-        background: #577863;
-        margin-right:10%;
-        position: static;
-        text-align: center;
-        padding: 2%;
-    }
     .detail-order p{
         display:block;
         overflow: auto;
         font-size:14px ;
                
+    }.dropdown-status{
+        font-size: 16px;
+        transform: translate3d(48px, 349px, 0px);
     }
 
 }

@@ -15,6 +15,7 @@ class Order extends Component {
       modalDetailOrderIsOpen: false,
       typeOrder: 'ทั้งหมด',
       searchOrder: null,
+      status:'',
       statusOrder:{
         status:'',
         orderID:''
@@ -32,7 +33,8 @@ class Order extends Component {
         //this.setState({ orders: response.data })
         this.setState({ modalDetailOrderIsOpen: true });
         this.setState({ detail: this.state.orders.filter(orders => orders.orderId === id) })
-        //setTimeout(() => { console.log(this.state.detail) }, 1000)
+        this.setState({status:this.state.detail.map(orders =>orders.statusId.statusName) })
+        console.log(this.state.status)
       })
 
 
@@ -43,6 +45,7 @@ class Order extends Component {
 
   closeModal() {
     this.setState({ modalDetailOrderIsOpen: false });
+    window.location.reload();
   }
 
   componentDidMount() {
@@ -121,36 +124,47 @@ class Order extends Component {
     //console.log(order)
   }
 
+  
+
   editStatusWaiting (id){
-    console.log(id)
+    //console.log(id)
     const apiURL = 'https://treedp.doge.in.th/order/editStatus'
     this.state.statusOrder.orderID=id
     this.state.statusOrder.status=1
-    console.log(this.state.statusOrder)
+    //console.log(this.state.statusOrder)
     axios.post(apiURL, this.state.statusOrder)
+    .then(response=>
+     this.setState({status:'Waiting'})
+      )
   }
 
   editStatusPrepare (id){
-    console.log(id)
+    //console.log(id)
     const apiURL = 'https://treedp.doge.in.th/order/editStatus'
     this.state.statusOrder.orderID=id
     this.state.statusOrder.status=2
-    console.log(this.state.statusOrder)
+    //console.log(this.state.statusOrder)
     axios.post(apiURL, this.state.statusOrder)
+    .then(response=>
+      this.setState({status:'Prepare'})
+      )
   }
 
   editStatusComplete (id){
-    console.log(id)
+    //console.log(id)
     const apiURL = 'https://treedp.doge.in.th/order/editStatus'
     //this.setState({orderID:id})
     this.state.statusOrder.orderID=id
     //this.setState({status:3})
     this.state.statusOrder.status=3
-    console.log(this.state.statusOrder)
+    //console.log(this.state.statusOrder)
     axios.post(apiURL, this.state.statusOrder)
+    .then(response=>
+      this.setState({status:'Complete'})
+      )
   }
 
-
+  
 
   render() {
     const { orders } = this.state
@@ -164,13 +178,13 @@ class Order extends Component {
         <p>รวมทั้งหมด   {orders.totalPrice}   บาท</p>
 
         <Dropdown>
-          <Dropdown.Toggle variant="success" id="dropdownMenu">
-            {orders.statusId.statusName}
+          <Dropdown.Toggle variant="success" id="dropdownMenu" >
+          {this.state.status}
           </Dropdown.Toggle>
           <Dropdown.Menu className="dropdown-status">
-            <Dropdown.Item onClick={() => { this.editStatusWaiting(orders.orderId) }} >Waiting</Dropdown.Item>
-            <Dropdown.Item onClick={() => { this.editStatusPrepare(orders.orderId) }}>Prepare</Dropdown.Item>
-            <Dropdown.Item onClick={() => { this.editStatusComplete(orders.orderId) }}>Complete</Dropdown.Item>
+            <Dropdown.Item value="waiting" onClick={() => { this.editStatusWaiting(orders.orderId) }} >Waiting</Dropdown.Item>
+            <Dropdown.Item value="prepare" onClick={() => { this.editStatusPrepare(orders.orderId) }}>Prepare</Dropdown.Item>
+            <Dropdown.Item value="complete" onClick={() => { this.editStatusComplete(orders.orderId) }}>Complete</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 
