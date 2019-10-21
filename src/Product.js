@@ -18,11 +18,31 @@ class Product extends Component {
       modalDetailIsOpen: false,
       searchName: null,
       typeAsset: 'ทั้งหมด',
+      editAssetDetail: false,
+      disabled: true,
+      image: null,
       assets: [],
       detail: [],
       id: {
         assetID: 0,
       },
+      assetEdit: {
+        price: '',
+        name: '',
+        image: '',
+        detail: '',
+      },
+      treeEdit: {
+        name: '',
+        image: '',
+        price: '',
+        detail: '',
+        width: '',
+        height: '',
+        model: '',
+        shader: '',
+        scale: 0.1,
+      }
     };
 
     this.openModalAdd = this.openModalAdd.bind(this);
@@ -47,9 +67,12 @@ class Product extends Component {
   afterOpenModal() {
   }
 
+
   closeModal() {
-    this.setState({ modalAddIsOpen: false });
-    this.setState({ modalDetailIsOpen: false });
+    this.setState({
+      modalAddIsOpen: false,
+      modalDetailIsOpen: false
+    });
   }
   componentDidMount() {
     Modal.setAppElement('body');
@@ -126,9 +149,35 @@ class Product extends Component {
     this.setState({ searchName: name })
   }
 
+  editAsset() {
+    if (this.state.editAssetDetail === false) {
+      this.setState({ editAssetDetail: true})
+      this.setState({ disabled: !this.state.disabled })
+    } else if (this.state.editAssetDetail === true) {
+      this.setState({ editAssetDetail: false})
+      this.setState({ disabled: !this.state.disabled })
+    }
+  }
+
+  submitEditTree= e => {
+    e.preventDefault()
+    const apiURL = 'https://treedp.doge.in.th/asset/edit/tree'
+    axios.post(apiURL, this.state.treeEdit)
+      .then(response => {
+        alert("Edit already", (response.data.assetName))
+        window.location.reload();
+        this.setState({ editAssetDetail: false})
+        console.log(this.state.editAssetDetail)
+      }
+      )
+  }
 
 
   render() {
+    const { name, price, detail } = this.state.assetEdit;
+      const { tree_name, tree_image, tree_price, tree_detail,
+        width, height, model, shader } = this.state.treeEdit;
+    let detailAsset
     const { assets } = this.state
     let productAsset = assets.map(asset =>
       <div key={asset.assetId} name='id' className='tablePlant'
@@ -145,35 +194,60 @@ class Product extends Component {
       </div>
     )
 
-    let detailAsset
+
     this.state.detail.forEach(detail => {
       if (this.state.detail[0].typeId.typeId === 1) {
+        this.state.image = detail.asssetImage
         detailAsset =
           <div key={detail.asssetId} >
             <h1 className="headAdd">รายละเอียดสินค้า</h1>
             <img alt={detail.asssetImage}
               className='img-detail'
               key={detail.asssetImage}
-              src={detail.asssetImage}>
+              src={this.state.image}>
             </img>
             <div className="detail-table">
+
               <div><p>ชื่อ</p>
-                <p className='detail-field' key={detail.asssetName}
-                  >{detail.assetName}</p></div>
+                <input className='detail-field'
+                  key={detail.asssetName}
+                  disabled={(this.state.disabled) ? "disabled" : ""}
+                  defaultValue={detail.assetName}
+                />
+              </div>
 
               <div><p>สูง (ซม.)</p>
-                <p className='detail-field' key={detail.height}>{detail.treeId.height}</p> </div>
+                <input className='detail-field'
+                  key={detail.height}
+                  disabled={(this.state.disabled) ? "disabled" : ""}
+                  defaultValue={detail.treeId.height}
+                />
+              </div>
 
               <div><p>กว้าง (ซม.)</p>
-                <p className='detail-field' key={detail.width}>{detail.treeId.width}</p></div>
+                <input className='detail-field'
+                  key={detail.width}
+                  disabled={(this.state.disabled) ? "disabled" : ""}
+                  defaultValue={detail.treeId.width} />
+              </div>
 
               <div><p>ราคา (บาท)</p>
-                <p className='detail-field' key={detail.price}>{detail.price} </p></div>
+                <input className='detail-field'
+                  key={detail.price}
+                  disabled={(this.state.disabled) ? "disabled" : ""}
+                  defaultValue={detail.price} />
+              </div>
 
               <p>รายละเอียดสินค้า</p>
-              <div><p key={detail.assetDetail} className='detail-textarea'>{detail.assetDetail}  </p></div>
+              <div>
+                <textarea key={detail.assetDetail}
+                  className='detail-textarea'
+                  disabled={(this.state.disabled) ? "disabled" : ""}
+                  defaultValue={detail.assetDetail} />
+              </div>
 
             </div>
+
           </div>
 
       } else if (this.state.detail[0].typeId.typeId === 2) {
@@ -183,25 +257,60 @@ class Product extends Component {
             <img alt={detail.asssetImage}
               className='img-detail'
               key={detail.asssetImage}
-              src={detail.asssetImage}>
+              src={this.state.image}>
             </img>
             <div className="detail-table">
               <div><p>ชื่อ</p>
-                <p className='detail-field' key={detail.asssetName}>{detail.assetName}</p></div>
+                <input className='detail-field'
+                  key={detail.asssetName}
+                  disabled={(this.state.disabled) ? "disabled" : ""}
+                  defaultValue={detail.assetName}
+                />
+              </div>
 
               <div><p>ราคา (บาท)</p>
-                <p className='detail-field' key={detail.price}>{detail.price} </p></div>
+                <input className='detail-field'
+                  key={detail.price}
+                  disabled={(this.state.disabled) ? "disabled" : ""}
+                  defaultValue={detail.price} />
+              </div>
 
               <p>รายละเอียดสินค้า</p>
-              <div><p key={detail.assetDetail} className='detail-textarea'>{detail.assetDetail}  </p></div>
+              <div>
+                <textarea key={detail.assetDetail}
+                  className='detail-textarea'
+                  disabled={(this.state.disabled) ? "disabled" : ""}
+                  defaultValue={detail.assetDetail} />
+              </div>
 
             </div>
+
           </div>
       }
     }
+    
     )
 
-
+    let manageButton 
+    if(this.state.editAssetDetail===false){
+      manageButton=
+    <div className="manage-btn">
+    <Popup trigger={<button className="delete-btn"> ลบ </button>} modal>
+      <h1 className="headAdd">ต้องการที่จะลบใช่หรือไม่</h1>
+      <div className="delete-popup">
+        <button onClick={this.deleteAsset}> ใช่ </button>
+        <button onClick={this.closeModal}> ไม่ใช่ </button>
+      </div>
+    </Popup>
+    <button className="edit-btn" onClick={this.editAsset.bind(this)}>แก้ไข</button>
+  </div>
+    }else if(this.state.editAssetDetail===true){
+      manageButton =
+      <div className="manage-btn">
+      <button className="edit-btn" onClick={this.submitEdit}>บันทึก</button>
+      <button className="edit-btn" onClick={this.editAsset.bind(this)}>ยกเลิก</button>
+      </div>
+    }
     return (
       <div>
         <Header />
@@ -213,11 +322,12 @@ class Product extends Component {
         <h1 className="head">เพิ่ม-ลด สินค้า</h1>
 
         <form>
-          <input type="text" className="search" placeholder="SEARCH" name="assetName"
+          <input type="search" className="search" placeholder="SEARCH" name="assetName"
             value={this.searchName}
             onChange={this.changeHandler}
             onKeyDown={this.searchAsset}
           />
+
         </form>
 
 
@@ -256,19 +366,7 @@ class Product extends Component {
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal} >
           {detailAsset}
-          <div className="manage-btn">
-
-            <button className="edit-btn" onClick> แก้ไข </button>
-
-
-            <Popup trigger={<button className="delete-btn"> ลบ </button>} modal>
-              <h1 className="headAdd">ต้องการที่จะลบใช่หรือไม่</h1>
-              <div className="delete-popup">
-                <button onClick={this.deleteAsset}> ใช่ </button>
-                <button onClick={this.closeModal}> ไม่ใช่ </button>
-              </div>
-            </Popup>
-          </div>
+          {manageButton}
         </Modal>
       </div>
 

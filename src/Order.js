@@ -206,7 +206,7 @@ class Order extends Component {
         <h1 className="head">จัดการคำสั่งซื้อ</h1>
 
         <form>
-          <input type="number" className="search" placeholder="SEARCH" name="orderID"
+          <input type="search" className="search" placeholder="SEARCH" name="orderID"
             value={this.searchOrder}
             onChange={this.changeHandler}
             onKeyDown={this.searchOrderId}

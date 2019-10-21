@@ -220,13 +220,20 @@ p{
     transition-duration: 0.4s;
 }
 .manage-btn{
-    margin-left:auto;
-    margin-right:auto ;    
-    display: block;
-    overflow: auto;
-    transition-duration: 0.2s;
-    display: inline;
-    
+    text-align: center;
+}
+.manage-btn button{
+    margin-left:3%;
+    overflow:auto;
+    display:line;
+    font-family: 'Kanit';
+    font-size: 16px;
+    width: 20%;
+    color: white;
+    background-color: #577863;
+    border-radius:10px;
+    border: none;
+    height: 50px;
 }
 .formAdd {  
     position:static;
@@ -321,9 +328,8 @@ p{
     border-radius:10px;
     border: none;
     height: 50px;
-
 }
-.save:hover{
+.save:hover,.manage-btn button:hover{
     background-color: #DAE0D8;
     color: #577863;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
@@ -385,7 +391,7 @@ p{
         height: 75px;
         transition-duration: 0.4s;
 }
-.search{
+    .search{
         position: static;
         width: 70%;
         height: 15%;
@@ -406,11 +412,11 @@ p{
         border-width: 0 0 0.1px;
         border-color: #577863;
 }
-.btn-type{
+    .btn-type{
     visibility: hidden;
     display: none;
 }
-#dropdown-basic{
+    #dropdown-basic{
     margin-bottom: 4%;
     margin-top: 4%;
     margin-left:auto;
@@ -422,7 +428,7 @@ p{
     color: #ffffff;
     font-size: 16px;
     width: 70%;
-}
+    }
 .dropdown-item,.dropdown-menu.show,.dropdown-item:hover{
     font-size: 16px;
     width: 70%;
@@ -551,12 +557,20 @@ p{
     margin-bottom:5% ;
 }
 .manage-btn{
-    margin-left:auto;
-    margin-right:auto ;    
-    display: block;
-    overflow: auto;
-    transition-duration: 0.2s;
-    display: inline;
+    text-align: center;
+}
+.manage-btn button{
+    margin-left:3%;
+    overflow:auto;
+    display:inline-block;
+    font-family: 'Kanit';
+    font-size: 16px;
+    width: 30%;
+    color: white;
+    background-color: #577863;
+    border-radius:10px;
+    border: none;
+    height: 40px;
 }
 
 .formAdd {  
@@ -656,7 +670,7 @@ p{
     height: 30px;
 
 }
-.save:hover{
+.save:hover,.manage-btn button:hover{
     background-color: #DAE0D8;
     color: #577863;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);

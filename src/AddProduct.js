@@ -73,7 +73,6 @@ class ModalAdd extends Component {
       const tree = { ...this.state.tree, [e.target.name]: e.target.value }
       console.log(asset)
       this.setState({ asset })
-      
       this.setState({ tree })
       
     }
