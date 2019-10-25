@@ -52,7 +52,7 @@ class Order extends Component {
     Modal.setAppElement('body');
     axios.get('https://treedp.doge.in.th/order/getAllOrder')
       .then(response => {
-        //console.log(response.data)
+        console.log(response.data)
         this.setState({ orders: response.data })
       })
   }
@@ -101,11 +101,9 @@ class Order extends Component {
     if (e.key === 'Enter' && this.state.searchOrder.orderID !== '') {
       e.preventDefault()
       console.log(this.state.searchOrder.orderID)
-      this.setState({ orders: this.state.orders.filter(orders => orders.orderId === 800003) })
-      console.log(this.state.orders)
+      this.setState({ orders: this.state.orders.filter(orders => orders.orderId ===this.state.searchOrder.orderID) })
 
     } else if (e.key === "Delete" || e.key === "Backspace") {
-      //console.log(this.state.searchName.assetName)
       if (this.state.searchOrder.orderID === '') {
         axios.get('https://treedp.doge.in.th//order/getAllOrder')
           .then(response => {

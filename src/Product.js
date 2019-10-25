@@ -27,12 +27,14 @@ class Product extends Component {
         assetID: 0,
       },
       assetEdit: {
+        assetId:'',
         price: '',
         name: '',
         image: '',
         detail: '',
       },
       treeEdit: {
+        assetId:'',
         name: '',
         image: '',
         price: '',
@@ -56,12 +58,10 @@ class Product extends Component {
   }
 
   openModalDetail(id) {
-    this.setState({ modalDetailIsOpen: true });
+    this.setState({ modalDetailIsOpen: true, editAssetDetail: false, disabled: true });
     this.setState({ detail: this.state.assets.filter(assets => assets.assetId === id) })
-    //setTimeout(() => { console.log(this.state.detail) }, 1000)
-    this.setState({ assetID: id });
-    //this.state.id.assetID = id
-
+    setTimeout(() => { console.log(this.state.detail[0]) }, 1000)
+    this.state.id.assetID = id
   }
 
   afterOpenModal() {
@@ -71,14 +71,14 @@ class Product extends Component {
   closeModal() {
     this.setState({
       modalAddIsOpen: false,
-      modalDetailIsOpen: false
+      modalDetailIsOpen: false,
+
     });
   }
   componentDidMount() {
     Modal.setAppElement('body');
     axios.get('https://treedp.doge.in.th/asset/getAllAsset')
       .then(response => {
-        //console.log(response.data)
         this.setState({ assets: response.data })
       })
   }
@@ -87,7 +87,6 @@ class Product extends Component {
     console.log()
     axios.get('https://treedp.doge.in.th/asset/getAllAsset')
       .then(response => {
-        //console.log(response.data)
         this.setState({ assets: response.data })
       })
   }
@@ -97,7 +96,6 @@ class Product extends Component {
     console.log()
     axios.get('https://treedp.doge.in.th/asset/getAllAsset/tree')
       .then(response => {
-        //console.log(response.data)
         this.setState({ assets: response.data })
       })
   }
@@ -106,7 +104,6 @@ class Product extends Component {
     this.setState({ typeAsset: 'อุปกรณ์' })
     axios.get('https://treedp.doge.in.th/asset/getTypeAsset')
       .then(response => {
-        //console.log(response.data)
         this.setState({ assets: response.data })
 
       })
@@ -128,55 +125,78 @@ class Product extends Component {
     if (e.key === 'Enter' && this.state.searchName.assetName !== '') {
       e.preventDefault()
       this.setState({ assets: this.state.assets.filter(assets => assets.assetName === this.state.searchName.assetName) })
-      console.log(this.state.assets)
     } else if (e.key === "Delete" || e.key === "Backspace") {
-      //console.log(this.state.searchName.assetName)
       if (this.state.searchName.assetName === '') {
         axios.get('https://treedp.doge.in.th/asset/getAllAsset')
           .then(response => {
-            // console.log(response.data)
             this.setState({ assets: response.data })
           })
       }
-
-
     }
-
   }
   changeHandler = (e) => {
     const name = { ...this.state.searchName, [e.target.name]: e.target.value }
-    this.setState({ name })
     this.setState({ searchName: name })
   }
 
-  editAsset() {
-    if (this.state.editAssetDetail === false) {
-      this.setState({ editAssetDetail: true})
-      this.setState({ disabled: !this.state.disabled })
-    } else if (this.state.editAssetDetail === true) {
-      this.setState({ editAssetDetail: false})
-      this.setState({ disabled: !this.state.disabled })
+  changeHandlerEdit = (e) => {
+    if (this.state.detail[0].treeId === null) {
+      const edit = { ...this.state.detail[0], [e.target.name]: e.target.value }
+      this.setState({ assetEdit: edit })
+      console.log(this.state.assetEdit)
+    } else if (this.state.detail[0].treeId != null) {
+      const edit = { ...this.state.treeEdit, [e.target.name]: e.target.value }
+      this.setState({ treeEdit: edit })
+      console.log(this.state.treeEdit)
     }
   }
 
-  submitEditTree= e => {
+  editAsset() {
+    this.setState({ editAssetDetail: true, disabled: false })
+    //asset
+    if (this.state.detail[0].treeId === null) {
+      this.state.assetEdit.assetId = this.state.detail[0].assetId
+      this.state.assetEdit.name = this.state.detail[0].assetName
+      this.state.assetEdit.image = this.state.detail[0].asssetImage
+      this.state.assetEdit.price = this.state.detail[0].price
+      this.state.assetEdit.detail = this.state.detail[0].assetDetail
+    } else if (this.state.detail[0].treeId != null) {
+      this.state.treeEdit.assetId = this.state.detail[0].assetId
+      this.state.treeEdit.name = this.state.detail[0].assetName
+      this.state.treeEdit.image = this.state.detail[0].asssetImage
+      this.state.treeEdit.price = this.state.detail[0].price
+      this.state.treeEdit.detail = this.state.detail[0].assetDetail
+      this.state.treeEdit.width = this.state.detail[0].treeId.width
+      this.state.treeEdit.height = this.state.detail[0].treeId.height
+      this.state.treeEdit.model = this.state.detail[0].treeId.model
+      this.state.treeEdit.shader = this.state.detail[0].treeId.shader
+    }
+  }
+
+  submitEdit = e => {
     e.preventDefault()
+    this.setState({ editAssetDetail: false, disabled: true })
+    if (this.state.detail[0].treeId === null) {
+      const apiURL = 'https://treedp.doge.in.th/asset/edit'
+      axios.post(apiURL, this.state.assetEdit)
+        .then(response => {
+          alert("Edit already", this.state.assetEdit.name)
+          window.location.reload();
+        }
+        )
+    }else if(this.state.detail[0].treeId != null){
     const apiURL = 'https://treedp.doge.in.th/asset/edit/tree'
     axios.post(apiURL, this.state.treeEdit)
       .then(response => {
-        alert("Edit already", (response.data.assetName))
+        alert("Edit already", this.state.treeEdit.name)
         window.location.reload();
-        this.setState({ editAssetDetail: false})
-        console.log(this.state.editAssetDetail)
       }
       )
+    }
   }
 
 
   render() {
-    const { name, price, detail } = this.state.assetEdit;
-      const { tree_name, tree_image, tree_price, tree_detail,
-        width, height, model, shader } = this.state.treeEdit;
     let detailAsset
     const { assets } = this.state
     let productAsset = assets.map(asset =>
@@ -202,48 +222,60 @@ class Product extends Component {
           <div key={detail.asssetId} >
             <h1 className="headAdd">รายละเอียดสินค้า</h1>
             <img alt={detail.asssetImage}
+              name='image'
               className='img-detail'
               key={detail.asssetImage}
-              src={this.state.image}>
+              src={this.state.image}
+              onChange={this.changeHandlerEdit}>
             </img>
             <div className="detail-table">
 
               <div><p>ชื่อ</p>
                 <input className='detail-field'
+                  name='name'
                   key={detail.asssetName}
                   disabled={(this.state.disabled) ? "disabled" : ""}
                   defaultValue={detail.assetName}
+                  onChange={this.changeHandlerEdit}
                 />
               </div>
 
               <div><p>สูง (ซม.)</p>
                 <input className='detail-field'
+                  name='height'
                   key={detail.height}
                   disabled={(this.state.disabled) ? "disabled" : ""}
                   defaultValue={detail.treeId.height}
+                  onChange={this.changeHandlerEdit}
                 />
               </div>
 
               <div><p>กว้าง (ซม.)</p>
                 <input className='detail-field'
+                  name='width'
                   key={detail.width}
                   disabled={(this.state.disabled) ? "disabled" : ""}
-                  defaultValue={detail.treeId.width} />
+                  defaultValue={detail.treeId.width}
+                  onChange={this.changeHandlerEdit} />
               </div>
 
               <div><p>ราคา (บาท)</p>
                 <input className='detail-field'
+                  name='price'
                   key={detail.price}
                   disabled={(this.state.disabled) ? "disabled" : ""}
-                  defaultValue={detail.price} />
+                  defaultValue={detail.price}
+                  onChange={this.changeHandlerEdit} />
               </div>
 
               <p>รายละเอียดสินค้า</p>
               <div>
                 <textarea key={detail.assetDetail}
+                  name='detail'
                   className='detail-textarea'
                   disabled={(this.state.disabled) ? "disabled" : ""}
-                  defaultValue={detail.assetDetail} />
+                  defaultValue={detail.assetDetail}
+                  onChange={this.changeHandlerEdit} />
               </div>
 
             </div>
@@ -251,36 +283,48 @@ class Product extends Component {
           </div>
 
       } else if (this.state.detail[0].typeId.typeId === 2) {
+        this.state.image = detail.asssetImage
         detailAsset =
           <div key={detail.asssetId} >
             <h1 className="headAdd">รายละเอียดสินค้า</h1>
             <img alt={detail.asssetImage}
+              name='image'
               className='img-detail'
               key={detail.asssetImage}
-              src={this.state.image}>
+              src={this.state.image}
+              onChange={this.changeHandlerEdit}>
             </img>
             <div className="detail-table">
               <div><p>ชื่อ</p>
                 <input className='detail-field'
+
+                  name='name'
                   key={detail.asssetName}
                   disabled={(this.state.disabled) ? "disabled" : ""}
                   defaultValue={detail.assetName}
+                  onChange={this.changeHandlerEdit}
                 />
               </div>
 
               <div><p>ราคา (บาท)</p>
                 <input className='detail-field'
+                  name='price'
                   key={detail.price}
                   disabled={(this.state.disabled) ? "disabled" : ""}
-                  defaultValue={detail.price} />
+                  defaultValue={detail.price}
+                  onChange={this.changeHandlerEdit}
+                />
               </div>
 
               <p>รายละเอียดสินค้า</p>
               <div>
                 <textarea key={detail.assetDetail}
+                  name='detail'
                   className='detail-textarea'
                   disabled={(this.state.disabled) ? "disabled" : ""}
-                  defaultValue={detail.assetDetail} />
+                  defaultValue={detail.assetDetail}
+                  onChange={this.changeHandlerEdit}
+                />
               </div>
 
             </div>
@@ -288,28 +332,27 @@ class Product extends Component {
           </div>
       }
     }
-    
+
     )
 
-    let manageButton 
-    if(this.state.editAssetDetail===false){
-      manageButton=
-    <div className="manage-btn">
-    <Popup trigger={<button className="delete-btn"> ลบ </button>} modal>
-      <h1 className="headAdd">ต้องการที่จะลบใช่หรือไม่</h1>
-      <div className="delete-popup">
-        <button onClick={this.deleteAsset}> ใช่ </button>
-        <button onClick={this.closeModal}> ไม่ใช่ </button>
-      </div>
-    </Popup>
-    <button className="edit-btn" onClick={this.editAsset.bind(this)}>แก้ไข</button>
-  </div>
-    }else if(this.state.editAssetDetail===true){
+    let manageButton
+    if (this.state.editAssetDetail === false) {
       manageButton =
-      <div className="manage-btn">
-      <button className="edit-btn" onClick={this.submitEdit}>บันทึก</button>
-      <button className="edit-btn" onClick={this.editAsset.bind(this)}>ยกเลิก</button>
-      </div>
+        <div className="manage-btn">
+          <Popup trigger={<button className="delete-btn"> ลบ </button>} modal>
+            <h1 className="headAdd">ต้องการที่จะลบใช่หรือไม่</h1>
+            <div className="delete-popup">
+              <button onClick={this.deleteAsset}> ใช่ </button>
+              <button onClick={this.closeModal}> ไม่ใช่ </button>
+            </div>
+          </Popup>
+          <button className="edit-btn" onClick={this.editAsset.bind(this)}>แก้ไข</button>
+        </div>
+    } else if (this.state.editAssetDetail === true) {
+      manageButton =
+        <div className="manage-btn">
+          <button className="edit-btn" onClick={this.submitEdit}>บันทึก</button>
+        </div>
     }
     return (
       <div>
