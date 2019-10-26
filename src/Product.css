@@ -67,7 +67,7 @@ p{
     
     
 }
-.btn-type Button:hover,.btn-type Button:link,.btn-type Button.active{
+.btn-type Button:hover,.btn-type Button:link,.btn-type Button:focus{
     color: #ffffff;
     background-color: #de425b;
     cursor: pointer;

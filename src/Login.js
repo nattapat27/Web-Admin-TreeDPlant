@@ -3,17 +3,19 @@ import logo from './logo-white.png';
 import './Login.css'
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
-//import Modal from 'react-modal';
+import Product from './Product';
 
 
 
 
 class Login extends Component {
     constructor(props) {
-        super(props)
+        super(props);
+
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            login:false
         }
     }
     changeHandler = (e) => {
@@ -25,13 +27,16 @@ class Login extends Component {
         e.preventDefault()
         //console.log(this.state)
         const apiURL = 'https://treedp.doge.in.th/admin/login'
-        // const apiURL = 'http://localhost:8080/admin/login'
         axios.post(apiURL, this.state)
             .then(response => {
                 if (response.data.email != null) {
+                    this.setState({login:true})
+                    //console.log(response.data)
                     this.props.history.push('/product')
-                } else {
+                } else if((response.data.email = null)){
                     alert("Incorrect Email or Password")
+                }else if(this.state.login===false){
+                    this.props.history.push('/')
                 }
 
             })
@@ -44,6 +49,7 @@ class Login extends Component {
     }
     render() {
         const { email, password } = this.state
+        
         return (
             <div className="bg">
                 <img src={logo} className="logoLogin" alt="logo" />

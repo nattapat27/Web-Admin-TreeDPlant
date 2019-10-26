@@ -7,12 +7,14 @@ import axios from 'axios';
 import Popup from "reactjs-popup";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Dropdown } from 'react-bootstrap';
+import Login from './Login';
 
 
 
 class Product extends Component {
   constructor(props) {
     super(props);
+    
     this.state = {
       modalAddIsOpen: false,
       modalDetailIsOpen: false,
@@ -76,27 +78,28 @@ class Product extends Component {
     });
   }
   componentDidMount() {
+    console.log(this.props.login)
     Modal.setAppElement('body');
     axios.get('https://treedp.doge.in.th/asset/getAllAsset')
       .then(response => {
-        this.setState({ assets: response.data })
+        this.setState({ assets: response.data.filter(assets => assets.status === true) })
       })
-  }
+      }
+     
+  
   allProduct = e => {
     e.preventDefault()
-    console.log()
     axios.get('https://treedp.doge.in.th/asset/getAllAsset')
       .then(response => {
-        this.setState({ assets: response.data })
+        this.setState({ assets: response.data.filter(assets => assets.status === true)})
       })
   }
   showTree = e => {
     e.preventDefault()
     this.setState({ typeAsset: 'ต้นไม้' })
-    console.log()
     axios.get('https://treedp.doge.in.th/asset/getAllAsset/tree')
       .then(response => {
-        this.setState({ assets: response.data })
+        this.setState({ assets: response.data.filter(assets => assets.status === true) })
       })
   }
   showAsset = e => {
@@ -104,7 +107,7 @@ class Product extends Component {
     this.setState({ typeAsset: 'อุปกรณ์' })
     axios.get('https://treedp.doge.in.th/asset/getTypeAsset')
       .then(response => {
-        this.setState({ assets: response.data })
+        this.setState({ assets: response.data.filter(assets => assets.status === true) })
 
       })
   }
@@ -115,7 +118,7 @@ class Product extends Component {
     this.setState({ modalDetailIsOpen: false });
     axios.post(apiURL, this.state.id)
       .then(response => {
-        alert("Delete", (response.data.assetName))
+        alert("Delete"+(response.data.assetName))
         window.location.reload();
       }
       )
@@ -137,6 +140,7 @@ class Product extends Component {
   changeHandler = (e) => {
     const name = { ...this.state.searchName, [e.target.name]: e.target.value }
     this.setState({ searchName: name })
+    console.log(name)
   }
 
   changeHandlerEdit = (e) => {

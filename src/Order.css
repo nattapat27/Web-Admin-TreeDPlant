@@ -13,6 +13,7 @@ div{
     color:#577863;
     text-align: center;
     position:static;
+    margin-bottom: 3%;
 }
 .search{
     position: static;
@@ -33,6 +34,26 @@ div{
     margin-left: auto;
     border-style: none;
     border-radius: 25px;
+}
+.excel{
+    position: fixed;
+    overflow: auto;
+    bottom: 5%;
+    right:5%;
+    background:url(excel.png);
+    background-size: 100%;
+    color: white;
+    width: 90px;
+    height: 90px;
+    border: none;
+    box-shadow:  rgba(0,0,0,0.24), 0 5px 5px 0 rgba(0,0,0,0.19);
+    cursor: pointer;
+}
+.excel:hover{
+    box-shadow:  rgba(0,0,0,0.24), 0 15px 15px 0 rgba(0,0,0,0.19);
+    width: 95px;
+    height: 95px;
+    transition-duration: 0.4s;
 }
 #dropdown-basic{
     visibility: hidden;
@@ -55,13 +76,12 @@ div{
     margin: 0.5%;
     
 }
-.btn-process Button:hover,.btn-process Button:link,.btn-process Button:visited{
+.btn-process Button:hover,.btn-process Button:focus{
     color: #ffffff;
     background-color: #de425b;
     transition-duration: 0.4s;
     cursor: pointer;
 }
-
 .btn-process{
     display: block;
     text-align: center;
@@ -96,13 +116,13 @@ div{
 }
 .orderId{
     float: right;
+    margin-right: 10%;
 }
 .detailOrder p{
     color:#383939;
     font-weight:lighter;
     opacity: 0.75;
     margin: 4%;
-
 }
 .detailOrder {
     padding: 3%;
@@ -122,10 +142,22 @@ div{
 .detail-order p{
     display:block;
     overflow: auto;
+    color: #383939;
+    font-weight: lighter;
+    margin-left: 5%;
+    font-size:18px ; 
+}
+.detail-order p b{
+    margin-right: 3%;
 }
 .dropdown-status{
     font-size: 16px;
     transform: translate3d(48px, 349px, 0px);
+    float: right;
+}
+.btn-success{
+    float: right;
+    margin-right: 10%;
 }
 
 }

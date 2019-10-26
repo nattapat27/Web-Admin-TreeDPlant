@@ -15,10 +15,10 @@ class Order extends Component {
       modalDetailOrderIsOpen: false,
       typeOrder: 'ทั้งหมด',
       searchOrder: null,
-      status:'',
-      statusOrder:{
-        status:'',
-        orderID:''
+      status: '',
+      statusOrder: {
+        status: '',
+        orderID: ''
       }
     };
     this.openModalDetail = this.openModalDetail.bind(this);
@@ -33,8 +33,8 @@ class Order extends Component {
         //this.setState({ orders: response.data })
         this.setState({ modalDetailOrderIsOpen: true });
         this.setState({ detail: this.state.orders.filter(orders => orders.orderId === id) })
-        this.setState({status:this.state.detail.map(orders =>orders.statusId.statusName) })
-        console.log(this.state.status)
+        this.setState({ status: this.state.detail.map(orders => orders.statusId.statusName) })
+        console.log(this.state.detail)
       })
 
 
@@ -61,7 +61,7 @@ class Order extends Component {
     this.setState({ typeOrder: 'ทั้งหมด' })
     axios.get('https://treedp.doge.in.th/order/getAllOrder')
       .then(response => {
-        //console.log(response.data)
+        console.log(response.data)
         this.setState({ orders: response.data })
       })
   }
@@ -101,7 +101,7 @@ class Order extends Component {
     if (e.key === 'Enter' && this.state.searchOrder.orderID !== '') {
       e.preventDefault()
       console.log(this.state.searchOrder.orderID)
-      this.setState({ orders: this.state.orders.filter(orders => orders.orderId ===this.state.searchOrder.orderID) })
+      this.setState({ orders: this.state.orders.filter(orders => orders.orderId === this.state.searchOrder.orderID) })
 
     } else if (e.key === "Delete" || e.key === "Backspace") {
       if (this.state.searchOrder.orderID === '') {
@@ -122,62 +122,60 @@ class Order extends Component {
     //console.log(order)
   }
 
-  
 
-  editStatusWaiting (id){
+
+  editStatusWaiting(id) {
     //console.log(id)
     const apiURL = 'https://treedp.doge.in.th/order/editStatus'
-    this.state.statusOrder.orderID=id
-    this.state.statusOrder.status=1
+    this.state.statusOrder.orderID = id
+    this.state.statusOrder.status = 1
     //console.log(this.state.statusOrder)
     axios.post(apiURL, this.state.statusOrder)
-    .then(response=>
-     this.setState({status:'Waiting'})
+      .then(response =>
+        this.setState({ status: 'Waiting' })
       )
   }
 
-  editStatusPrepare (id){
+  editStatusPrepare(id) {
     //console.log(id)
     const apiURL = 'https://treedp.doge.in.th/order/editStatus'
-    this.state.statusOrder.orderID=id
-    this.state.statusOrder.status=2
+    this.state.statusOrder.orderID = id
+    this.state.statusOrder.status = 2
     //console.log(this.state.statusOrder)
     axios.post(apiURL, this.state.statusOrder)
-    .then(response=>
-      this.setState({status:'Prepare'})
+      .then(response =>
+        this.setState({ status: 'Prepare' })
       )
   }
 
-  editStatusComplete (id){
+  editStatusComplete(id) {
     //console.log(id)
     const apiURL = 'https://treedp.doge.in.th/order/editStatus'
     //this.setState({orderID:id})
-    this.state.statusOrder.orderID=id
+    this.state.statusOrder.orderID = id
     //this.setState({status:3})
-    this.state.statusOrder.status=3
+    this.state.statusOrder.status = 3
     //console.log(this.state.statusOrder)
     axios.post(apiURL, this.state.statusOrder)
-    .then(response=>
-      this.setState({status:'Complete'})
+      .then(response =>
+        this.setState({ status: 'Complete' })
       )
   }
 
-  
+
 
   render() {
     const { orders } = this.state
     let detailOrder = this.state.detail.map(orders =>
       <div className='detail-order' key={orders.orderId}>
         <h1 className='head-detail'>รายละเอียดคำสั่งซื้อ</h1>
-        <p key={orders.orderId}><b>รหัสคำสั่งซื้อ   #</b> {orders.orderId}</p>
-        <p key={orders.datePurchase}><b>วันที่ : </b>   {orders.datePurchase}</p>
-        <p key={orders.profileId}><b>ชื่อ</b>   {orders.profileId.name}</p>
-        <p key={orders.addressDetail}><b>ที่อยู่</b>   {orders.addressId.addressDetail}</p>
-        <p>รวมทั้งหมด   {orders.totalPrice}   บาท</p>
-
+        <p key={orders.datePurchase} className='orderId'>DATE :    {orders.datePurchase}</p>
+        <p key={orders.orderId}><b>รหัสคำสั่งซื้อ     #</b> {orders.orderId}</p>
+        <p key={orders.profileId}><b>ชื่อ</b>{orders.profileId.name}</p>
+        
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdownMenu" >
-          {this.state.status}
+            {this.state.status}
           </Dropdown.Toggle>
           <Dropdown.Menu className="dropdown-status">
             <Dropdown.Item value="waiting" onClick={() => { this.editStatusWaiting(orders.orderId) }} >Waiting</Dropdown.Item>
@@ -186,7 +184,14 @@ class Order extends Component {
           </Dropdown.Menu>
         </Dropdown>
 
+        <p key={orders.addressDetail}><b>ที่อยู่ในการจัดส่ง</b>   {orders.addressId.addressDetail}</p>
+        <br></br>
+        <p><b>รายการสินค้า</b></p>
+        <p>รวมทั้งหมด   {orders.totalPrice}   บาท</p>
+
         
+
+
       </div>
 
 
@@ -194,6 +199,8 @@ class Order extends Component {
 
     return (
       <div>
+
+        <button className="excel"  ></button>
         <Modal
           isOpen={this.state.modalDetailOrderIsOpen}
           onAfterOpen={this.afterOpenModal}
@@ -231,7 +238,8 @@ class Order extends Component {
           </Dropdown.Menu>
         </Dropdown>
 
-        <div className='tableAllOrder'>
+        { //เปลี่ยนข้อมูลใหม่
+          /* <div className='tableAllOrder'>
 
           {orders.length ?
             orders.map(orders =>
@@ -252,7 +260,7 @@ class Order extends Component {
             ) : null
           }
 
-        </div>
+        </div> */}
 
       </div>
 
