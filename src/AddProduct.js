@@ -51,41 +51,46 @@ class ModalAdd extends Component {
       typeAsset: 'ต้นไม้'
     })
   }
-  addTree = e => {
-    e.preventDefault()
-    const  img = this.state.image
-    storage.ref("/images").child(img.name).put(img)
-    .then(snapshot=>{
-      snapshot.ref.getDownloadURL().then(
-        downloadURL=>{
-          console.log(downloadURL);
-        }
-      )
-    },
-       (error) => {
-         //error
-         console.log(error);
-       });
 
-    
-    // const apiURL = 'https://treedp.doge.in.th/asset/save/tree'
-    //axios.post(apiURL, this.state.tree)
-    // .then(response => {
-    // alert(response.data.assetName)
-    //window.location.reload();
-    //}
-    //)
-  }
   addAsset = e => {
     e.preventDefault()
-    const apiURL = 'https://treedp.doge.in.th/asset/save'
-    axios.post(apiURL, this.state.asset)
-      .then(response => {
-        alert(response.data.assetName)
-        window.location.reload();
-      }
-      )
+    const img = this.state.image
+    const upload = storage.ref("/images").child(img.name).put(img)
+    upload.then(snapshot => {
+      return snapshot.ref.getDownloadURL()
+        .then(
+          downloadURL => {
+            var url = downloadURL
+            this.setState({ url, url: url })
+          }
+        )
+    }, (error) => {
+    });
+    
+    if (this.state.trees === true) {
+      this.state.tree.image = this.state.url
+       const apiURL = 'https://treedp.doge.in.th/asset/save/tree'
+       axios.post(apiURL, this.state.tree)
+         .then(response => {
+           alert(response.data.assetName)
+           window.location.reload();
+         }).catch(error=>{
+           alert("Fill up")
+         })    
+    } else if (this.state.assets === true) {
+      this.state.asset.image = this.state.url
+      const apiURL = 'https://treedp.doge.in.th/asset/save'
+      axios.post(apiURL, this.state.asset)
+        .then(response => {
+          alert(response.data.assetName)
+          window.location.reload();
+        }).catch(error => {
+          alert("Fill up")
+        })
+    }
   }
+
+
   changeHandler = (e) => {
     const asset = { ...this.state.asset, [e.target.name]: e.target.value }
     const tree = { ...this.state.tree, [e.target.name]: e.target.value }
@@ -96,7 +101,7 @@ class ModalAdd extends Component {
     //console.log(e.target.files[0]) 
     const img = e.target.files[0]
     this.state.image = img
-    console.log( this.state.image) 
+    console.log(this.state.image)
   }
   render() {
     const { name, price, detail } = this.state.asset;
@@ -187,7 +192,7 @@ class ModalAdd extends Component {
                 onChange={this.changeHandler}></textarea>
             </form>
             <br></br>
-            <button className="save" onClick={this.addTree}>บันทึก</button>
+            <button className="save" onClick={this.addAsset}>บันทึก</button>
           </div>
           : null
         }
@@ -201,7 +206,7 @@ class ModalAdd extends Component {
               <input className="img-upload" type="file"
                 name="image"
                 value={tree_image}
-                onChange={this.changeHandler}
+                onChange={this.changeHandlerImage}
 
               />
             </label>
