@@ -5,6 +5,8 @@ import Modal from 'react-modal';
 import { Button, Dropdown } from 'react-bootstrap';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
+import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+
 
 class Order extends Component {
   constructor(props) {
@@ -12,6 +14,7 @@ class Order extends Component {
     this.state = {
       orders: [],
       detail: [],
+      asset: [],
       modalDetailOrderIsOpen: false,
       typeOrder: 'ทั้งหมด',
       searchOrder: null,
@@ -27,14 +30,12 @@ class Order extends Component {
   }
 
   openModalDetail(id) {
-    axios.get('https://treedp.doge.in.th/show/status/' + id)
+    axios.get('https://treedp.doge.in.th/order/getAllOrder')
       .then(response => {
-        //console.log(response.data)
-        //this.setState({ orders: response.data })
         this.setState({ modalDetailOrderIsOpen: true });
-        this.setState({ detail: this.state.orders.filter(orders => orders.orderId === id) })
-        this.setState({ status: this.state.detail.map(orders => orders.statusId.statusName) })
-        console.log(this.state.detail)
+        this.setState({ detail: response.data.filter(cart => cart.orderId === id) });
+        this.setState({ asset: this.state.detail[0].cartCollection })
+        this.setState({ status: this.state.detail.map(orders => orders.statusId.statusName) });
       })
 
 
@@ -52,7 +53,6 @@ class Order extends Component {
     Modal.setAppElement('body');
     axios.get('https://treedp.doge.in.th/order/getAllOrder')
       .then(response => {
-        console.log(response.data)
         this.setState({ orders: response.data })
       })
   }
@@ -69,31 +69,29 @@ class Order extends Component {
   waiting = e => {
     e.preventDefault()
     this.setState({ typeOrder: 'รอดำเนินการ' })
-    axios.get('https://treedp.doge.in.th/show/status/1')
+    axios.get('https://treedp.doge.in.th/order/getAllOrder')
       .then(response => {
-        //console.log(response.data)
-        this.setState({ orders: response.data })
+        //console.log(response.data.filter(status=>status.statusId.statusName==='Waiting'))
+        this.setState({ orders: response.data.filter(status=>status.statusId.statusName==='รอดำเนินการ') })
       })
   }
 
   prepare = e => {
     e.preventDefault()
     this.setState({ typeOrder: 'เตรียมจัดส่ง' })
-    axios.get('https://treedp.doge.in.th/show/status/2')
+    axios.get('https://treedp.doge.in.th/order/getAllOrder')
       .then(response => {
         //console.log(response.data)
-        this.setState({ orders: response.data })
+        this.setState({ orders: response.data.filter(status=>status.statusId.statusName==='เตรียมจัดส่ง') })
       })
   }
 
   complete = e => {
     e.preventDefault()
     this.setState({ typeOrder: 'เสร็จสมบูรณ์' })
-    console.log()
-    axios.get('https://treedp.doge.in.th/show/status/3')
+    axios.get('https://treedp.doge.in.th/order/getAllOrder')
       .then(response => {
-        //console.log(response.data)
-        this.setState({ orders: response.data })
+        this.setState({ orders: response.data.filter(status=>status.statusId.statusName==='เสร็จสมบูรณ์') })
       })
   }
 
@@ -162,35 +160,55 @@ class Order extends Component {
       )
   }
 
+  exportExcel() {
+    console.log(this.state.orders)
+  }
 
 
   render() {
     const { orders } = this.state
-    let detailOrder = this.state.detail.map(orders =>
-      <div className='detail-order' key={orders.orderId}>
+    let asset = this.state.asset.map(assets =>
+      <div className='asset-detail'>
+        <img src={assets.assetId.asssetImage}
+          alt={assets.assetId.assetImage}
+          className='img-order'
+        ></img>
+        <div className="detailOfAsset">
+          <p><b>{assets.assetId.assetName}</b></p>
+          <p>ราคา {assets.assetId.price} THB</p>
+          <p>จำนวน {assets.amount} ชิ้น</p>
+        </div>
+        <div className='priceDetail'><b>{assets.assetId.price * assets.amount} THB</b></div>
+      </div>
+    );
+
+    let detailOrder = this.state.detail.map(cart =>
+      <div className='detail-order' key={cart.orderId}>
         <h1 className='head-detail'>รายละเอียดคำสั่งซื้อ</h1>
-        <p key={orders.datePurchase} className='orderId'>DATE :    {orders.datePurchase}</p>
-        <p key={orders.orderId}><b>รหัสคำสั่งซื้อ     #</b> {orders.orderId}</p>
-        <p key={orders.profileId}><b>ชื่อ</b>{orders.profileId.name}</p>
-        
+        <p className='orderId'>DATE :  {cart.datePurchase}  </p>
+        <p><b>รหัสคำสั่งซื้อ     #</b> {cart.orderId} </p>
+        <p ><b>ชื่อ</b> {cart.profileId.name}  </p>
+
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdownMenu" >
             {this.state.status}
           </Dropdown.Toggle>
           <Dropdown.Menu className="dropdown-status">
-            <Dropdown.Item value="waiting" onClick={() => { this.editStatusWaiting(orders.orderId) }} >Waiting</Dropdown.Item>
-            <Dropdown.Item value="prepare" onClick={() => { this.editStatusPrepare(orders.orderId) }}>Prepare</Dropdown.Item>
-            <Dropdown.Item value="complete" onClick={() => { this.editStatusComplete(orders.orderId) }}>Complete</Dropdown.Item>
+            <Dropdown.Item value="waiting" onClick={() => { this.editStatusWaiting(cart.orderId) }} >Waiting</Dropdown.Item>
+            <Dropdown.Item value="prepare" onClick={() => { this.editStatusPrepare(cart.orderId) }}>Prepare</Dropdown.Item>
+            <Dropdown.Item value="complete" onClick={() => { this.editStatusComplete(cart.orderId) }}>Complete</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 
-        <p key={orders.addressDetail}><b>ที่อยู่ในการจัดส่ง</b>   {orders.addressId.addressDetail}</p>
+        <p ><b>ที่อยู่ในการจัดส่ง</b> {cart.addressId.addressDetail} &nbsp; อำเภอ {cart.addressId.district} &nbsp; จังหวัด {cart.addressId.province} &nbsp; รหัสไปรษณีย์ {cart.addressId.zipcode} </p>
         <br></br>
         <p><b>รายการสินค้า</b></p>
-        <p>รวมทั้งหมด   {orders.totalPrice}   บาท</p>
+        {asset}
 
-        
-
+        <div>
+          <p>รวมทั้งหมด</p>
+          <div className='priceDetail'> {cart.totalPrice} THB</div>
+        </div>
 
       </div>
 
@@ -200,7 +218,7 @@ class Order extends Component {
     return (
       <div>
 
-        <button className="excel"  ></button>
+        <button className="excel" onClick={this.exportExcel} ></button>
         <Modal
           isOpen={this.state.modalDetailOrderIsOpen}
           onAfterOpen={this.afterOpenModal}
@@ -238,8 +256,7 @@ class Order extends Component {
           </Dropdown.Menu>
         </Dropdown>
 
-        { //เปลี่ยนข้อมูลใหม่
-          /* <div className='tableAllOrder'>
+        <div className='tableAllOrder'>
 
           {orders.length ?
             orders.map(orders =>
@@ -249,10 +266,11 @@ class Order extends Component {
                   <p className='orderId' key={orders.orderId}># {orders.orderId}</p>
                 </div>
                 <div className='detailOrder'>
-                  <p key={orders.profileId}><b>ชื่อ</b>   {orders.profileId.name}</p>
-                  <p key={orders.addressDetail}><b>ที่อยู่</b>   {orders.addressId.addressDetail}</p>
-                  <p key={orders.datePurchase}><b>วันที่ : </b>   {orders.datePurchase}</p>
-                  <div className='orderStatus'>{orders.statusId.statusName}</div>
+                  <p key={orders.profileId}><b>ชื่อ</b>  {orders.profileId.name}</p>
+                  <p key={orders.addressDetail}><b>ที่อยู่ </b> {orders.addressId.addressDetail}  </p>
+                  <p> {orders.addressId.district} , {orders.addressId.province} {orders.addressId.zipcode} </p>
+                  <p key={orders.datePurchase}><b>วันที่ : </b>  {orders.datePurchase} </p>
+                  <div className='orderStatus'>     {orders.statusId.statusName}      </div>
 
 
                 </div>
@@ -260,7 +278,7 @@ class Order extends Component {
             ) : null
           }
 
-        </div> */}
+        </div>
 
       </div>
 

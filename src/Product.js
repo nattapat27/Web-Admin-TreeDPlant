@@ -140,7 +140,6 @@ class Product extends Component {
   changeHandler = (e) => {
     const name = { ...this.state.searchName, [e.target.name]: e.target.value }
     this.setState({ searchName: name })
-    console.log(name)
   }
 
   changeHandlerEdit = (e) => {
@@ -185,9 +184,12 @@ class Product extends Component {
       axios.post(apiURL, this.state.assetEdit)
         .then(response => {
           alert("Edit already", this.state.assetEdit.name)
+          
           window.location.reload();
         }
-        )
+        ).catch(error=>{
+          alert("Fill up")
+        })
     }else if(this.state.detail[0].treeId != null){
     const apiURL = 'https://treedp.doge.in.th/asset/edit/tree'
     axios.post(apiURL, this.state.treeEdit)
@@ -195,7 +197,9 @@ class Product extends Component {
         alert("Edit already", this.state.treeEdit.name)
         window.location.reload();
       }
-      )
+      ).catch(error=>{
+        alert("Fill up")
+      })
     }
   }
 

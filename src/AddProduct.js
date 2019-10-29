@@ -66,28 +66,30 @@ class ModalAdd extends Component {
         )
     }, (error) => {
     });
-    
-    if (this.state.trees === true) {
-      this.state.tree.image = this.state.url
-       const apiURL = 'https://treedp.doge.in.th/asset/save/tree'
-       axios.post(apiURL, this.state.tree)
-         .then(response => {
-           alert(response.data.assetName)
-           window.location.reload();
-         }).catch(error=>{
-           alert("Fill up")
-         })    
-    } else if (this.state.assets === true) {
-      this.state.asset.image = this.state.url
-      const apiURL = 'https://treedp.doge.in.th/asset/save'
-      axios.post(apiURL, this.state.asset)
-        .then(response => {
-          alert(response.data.assetName)
-          window.location.reload();
-        }).catch(error => {
-          alert("Fill up")
-        })
-    }
+    setTimeout(() => {
+      if (this.state.trees === true) {
+        this.state.tree.image = this.state.url
+        const apiURL = 'https://treedp.doge.in.th/asset/save/tree'
+        axios.post(apiURL, this.state.tree)
+          .then(response => {
+            alert(response.data.assetName)
+            window.location.reload();
+          }).catch(error => {
+            alert("Fill up")
+          })
+      } else if (this.state.assets === true) {
+        this.state.asset.image = this.state.url
+        const apiURL = 'https://treedp.doge.in.th/asset/save'
+        axios.post(apiURL, this.state.asset)
+          .then(response => {
+            alert(response.data.assetName)
+            window.location.reload();
+          }).catch(error => {
+            alert("Fill up")
+          })
+      }
+    }, 2000);
+
   }
 
 
@@ -98,7 +100,6 @@ class ModalAdd extends Component {
 
   }
   changeHandlerImage = (e) => {
-    //console.log(e.target.files[0]) 
     const img = e.target.files[0]
     this.state.image = img
     console.log(this.state.image)

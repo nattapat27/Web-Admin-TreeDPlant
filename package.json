@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@react-pdf/renderer": "^1.6.7",
     "@version/react-router-v3": "^1.0.0",
     "axios": "^0.18.1",
     "babel-loader": "^8.0.6",

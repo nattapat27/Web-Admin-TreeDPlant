@@ -159,6 +159,45 @@ div{
     float: right;
     margin-right: 10%;
 }
+.img-order{
+    width: 15%;
+    height: 100%; 
+    position: static;
+}
+.priceDetail{
+    background: #DAE0D8 0% 0% no-repeat padding-box;
+    opacity: 1;
+    float: right;
+    margin-right: 20%;
+    margin-top: 4%;
+    padding:2%; 
+    color: #577863;
+    width: 15%;
+    font-weight: lighter;
+    text-align: center;
+    font-size: 14pt;
+}
+.asset-detail{
+    padding-left:8%;
+    margin-bottom:2% ;
+}
+.asset-detail p{
+    display: block;
+    font-size: 14pt;
+    margin-bottom: 0%;
+}
+.asset-detail b{
+    font-size: 18pt;
+    color: #577863;
+}
+.detailOfAsset{
+    position:absolute;
+    display: inline-block; 
+    width: 50%;
+    padding-top: 3%;
+    
+}
+
 
 }
 @media only screen and (max-width: 961px) {
