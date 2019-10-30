@@ -5,7 +5,7 @@ import Modal from 'react-modal';
 import { Button, Dropdown } from 'react-bootstrap';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 
 
 class Order extends Component {
@@ -72,7 +72,7 @@ class Order extends Component {
     axios.get('https://treedp.doge.in.th/order/getAllOrder')
       .then(response => {
         //console.log(response.data.filter(status=>status.statusId.statusName==='Waiting'))
-        this.setState({ orders: response.data.filter(status=>status.statusId.statusName==='รอดำเนินการ') })
+        this.setState({ orders: response.data.filter(status => status.statusId.statusName === 'รอดำเนินการ') })
       })
   }
 
@@ -82,7 +82,7 @@ class Order extends Component {
     axios.get('https://treedp.doge.in.th/order/getAllOrder')
       .then(response => {
         //console.log(response.data)
-        this.setState({ orders: response.data.filter(status=>status.statusId.statusName==='เตรียมจัดส่ง') })
+        this.setState({ orders: response.data.filter(status => status.statusId.statusName === 'เตรียมจัดส่ง') })
       })
   }
 
@@ -91,7 +91,7 @@ class Order extends Component {
     this.setState({ typeOrder: 'เสร็จสมบูรณ์' })
     axios.get('https://treedp.doge.in.th/order/getAllOrder')
       .then(response => {
-        this.setState({ orders: response.data.filter(status=>status.statusId.statusName==='เสร็จสมบูรณ์') })
+        this.setState({ orders: response.data.filter(status => status.statusId.statusName === 'เสร็จสมบูรณ์') })
       })
   }
 
@@ -119,9 +119,6 @@ class Order extends Component {
     this.setState({ searchOrder: order })
     //console.log(order)
   }
-
-
-
   editStatusWaiting(id) {
     //console.log(id)
     const apiURL = 'https://treedp.doge.in.th/order/editStatus'
@@ -160,10 +157,9 @@ class Order extends Component {
       )
   }
 
-  exportExcel() {
-    console.log(this.state.orders)
-  }
+  exportFile = (e) => {
 
+  }
 
   render() {
     const { orders } = this.state
@@ -182,6 +178,28 @@ class Order extends Component {
       </div>
     );
 
+    let file = this.state.orders.map(orders =>
+      <div>
+        <table>
+          <tr>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Age</th>
+          </tr>
+          <tr>
+            <td>Jill</td>
+            <td>Smith</td>
+            <td>50</td>
+          </tr>
+          <tr>
+            <td>Eve</td>
+            <td>Jackson</td>
+            <td>94</td>
+          </tr>
+        </table>
+      </div>
+    )
+
     let detailOrder = this.state.detail.map(cart =>
       <div className='detail-order' key={cart.orderId}>
         <h1 className='head-detail'>รายละเอียดคำสั่งซื้อ</h1>
@@ -194,9 +212,9 @@ class Order extends Component {
             {this.state.status}
           </Dropdown.Toggle>
           <Dropdown.Menu className="dropdown-status">
-            <Dropdown.Item value="waiting" onClick={() => { this.editStatusWaiting(cart.orderId) }} >Waiting</Dropdown.Item>
-            <Dropdown.Item value="prepare" onClick={() => { this.editStatusPrepare(cart.orderId) }}>Prepare</Dropdown.Item>
-            <Dropdown.Item value="complete" onClick={() => { this.editStatusComplete(cart.orderId) }}>Complete</Dropdown.Item>
+            <Dropdown.Item value="รอดำเนินการ" onClick={() => { this.editStatusWaiting(cart.orderId) }} >รอดำเนินการ</Dropdown.Item>
+            <Dropdown.Item value="เตรียมจัดส่ง" onClick={() => { this.editStatusPrepare(cart.orderId) }}>เตรียมจัดส่ง</Dropdown.Item>
+            <Dropdown.Item value="เสร็จสมบูรณ์" onClick={() => { this.editStatusComplete(cart.orderId) }}>เสร็จสมบูรณ์</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 
@@ -204,21 +222,21 @@ class Order extends Component {
         <br></br>
         <p><b>รายการสินค้า</b></p>
         {asset}
-
         <div>
           <p>รวมทั้งหมด</p>
           <div className='priceDetail'> {cart.totalPrice} THB</div>
         </div>
-
       </div>
 
 
     )
-
     return (
       <div>
 
-        <button className="excel" onClick={this.exportExcel} ></button>
+
+        <button className="excel" onClick={this.exportFile}></button>
+
+
         <Modal
           isOpen={this.state.modalDetailOrderIsOpen}
           onAfterOpen={this.afterOpenModal}
@@ -279,6 +297,8 @@ class Order extends Component {
           }
 
         </div>
+
+
 
       </div>
 
