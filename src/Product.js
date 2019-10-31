@@ -7,14 +7,14 @@ import axios from 'axios';
 import Popup from "reactjs-popup";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Dropdown } from 'react-bootstrap';
-import Login from './Login';
-
+import { storage } from './firebase';
+import 'firebase/storage';
 
 
 class Product extends Component {
   constructor(props) {
     super(props);
-    
+
     this.state = {
       modalAddIsOpen: false,
       modalDetailIsOpen: false,
@@ -25,18 +25,20 @@ class Product extends Component {
       image: null,
       assets: [],
       detail: [],
+      url:'',
       id: {
         assetID: 0,
       },
       assetEdit: {
-        assetId:'',
+        assetID: '',
         price: '',
         name: '',
         image: '',
         detail: '',
+        status: true
       },
       treeEdit: {
-        assetId:'',
+        assetID: '',
         name: '',
         image: '',
         price: '',
@@ -46,6 +48,7 @@ class Product extends Component {
         model: '',
         shader: '',
         scale: 0.1,
+        status: true
       }
     };
 
@@ -84,14 +87,14 @@ class Product extends Component {
       .then(response => {
         this.setState({ assets: response.data.filter(assets => assets.status === true) })
       })
-      }
-     
-  
+  }
+
+
   allProduct = e => {
     e.preventDefault()
     axios.get('https://treedp.doge.in.th/asset/getAllAsset')
       .then(response => {
-        this.setState({ assets: response.data.filter(assets => assets.status === true)})
+        this.setState({ assets: response.data.filter(assets => assets.status === true) })
       })
   }
   showTree = e => {
@@ -118,7 +121,7 @@ class Product extends Component {
     this.setState({ modalDetailIsOpen: false });
     axios.post(apiURL, this.state.id)
       .then(response => {
-        alert("Delete"+(response.data.assetName))
+        alert("Delete" + (response.data.assetName))
         window.location.reload();
       }
       )
@@ -144,7 +147,7 @@ class Product extends Component {
 
   changeHandlerEdit = (e) => {
     if (this.state.detail[0].treeId === null) {
-      const edit = { ...this.state.detail[0], [e.target.name]: e.target.value }
+      const edit = { ...this.state.assetEdit, [e.target.name]: e.target.value }
       this.setState({ assetEdit: edit })
       console.log(this.state.assetEdit)
     } else if (this.state.detail[0].treeId != null) {
@@ -154,17 +157,24 @@ class Product extends Component {
     }
   }
 
+  changeHandlerImage = (e) => {
+    const img = e.target.files[0]
+    this.state.image = img
+    console.log(this.state.image)
+  }
+
   editAsset() {
     this.setState({ editAssetDetail: true, disabled: false })
     //asset
+    console.log(this.state.assetEdit)
     if (this.state.detail[0].treeId === null) {
-      this.state.assetEdit.assetId = this.state.detail[0].assetId
+      this.state.assetEdit.assetID = this.state.detail[0].assetId
       this.state.assetEdit.name = this.state.detail[0].assetName
       this.state.assetEdit.image = this.state.detail[0].asssetImage
       this.state.assetEdit.price = this.state.detail[0].price
       this.state.assetEdit.detail = this.state.detail[0].assetDetail
     } else if (this.state.detail[0].treeId != null) {
-      this.state.treeEdit.assetId = this.state.detail[0].assetId
+      this.state.treeEdit.assetID = this.state.detail[0].assetId
       this.state.treeEdit.name = this.state.detail[0].assetName
       this.state.treeEdit.image = this.state.detail[0].asssetImage
       this.state.treeEdit.price = this.state.detail[0].price
@@ -174,33 +184,52 @@ class Product extends Component {
       this.state.treeEdit.model = this.state.detail[0].treeId.model
       this.state.treeEdit.shader = this.state.detail[0].treeId.shader
     }
+    console.log(this.state.assetEdit)
   }
 
   submitEdit = e => {
     e.preventDefault()
     this.setState({ editAssetDetail: false, disabled: true })
-    if (this.state.detail[0].treeId === null) {
-      const apiURL = 'https://treedp.doge.in.th/asset/edit'
-      axios.post(apiURL, this.state.assetEdit)
-        .then(response => {
-          alert("Edit already", this.state.assetEdit.name)
-          
-          window.location.reload();
-        }
-        ).catch(error=>{
-          alert("Fill up")
-        })
-    }else if(this.state.detail[0].treeId != null){
-    const apiURL = 'https://treedp.doge.in.th/asset/edit/tree'
-    axios.post(apiURL, this.state.treeEdit)
-      .then(response => {
-        alert("Edit already", this.state.treeEdit.name)
-        window.location.reload();
+    const img = this.state.image
+    const upload = storage.ref("/images").child(img.name).put(img)
+    upload.then(snapshot => {
+      return snapshot.ref.getDownloadURL()
+        .then(
+          downloadURL => {
+            var url = downloadURL
+            this.setState({ url, url: url })
+          }
+        )
+    }, (error) => {
+    });
+    setTimeout(() => {
+      if (this.state.detail[0].treeId === null) {
+        this.state.assetEdit.image = this.state.url
+        console.log(this.state.assetEdit);
+        const apiURL = 'https://treedp.doge.in.th/asset/edit'
+        axios.post(apiURL, this.state.assetEdit)
+          .then(response => {
+            alert("Edit already", this.state.assetEdit.name)
+
+            window.location.reload();
+          }
+          ).catch(error => {
+            alert("Fill up")
+          })
+      } else if (this.state.detail[0].treeId != null) {
+        this.state.treeEdit.image = this.state.url
+        console.log(this.state.treeEdit);
+        const apiURL = 'https://treedp.doge.in.th/asset/edit/tree'
+        axios.post(apiURL, this.state.treeEdit)
+          .then(response => {
+            alert("Edit already", this.state.treeEdit.name)
+            window.location.reload();
+          }
+          ).catch(error => {
+            alert("Fill up")
+          })
       }
-      ).catch(error=>{
-        alert("Fill up")
-      })
-    }
+    }, 2000);
   }
 
 
@@ -229,13 +258,23 @@ class Product extends Component {
         detailAsset =
           <div key={detail.asssetId} >
             <h1 className="headAdd">รายละเอียดสินค้า</h1>
-            <img alt={detail.asssetImage}
-              name='image'
-              className='img-detail'
-              key={detail.asssetImage}
-              src={this.state.image}
-              onChange={this.changeHandlerEdit}>
-            </img>
+
+            <label className="uploadImageEdit">
+              <img alt={detail.asssetImage}
+                name='image'
+                className='img-detail'
+                key={detail.asssetImage}
+                src={this.state.image}
+              />
+              <input className="img-upload"
+                type="file"
+                name="image"
+                disabled={(this.state.disabled) ? "disabled" : ""}
+                onChange={this.changeHandlerImage}
+              />
+            </label>
+
+
             <div className="detail-table">
 
               <div><p>ชื่อ</p>
@@ -295,13 +334,21 @@ class Product extends Component {
         detailAsset =
           <div key={detail.asssetId} >
             <h1 className="headAdd">รายละเอียดสินค้า</h1>
-            <img alt={detail.asssetImage}
-              name='image'
-              className='img-detail'
-              key={detail.asssetImage}
-              src={this.state.image}
-              onChange={this.changeHandlerEdit}>
-            </img>
+            <label className="uploadImageEdit">
+              <img alt={detail.asssetImage}
+                name='image'
+                className='img-detail'
+                key={detail.asssetImage}
+                src={this.state.image}
+              />
+              <input className="img-upload"
+                type="file"
+                name="image"
+                disabled={(this.state.disabled) ? "disabled" : ""}
+                onChange={this.changeHandlerImage}
+              />
+            </label>
+
             <div className="detail-table">
               <div><p>ชื่อ</p>
                 <input className='detail-field'

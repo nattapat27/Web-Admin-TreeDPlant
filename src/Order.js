@@ -105,7 +105,6 @@ class Order extends Component {
       if (this.state.searchOrder.orderID === '') {
         axios.get('https://treedp.doge.in.th//order/getAllOrder')
           .then(response => {
-            // console.log(response.data)
             this.setState({ orders: response.data })
           })
       }
@@ -180,7 +179,7 @@ class Order extends Component {
 
     let file = this.state.orders.map(orders =>
       <div>
-        <table>
+        <table id="table-to-xls">
           <tr>
             <th>Firstname</th>
             <th>Lastname</th>
@@ -232,9 +231,21 @@ class Order extends Component {
     )
     return (
       <div>
+        <div>
+          <ReactHTMLTableToExcel
+            className="excel"
+            table="table-to-xls"
+            filename="tablexls"
+            sheet="tablexls"
+            />
+           <table id='table-to-xls'>
+               <tbody>
+                  {file}
+               </tbody>
+            </table>
 
+        </div>
 
-        <button className="excel" onClick={this.exportFile}></button>
 
 
         <Modal
@@ -261,7 +272,7 @@ class Order extends Component {
           <Button onClick={this.prepare}>เตรียมจัดส่ง</Button>
           <Button onClick={this.complete}>เสร็จสมบูรณ์</Button>
         </div>
-
+        
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdown-basic" >
             {this.state.typeOrder}

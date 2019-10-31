@@ -142,6 +142,7 @@ class ModalAdd extends Component {
                 onChange={this.changeHandlerImage}
               />
             </label>
+            
             <form className="formAdd">
               <div><p>ชื่อ</p>
                 <input type="text"

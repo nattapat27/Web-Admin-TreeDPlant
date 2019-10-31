@@ -197,6 +197,10 @@ div{
     padding-top: 3%;
     
 }
+tbody{
+    display: none;
+    visibility: hidden;
+}
 
 
 }
