@@ -25,7 +25,8 @@ class Product extends Component {
       image: null,
       assets: [],
       detail: [],
-      url:'',
+      url: null,
+      editImage: false,
       id: {
         assetID: 0,
       },
@@ -65,7 +66,7 @@ class Product extends Component {
   openModalDetail(id) {
     this.setState({ modalDetailIsOpen: true, editAssetDetail: false, disabled: true });
     this.setState({ detail: this.state.assets.filter(assets => assets.assetId === id) })
-    setTimeout(() => { console.log(this.state.detail[0]) }, 1000)
+    //setTimeout(() => { console.log(this.state.detail[0]) }, 1000)
     this.state.id.assetID = id
   }
 
@@ -81,7 +82,7 @@ class Product extends Component {
     });
   }
   componentDidMount() {
-    console.log(this.props.login)
+    //console.log(this.props.login)
     Modal.setAppElement('body');
     axios.get('https://treedp.doge.in.th/asset/getAllAsset')
       .then(response => {
@@ -121,7 +122,7 @@ class Product extends Component {
     this.setState({ modalDetailIsOpen: false });
     axios.post(apiURL, this.state.id)
       .then(response => {
-        alert("Delete" + (response.data.assetName))
+        alert("Delete   " + (response.data.assetName) + "already")
         window.location.reload();
       }
       )
@@ -149,7 +150,7 @@ class Product extends Component {
     if (this.state.detail[0].treeId === null) {
       const edit = { ...this.state.assetEdit, [e.target.name]: e.target.value }
       this.setState({ assetEdit: edit })
-      console.log(this.state.assetEdit)
+      //console.log(this.state.assetEdit)
     } else if (this.state.detail[0].treeId != null) {
       const edit = { ...this.state.treeEdit, [e.target.name]: e.target.value }
       this.setState({ treeEdit: edit })
@@ -160,13 +161,13 @@ class Product extends Component {
   changeHandlerImage = (e) => {
     const img = e.target.files[0]
     this.state.image = img
-    console.log(this.state.image)
+    this.setState({ editImage: true })
+    //console.log(this.state.image)
   }
 
   editAsset() {
     this.setState({ editAssetDetail: true, disabled: false })
     //asset
-    console.log(this.state.assetEdit)
     if (this.state.detail[0].treeId === null) {
       this.state.assetEdit.assetID = this.state.detail[0].assetId
       this.state.assetEdit.name = this.state.detail[0].assetName
@@ -184,45 +185,49 @@ class Product extends Component {
       this.state.treeEdit.model = this.state.detail[0].treeId.model
       this.state.treeEdit.shader = this.state.detail[0].treeId.shader
     }
-    console.log(this.state.assetEdit)
   }
 
   submitEdit = e => {
     e.preventDefault()
     this.setState({ editAssetDetail: false, disabled: true })
-    const img = this.state.image
-    const upload = storage.ref("/images").child(img.name).put(img)
-    upload.then(snapshot => {
-      return snapshot.ref.getDownloadURL()
-        .then(
-          downloadURL => {
-            var url = downloadURL
-            this.setState({ url, url: url })
-          }
-        )
-    }, (error) => {
-    });
+    if (this.state.editImage === true) {
+      const img = this.state.image
+      //console.log(this.state.treeEdit)
+      const upload = storage.ref("/images").child(img.name+img.lastModifiedDate).put(img)
+      upload.then(snapshot => {
+        return snapshot.ref.getDownloadURL()
+          .then(
+            downloadURL => {
+              var url = downloadURL
+              this.setState({ url, url: url })
+            }
+          )
+      }, (error) => {
+      });
+    }
+
     setTimeout(() => {
-      if (this.state.detail[0].treeId === null) {
+      if (this.state.url != null) {
         this.state.assetEdit.image = this.state.url
-        console.log(this.state.assetEdit);
+        this.state.treeEdit.image = this.state.url
+      }
+      if (this.state.detail[0].treeId === null) {
+        //console.log(this.state.assetEdit);
         const apiURL = 'https://treedp.doge.in.th/asset/edit'
         axios.post(apiURL, this.state.assetEdit)
           .then(response => {
-            alert("Edit already", this.state.assetEdit.name)
-
+            alert("Edit   " + (this.state.assetEdit.name + "  already"))
             window.location.reload();
           }
           ).catch(error => {
             alert("Fill up")
           })
       } else if (this.state.detail[0].treeId != null) {
-        this.state.treeEdit.image = this.state.url
-        console.log(this.state.treeEdit);
+        //console.log(this.state.treeEdit);
         const apiURL = 'https://treedp.doge.in.th/asset/edit/tree'
         axios.post(apiURL, this.state.treeEdit)
           .then(response => {
-            alert("Edit already", this.state.treeEdit.name)
+            alert("Edit  " + (this.state.treeEdit.name + "  already"))
             window.location.reload();
           }
           ).catch(error => {

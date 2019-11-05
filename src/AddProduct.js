@@ -54,8 +54,10 @@ class ModalAdd extends Component {
 
   addAsset = e => {
     e.preventDefault()
+    console.log(this.state.tree)
+    console.log(this.state.asset)
     const img = this.state.image
-    const upload = storage.ref("/images").child(img.name).put(img)
+    const upload = storage.ref("/images").child(img.name+img.lastModifiedDate).put(img)
     upload.then(snapshot => {
       return snapshot.ref.getDownloadURL()
         .then(
@@ -66,6 +68,7 @@ class ModalAdd extends Component {
         )
     }, (error) => {
     });
+
     setTimeout(() => {
       if (this.state.trees === true) {
         this.state.tree.image = this.state.url
@@ -73,12 +76,15 @@ class ModalAdd extends Component {
         axios.post(apiURL, this.state.tree)
           .then(response => {
             alert(response.data.assetName)
+            //console.log(this.state.tree)
             window.location.reload();
           }).catch(error => {
             alert("Fill up")
+            //console.log(this.state.tree)
           })
       } else if (this.state.assets === true) {
         this.state.asset.image = this.state.url
+
         const apiURL = 'https://treedp.doge.in.th/asset/save'
         axios.post(apiURL, this.state.asset)
           .then(response => {
@@ -88,7 +94,7 @@ class ModalAdd extends Component {
             alert("Fill up")
           })
       }
-    }, 2000);
+    }, 4000);
 
   }
 
@@ -97,6 +103,7 @@ class ModalAdd extends Component {
     const asset = { ...this.state.asset, [e.target.name]: e.target.value }
     const tree = { ...this.state.tree, [e.target.name]: e.target.value }
     this.setState({ asset, tree, imageUpload: tree.image })
+    console.log(this.state.tree)
 
   }
   changeHandlerImage = (e) => {
