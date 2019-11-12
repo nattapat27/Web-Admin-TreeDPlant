@@ -38,11 +38,10 @@ div{
 .excel{
     position: fixed;
     overflow: auto;
-    bottom: 5%;
-    right:5%;
-    background:url(excel.png);
+    bottom: 10%;
+    right:7%;
     background-size: 100%;
-    color: white;
+    color: black;
     width: 90px;
     height: 90px;
     border: none;

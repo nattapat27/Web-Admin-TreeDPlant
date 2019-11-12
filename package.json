@@ -13,6 +13,8 @@
     "cloudinary": "^1.14.0",
     "firebase": "^7.2.2",
     "formik": "^1.5.7",
+    "jspdf": "^1.5.3",
+    "jspdf-autotable": "^3.2.10",
     "material-table": "^1.32.0",
     "mdbreact": "^4.21.1",
     "pdfmake": "^0.1.61",

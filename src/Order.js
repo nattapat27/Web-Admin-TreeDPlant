@@ -5,7 +5,9 @@ import Modal from 'react-modal';
 import { Button, Dropdown } from 'react-bootstrap';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
-import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import jsPDF from 'jspdf'
+import "jspdf-autotable";
+
 
 
 class Order extends Component {
@@ -156,8 +158,27 @@ class Order extends Component {
       )
   }
 
-  exportFile = (e) => {
+  exportFile = () => {
+    const unit = "pt";
+    const size = "A4"; // Use A1, A2, A3 or A4
+    const orientation = "portrait"; // portrait or landscape
 
+    const marginLeft = 40;
+    const doc = new jsPDF(orientation, unit, size);
+
+    doc.setFontSize(15);
+
+    const title = "My Awesome Report";
+    const data = this.state.detail.map(cart => [cart.orderId]);
+
+    let content = {
+      startY: 50,
+      body: data
+    };
+
+    doc.text(title, marginLeft, 40);
+    doc.autoTable(data);
+    doc.save("report.pdf")
   }
 
   render() {
@@ -177,28 +198,7 @@ class Order extends Component {
       </div>
     );
 
-    let file = this.state.orders.map(orders =>
-      <div>
-        <table id="table-to-xls">
-          <tr>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Age</th>
-          </tr>
-          <tr>
-            <td>Jill</td>
-            <td>Smith</td>
-            <td>50</td>
-          </tr>
-          <tr>
-            <td>Eve</td>
-            <td>Jackson</td>
-            <td>94</td>
-          </tr>
-        </table>
-      </div>
-    )
-
+    
     let detailOrder = this.state.detail.map(cart =>
       <div className='detail-order' key={cart.orderId}>
         <h1 className='head-detail'>รายละเอียดคำสั่งซื้อ</h1>
@@ -225,34 +225,20 @@ class Order extends Component {
           <p>รวมทั้งหมด</p>
           <div className='priceDetail'> {cart.totalPrice} THB</div>
         </div>
+        <button className='excel'onClick={() => this.exportFile()}>Download PDF File</button>
       </div>
-
-
     )
+
+    
+
     return (
-      <div>
         <div>
-          <ReactHTMLTableToExcel
-            className="excel"
-            table="table-to-xls"
-            filename="tablexls"
-            sheet="tablexls"
-            />
-           <table id='table-to-xls'>
-               <tbody>
-                  {file}
-               </tbody>
-            </table>
-
-        </div>
-
-
-
+          
         <Modal
           isOpen={this.state.modalDetailOrderIsOpen}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}>
-          {detailOrder}
+          {detailOrder}         
         </Modal>
         <Header />
         <h1 className="head">จัดการคำสั่งซื้อ</h1>

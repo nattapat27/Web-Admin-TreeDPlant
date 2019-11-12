@@ -189,7 +189,7 @@ class Product extends Component {
 
   submitEdit = e => {
     e.preventDefault()
-    this.setState({ editAssetDetail: false, disabled: true })
+    this.setState({disabled: true })
     if (this.state.editImage === true) {
       const img = this.state.image
       //console.log(this.state.treeEdit)
@@ -216,6 +216,7 @@ class Product extends Component {
         const apiURL = 'https://treedp.doge.in.th/asset/edit'
         axios.post(apiURL, this.state.assetEdit)
           .then(response => {
+            this.setState({editAssetDetail: false})
             alert("Edit   " + (this.state.assetEdit.name + "  already"))
             window.location.reload();
           }
@@ -227,6 +228,7 @@ class Product extends Component {
         const apiURL = 'https://treedp.doge.in.th/asset/edit/tree'
         axios.post(apiURL, this.state.treeEdit)
           .then(response => {
+            this.setState({editAssetDetail: false})
             alert("Edit  " + (this.state.treeEdit.name + "  already"))
             window.location.reload();
           }
