@@ -236,7 +236,7 @@ class Product extends Component {
             alert("Fill up")
           })
       }
-    }, 2000);
+    }, 3000);
   }
 
 

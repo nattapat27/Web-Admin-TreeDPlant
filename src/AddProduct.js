@@ -54,8 +54,8 @@ class ModalAdd extends Component {
 
   addAsset = e => {
     e.preventDefault()
-    console.log(this.state.tree)
-    console.log(this.state.asset)
+    //console.log(this.state.tree)
+    //console.log(this.state.asset)
     const img = this.state.image
     const upload = storage.ref("/images").child(img.name+img.lastModifiedDate).put(img)
     upload.then(snapshot => {
@@ -79,7 +79,8 @@ class ModalAdd extends Component {
             //console.log(this.state.tree)
             window.location.reload();
           }).catch(error => {
-            alert("Fill up")
+            //console.log(this.state.tree)
+            alert("Fill up tree")
             //console.log(this.state.tree)
           })
       } else if (this.state.assets === true) {
@@ -91,10 +92,10 @@ class ModalAdd extends Component {
             alert(response.data.assetName)
             window.location.reload();
           }).catch(error => {
-            alert("Fill up")
+            alert("Fill up asset")
           })
       }
-    }, 4000);
+    }, 3000);
 
   }
 
