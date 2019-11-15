@@ -197,17 +197,17 @@ class Order extends Component {
       return row;
     });
     const subtotal = this.state.detail.map(cart => {
-      const subtotal = [cart.totalPrice]
+      const subtotal = [cart.totalPrice+ '  THB']
       return subtotal;
     })
 
     const balanceDue = this.state.detail.map(cart => {
-      const balanceDue = [cart.totalPrice + 100]
+      const balanceDue = [cart.totalPrice + 100 + '  THB']
       return balanceDue;
     })
 
     const totalRow = [{ title: "Subtotal" }, { title: subtotal }]
-    const shipping = [{ title: "Shipping Price" }, { title: 100 }]
+    const shipping = [{ title: "Shipping Price" }, { title: 100 + '  THB'}]
     const balance = [{ title: "Balance Due" }, { title: balanceDue }]
 
     doc.autoTable(userCol, user, {
@@ -229,27 +229,35 @@ class Order extends Component {
     });
 
     doc.autoTable(totalRow, null, {
+      margin:{
+        left:400
+      },
       theme: 'plain',
-      halign: 'right',
       tableWidth: 'wrap',
       styles: {
         fontSize: 11,
         font: 'Kanit-Regular',
-        halign: 'right',
+        halign: 'right'
       }
     });
 
     doc.autoTable(shipping, null, {
+      margin:{
+        left:400
+      },
       theme: 'plain',
       tableWidth: 'wrap',
       styles: {
         fontSize: 11,
         font: 'Kanit-Regular',
-        halign: 'right',
+        halign: 'right'
       }
     });
 
     doc.autoTable(balance, null, {
+      margin:{
+        left:400
+      },
       theme: 'plain',
       tableWidth: 'wrap',
       headerStyles: {
@@ -259,7 +267,7 @@ class Order extends Component {
       styles: {
         fontSize: 15,
         font: 'Kanit-Regular',
-        halign: 'right',
+        halign: 'right'
       }
     });
 
