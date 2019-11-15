@@ -22,7 +22,7 @@ class Product extends Component {
       typeAsset: 'ทั้งหมด',
       editAssetDetail: false,
       disabled: true,
-      file:'',
+      file: '',
       image: null,
       assets: [],
       detail: [],
@@ -130,9 +130,10 @@ class Product extends Component {
   }
 
   searchAsset = (e) => {
-    if (e.key === 'Enter' && this.state.searchName.assetName !== '') {
+    if (e.key === 'Enter'){
       e.preventDefault()
-      this.setState({ assets: this.state.assets.filter(assets => assets.assetName === this.state.searchName.assetName) })
+      this.setState({ assets: this.state.assets.filter(assets => assets.assetName.toLowerCase().includes(this.state.searchName.assetName.toLowerCase())) })
+        
     } else if (e.key === "Delete" || e.key === "Backspace") {
       if (this.state.searchName.assetName === '') {
         axios.get('https://treedp.doge.in.th/asset/getAllAsset')
@@ -162,8 +163,8 @@ class Product extends Component {
   changeHandlerImage = (e) => {
     const img = e.target.files[0]
     this.state.image = img
-    this.setState({ editImage: true ,file:URL.createObjectURL(e.target.files[0])})
-    }
+    this.setState({ editImage: true, file: URL.createObjectURL(e.target.files[0]) })
+  }
 
   editAsset() {
     this.setState({ editAssetDetail: true, disabled: false })
@@ -189,11 +190,11 @@ class Product extends Component {
 
   submitEdit = e => {
     e.preventDefault()
-    this.setState({disabled: true })
+    this.setState({ disabled: true })
     if (this.state.editImage === true) {
       const img = this.state.image
       //console.log(this.state.treeEdit)
-      const upload = storage.ref("/images").child(img.name+img.lastModifiedDate).put(img)
+      const upload = storage.ref("/images").child(img.name + img.lastModifiedDate).put(img)
       upload.then(snapshot => {
         return snapshot.ref.getDownloadURL()
           .then(
@@ -216,7 +217,7 @@ class Product extends Component {
         const apiURL = 'https://treedp.doge.in.th/asset/edit'
         axios.post(apiURL, this.state.assetEdit)
           .then(response => {
-            this.setState({editAssetDetail: false})
+            this.setState({ editAssetDetail: false })
             alert("Edit   " + (this.state.assetEdit.name + "  already"))
             window.location.reload();
           }
@@ -228,7 +229,7 @@ class Product extends Component {
         const apiURL = 'https://treedp.doge.in.th/asset/edit/tree'
         axios.post(apiURL, this.state.treeEdit)
           .then(response => {
-            this.setState({editAssetDetail: false})
+            this.setState({ editAssetDetail: false })
             alert("Edit  " + (this.state.treeEdit.name + "  already"))
             window.location.reload();
           }
@@ -261,8 +262,8 @@ class Product extends Component {
 
     this.state.detail.forEach(detail => {
       if (this.state.detail[0].typeId.typeId === 1) {
-        if(this.state.editImage===false){
-        this.state.file = detail.asssetImage
+        if (this.state.editImage === false) {
+          this.state.file = detail.asssetImage
         }
         detailAsset =
           <div key={detail.asssetId} >
@@ -296,14 +297,13 @@ class Product extends Component {
                 />
               </div>
 
-              <div><p>สูง (ซม.)</p>
+              <div><p>ราคา (บาท)</p>
                 <input className='detail-field'
-                  name='height'
-                  key={detail.height}
+                  name='price'
+                  key={detail.price}
                   disabled={(this.state.disabled) ? "disabled" : ""}
-                  defaultValue={detail.treeId.height}
-                  onChange={this.changeHandlerEdit}
-                />
+                  defaultValue={detail.price}
+                  onChange={this.changeHandlerEdit} />
               </div>
 
               <div><p>กว้าง (ซม.)</p>
@@ -315,13 +315,14 @@ class Product extends Component {
                   onChange={this.changeHandlerEdit} />
               </div>
 
-              <div><p>ราคา (บาท)</p>
+              <div><p>สูง (ซม.)</p>
                 <input className='detail-field'
-                  name='price'
-                  key={detail.price}
+                  name='height'
+                  key={detail.height}
                   disabled={(this.state.disabled) ? "disabled" : ""}
-                  defaultValue={detail.price}
-                  onChange={this.changeHandlerEdit} />
+                  defaultValue={detail.treeId.height}
+                  onChange={this.changeHandlerEdit}
+                />
               </div>
 
               <p>รายละเอียดสินค้า</p>
@@ -339,9 +340,9 @@ class Product extends Component {
           </div>
 
       } else if (this.state.detail[0].typeId.typeId === 2) {
-        if(this.state.editImage===false){
+        if (this.state.editImage === false) {
           this.state.file = detail.asssetImage
-          }
+        }
         detailAsset =
           <div key={detail.asssetId} >
             <h1 className="headAdd">รายละเอียดสินค้า</h1>

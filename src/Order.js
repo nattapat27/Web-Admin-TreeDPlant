@@ -7,7 +7,6 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import * as jsPDF from 'jspdf'
 import "jspdf-autotable";
-import color from '@material-ui/core/colors/amber';
 
 
 
@@ -99,9 +98,16 @@ class Order extends Component {
   }
 
   searchOrderId = e => {
+    /*<form>
+          <input type="search" className="search" placeholder="SEARCH" name="orderID"
+            value={this.searchOrder}
+            onChange={this.changeHandler}
+            onKeyDown={this.searchOrderId}
+          />
+        </form> */
     if (e.key === 'Enter' && this.state.searchOrder.orderID !== '') {
       e.preventDefault()
-      console.log(this.state.searchOrder.orderID)
+      //console.log(this.state.searchOrder.orderID)
       this.setState({ orders: this.state.orders.filter(orders => orders.orderId === this.state.searchOrder.orderID) })
 
     } else if (e.key === "Delete" || e.key === "Backspace") {
@@ -285,6 +291,9 @@ class Order extends Component {
         <p><b>รหัสคำสั่งซื้อ     #</b> {cart.orderId} </p>
         <p ><b>ชื่อ</b> {cart.profileId.name}  </p>
 
+       
+
+        <p ><b>ที่อยู่ในการจัดส่ง</b> {cart.addressId.addressDetail} &nbsp; อำเภอ {cart.addressId.district} &nbsp; จังหวัด {cart.addressId.province} &nbsp; รหัสไปรษณีย์ {cart.addressId.zipcode} </p>
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdownMenu" >
             {this.state.status}
@@ -295,18 +304,15 @@ class Order extends Component {
             <Dropdown.Item value="เสร็จสมบูรณ์" onClick={() => { this.editStatusComplete(cart.orderId) }}>เสร็จสมบูรณ์</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-
-        <p ><b>ที่อยู่ในการจัดส่ง</b> {cart.addressId.addressDetail} &nbsp; อำเภอ {cart.addressId.district} &nbsp; จังหวัด {cart.addressId.province} &nbsp; รหัสไปรษณีย์ {cart.addressId.zipcode} </p>
         <br></br>
         <p><b>รายการสินค้า</b></p>
         {asset}
-
-        <p><b>ค่าจัดส่ง 100 THB</b></p>
-        <div>
-
-          <p>รวมทั้งหมด   <b>{cart.totalPrice + 100} THB</b></p>
-          <div ></div>
+        <div className='price-total'>{cart.totalPrice + 100} THB</div>
+        <div className='totalPrice'>
+          <p><b>ค่าจัดส่ง 100 THB</b></p>
+          <p>รวมทั้งหมด </p>
         </div>
+        
         <button className='excel' onClick={() => this.exportFile()}>Download PDF File</button>
       </div>
     )
@@ -325,13 +331,7 @@ class Order extends Component {
         <Header />
         <h1 className="head">จัดการคำสั่งซื้อ</h1>
 
-        <form>
-          <input type="search" className="search" placeholder="SEARCH" name="orderID"
-            value={this.searchOrder}
-            onChange={this.changeHandler}
-            onKeyDown={this.searchOrderId}
-          />
-        </form>
+        
 
 
         <div className="btn-process">
