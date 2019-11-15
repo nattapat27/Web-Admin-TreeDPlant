@@ -31,7 +31,6 @@ class Login extends Component {
             .then(response => {
                 if (response.data.email != null) {
                     this.setState({login:true})
-                    //console.log(response.data)
                     this.props.history.push('/product')
                 } else if((response.data.email = null)){
                     alert("Incorrect Email or Password")
@@ -41,7 +40,7 @@ class Login extends Component {
 
             })
             .catch(error => {
-
+                alert("Incorrect Email or Password")
             })
 
 
