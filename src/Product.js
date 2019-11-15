@@ -22,6 +22,7 @@ class Product extends Component {
       typeAsset: 'ทั้งหมด',
       editAssetDetail: false,
       disabled: true,
+      file:'',
       image: null,
       assets: [],
       detail: [],
@@ -136,7 +137,7 @@ class Product extends Component {
       if (this.state.searchName.assetName === '') {
         axios.get('https://treedp.doge.in.th/asset/getAllAsset')
           .then(response => {
-            this.setState({ assets: response.data })
+            this.setState({ assets: response.data.filter(assets => assets.status === true) })
           })
       }
     }
@@ -161,9 +162,8 @@ class Product extends Component {
   changeHandlerImage = (e) => {
     const img = e.target.files[0]
     this.state.image = img
-    this.setState({ editImage: true })
-    //console.log(this.state.image)
-  }
+    this.setState({ editImage: true ,file:URL.createObjectURL(e.target.files[0])})
+    }
 
   editAsset() {
     this.setState({ editAssetDetail: true, disabled: false })
@@ -261,7 +261,9 @@ class Product extends Component {
 
     this.state.detail.forEach(detail => {
       if (this.state.detail[0].typeId.typeId === 1) {
-        this.state.image = detail.asssetImage
+        if(this.state.editImage===false){
+        this.state.file = detail.asssetImage
+        }
         detailAsset =
           <div key={detail.asssetId} >
             <h1 className="headAdd">รายละเอียดสินค้า</h1>
@@ -271,7 +273,7 @@ class Product extends Component {
                 name='image'
                 className='img-detail'
                 key={detail.asssetImage}
-                src={this.state.image}
+                src={this.state.file}
               />
               <input className="img-upload"
                 type="file"
@@ -337,7 +339,9 @@ class Product extends Component {
           </div>
 
       } else if (this.state.detail[0].typeId.typeId === 2) {
-        this.state.image = detail.asssetImage
+        if(this.state.editImage===false){
+          this.state.file = detail.asssetImage
+          }
         detailAsset =
           <div key={detail.asssetId} >
             <h1 className="headAdd">รายละเอียดสินค้า</h1>
@@ -346,7 +350,7 @@ class Product extends Component {
                 name='image'
                 className='img-detail'
                 key={detail.asssetImage}
-                src={this.state.image}
+                src={this.state.file}
               />
               <input className="img-upload"
                 type="file"

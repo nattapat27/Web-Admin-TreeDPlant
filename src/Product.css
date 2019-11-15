@@ -63,9 +63,7 @@ p{
     border: 1px black;
     transition-duration: 0.4s;
     border-radius: 15px;
-    margin: 0.5%;
-    
-    
+    margin: 0.5%;   
 }
 .btn-type Button:hover,.btn-type Button:link,.btn-type Button:focus{
     color: #ffffff;
@@ -115,12 +113,13 @@ p{
     position: static;
 }
 .price{
+    position: static;
     background: #de425b 0% 0% no-repeat padding-box;
     opacity: 1;
     float: right;
     padding:2%; 
     color: #ffffff;
-    width: 35%;
+    width: 40%;
     text-align: center;
     border-radius: 25px;
     font-size: 17px;
@@ -214,7 +213,7 @@ p{
     border: 1px solid #b3b3b3;
     cursor: pointer; 
 }
-.typeAsset button:hover{
+.typeAsset button:hover,.typeAsset button:link,.typeAsset button:focus{
     color:#ffffff;
     background-color: #577863;
     transition-duration: 0.4s;

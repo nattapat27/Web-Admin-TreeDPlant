@@ -109,8 +109,9 @@ class ModalAdd extends Component {
   }
   changeHandlerImage = (e) => {
     const img = e.target.files[0]
+    this.setState({file:URL.createObjectURL(e.target.files[0])})
     this.state.image = img
-    console.log(this.state.image)
+    //console.log(this.state.image)
   }
   render() {
     const { name, price, detail } = this.state.asset;

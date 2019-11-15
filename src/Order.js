@@ -5,8 +5,9 @@ import Modal from 'react-modal';
 import { Button, Dropdown } from 'react-bootstrap';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
-import jsPDF from 'jspdf'
+import * as jsPDF from 'jspdf'
 import "jspdf-autotable";
+import color from '@material-ui/core/colors/amber';
 
 
 
@@ -160,25 +161,103 @@ class Order extends Component {
 
   exportFile = () => {
     const unit = "pt";
-    const size = "A4"; // Use A1, A2, A3 or A4
+    const size = "A4";
     const orientation = "portrait"; // portrait or landscape
-
-    const marginLeft = 40;
     const doc = new jsPDF(orientation, unit, size);
-
+    doc.setFont('Kanit-Regular')
+    doc.setFontSize(20);
+    var img = new Image()
+    img.src = './logo-green.png'
+    doc.setTextColor(87, 120, 99);
+    doc.text("TREED-PLANT", 10 * 2.83, 10 * 2.83, "left");
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    doc.text("ที่อยู่ 90 หมู่ 11 ตำบล ป่าขะ  อำเภอ บ้านนา", 10 * 2.83, 10 * 5, "left");
+    doc.text("จังหวัด นครนายก  รหัสไปรษณีย์ 26110", 10 * 2.83, 10 * 7, "left");
+    doc.text("เบอร์โทรศัพท์  095-5407827", 10 * 2.83, 10 * 9, "left");
+    doc.arrayBufferToBinaryString()
+    doc.addImage(img, "PNG", 400, 10, 180, 200);
+    doc.setTextColor(87, 120, 99);
     doc.setFontSize(15);
+    //doc.text("INVOICE",550, 18 * 15);
+    const user = this.state.detail.map(cart => {
+      const user = [cart.profileId.name, cart.addressId.addressDetail + " " + cart.addressId.district + " " + cart.addressId.province + " " + cart.addressId.zipcode, cart.orderId];
+      return user;
+    });
+    const userCol = ["Customer", "Address", "Order ID"]
+    const assetCol = ["Description", "Rate", "Quatity", "Amount"];
+    const assetRows = this.state.asset.map(assets => {
+      const row = [assets.assetId.assetName, assets.assetId.price, assets.amount, assets.assetId.price * assets.amount];
+      return row;
+    });
+    const subtotal = this.state.detail.map(cart => {
+      const subtotal = [cart.totalPrice]
+      return subtotal;
+    })
 
-    const title = "My Awesome Report";
-    const data = this.state.detail.map(cart => [cart.orderId]);
+    const balanceDue = this.state.detail.map(cart => {
+      const balanceDue = [cart.totalPrice + 100]
+      return balanceDue;
+    })
 
-    let content = {
-      startY: 50,
-      body: data
-    };
+    const totalRow = [{ title: "Subtotal" }, { title: subtotal }]
+    const shipping = [{ title: "Shipping Price" }, { title: 100 }]
+    const balance = [{ title: "Balance Due" }, { title: balanceDue }]
 
-    doc.text(title, marginLeft, 40);
-    doc.autoTable(data);
-    doc.save("report.pdf")
+    doc.autoTable(userCol, user, {
+      theme: "plain",
+      startY: 200,
+      styles: {
+        fontSize: 11,
+        font: 'Kanit-Regular'
+      }
+    });
+
+    doc.autoTable(assetCol, assetRows, {
+      startY: 300,
+      theme: "grid",
+      styles: {
+        fontSize: 11,
+        font: 'Kanit-Regular'
+      }
+    });
+
+    doc.autoTable(totalRow, null, {
+      theme: 'plain',
+      halign: 'right',
+      tableWidth: 'wrap',
+      styles: {
+        fontSize: 11,
+        font: 'Kanit-Regular',
+        halign: 'right',
+      }
+    });
+
+    doc.autoTable(shipping, null, {
+      theme: 'plain',
+      tableWidth: 'wrap',
+      styles: {
+        fontSize: 11,
+        font: 'Kanit-Regular',
+        halign: 'right',
+      }
+    });
+
+    doc.autoTable(balance, null, {
+      theme: 'plain',
+      tableWidth: 'wrap',
+      headerStyles: {
+        fillColor: "#00000",
+        textColor: '#ffffff'
+      },
+      styles: {
+        fontSize: 15,
+        font: 'Kanit-Regular',
+        halign: 'right',
+      }
+    });
+
+    doc.save("invoice.pdf")
   }
 
   render() {
@@ -198,7 +277,7 @@ class Order extends Component {
       </div>
     );
 
-    
+
     let detailOrder = this.state.detail.map(cart =>
       <div className='detail-order' key={cart.orderId}>
         <h1 className='head-detail'>รายละเอียดคำสั่งซื้อ</h1>
@@ -221,24 +300,27 @@ class Order extends Component {
         <br></br>
         <p><b>รายการสินค้า</b></p>
         {asset}
+
+        <p><b>ค่าจัดส่ง 100 THB</b></p>
         <div>
-          <p>รวมทั้งหมด</p>
-          <div className='priceDetail'> {cart.totalPrice} THB</div>
+
+          <p>รวมทั้งหมด   <b>{cart.totalPrice + 100} THB</b></p>
+          <div ></div>
         </div>
-        <button className='excel'onClick={() => this.exportFile()}>Download PDF File</button>
+        <button className='excel' onClick={() => this.exportFile()}>Download PDF File</button>
       </div>
     )
 
-    
+
 
     return (
-        <div>
-          
+      <div>
+
         <Modal
           isOpen={this.state.modalDetailOrderIsOpen}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}>
-          {detailOrder}         
+          {detailOrder}
         </Modal>
         <Header />
         <h1 className="head">จัดการคำสั่งซื้อ</h1>
@@ -258,7 +340,7 @@ class Order extends Component {
           <Button onClick={this.prepare}>เตรียมจัดส่ง</Button>
           <Button onClick={this.complete}>เสร็จสมบูรณ์</Button>
         </div>
-        
+
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdown-basic" >
             {this.state.typeOrder}
